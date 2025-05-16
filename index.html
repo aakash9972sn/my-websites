@@ -1,31 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fleurons+ Bakery</title>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fleurons+ Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 </head>
 <body>
-
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">Fleurons+</div>
-    <div class="cart">🛒 Cart (<span id="cart-count">0</span>)</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Menu</a>
+      <a href="#">About</a>
+    </div>
+    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
   </nav>
 
-  <!-- Hero Banner -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-content">
-      <h1>Gourmet Desserts, Handcrafted</h1>
-      <p>From our oven to your heart</p>
+    <div class="hero-text" data-aos="fade-up">
+      <h1>Premium Pastries Delivered Fresh</h1>
+      <p>Handcrafted delicacies, just for you</p>
+      <button>Explore Menu</button>
     </div>
   </section>
 
-  <!-- Product Grid -->
-  <section class="products" id="product-grid">
-    <!-- Products added dynamically via JS -->
+  <!-- Category Filters -->
+  <section class="filters">
+    <button onclick="filterProducts('all')">All</button>
+    <button onclick="filterProducts('macaron')">Macarons</button>
+    <button onclick="filterProducts('tart')">Tarts</button>
   </section>
 
+  <!-- Products Grid -->
+  <section id="product-grid" class="products" data-aos="fade-up"></section>
+
+  <!-- Cart Sidebar -->
+  <div id="cart-sidebar" class="cart-sidebar">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p>Total: ₹<span id="cart-total">0</span></p>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span onclick="closeModal()" class="close">&times;</span>
+      <img id="modal-img" />
+      <h3 id="modal-title"></h3>
+      <p id="modal-price"></p>
+      <button onclick="addToCartFromModal()">Add to Cart</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
 </body>
 </html>
+
