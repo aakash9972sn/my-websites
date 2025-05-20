@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biology Test for AIIMS</title>
+  <title>Biology Test for NEET</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -670,12 +670,11 @@
     <div id="intro-screen">
       <div class="title">Sana Sab Kar Legi</div>
       <div class="test-details">
-        <p><i class="fas fa-book"></i> <strong>Subject:</strong> Biology</p>
-        <p><i class="fas fa-tags"></i> <strong>Topics:</strong> Sexual reproduction in flowering plants, Human reproduction, Reproductive health, Principles of genetics and variation, Molecular basis of inheritance, Evolution</p>
+        <p><i class="fas fa-book"></i> <strong>Subject:</strong> Biology (12th)</p>
+        <p><i class="fas fa-tags"></i> <strong>Topics:</strong> Inheritance, Molecular Basis, Evolution, Human Health, Food Production, Microbes</p>
         <p><i class="fas fa-question-circle"></i> <strong>Total Questions:</strong> 120</p>
         <p><i class="fas fa-clock"></i> <strong>Time Limit:</strong> 90 minutes</p>
-        <p><i class="fas fa-graduation-cap"></i> <strong>Test Type:</strong> Practice Quiz</p>
-        <p><i class="fas fa-star"></i> <strong>Marks:</strong> +4 for correct, -1 for wrong, 0 for unattempted</p>
+        <p><i class="fas fa-star"></i> <strong>Marks:</strong> +1 for correct, -⅓ for wrong, 0 for unattempted</p>
       </div>
       <button class="btn" onclick="startQuiz()">
         <i class="fas fa-play"></i> Start Test
@@ -741,7 +740,7 @@
             <div>Marks Obtained</div>
           </div>
           <div class="stat stat-marks">
-            <div class="stat-value">480</div>
+            <div class="stat-value">120</div>
             <div>Total Marks</div>
           </div>
         </div>
@@ -761,688 +760,724 @@
   <script>
     const quiz = [
       {
-        question: "Which part of the flower forms the fruit after fertilization?",
-        options: ["Ovary", "Stigma", "Style", "Ovule"],
-        answer: 0,
-        explanation: "(a) Ovary - After fertilization, the ovary of the flower develops into the fruit while the ovules become seeds."
+        question: "Who is regarded as the 'Father of Genetics'?",
+        options: ["Charles Darwin", "Gregor Mendel", "T.H. Morgan", "Hugo de Vries"],
+        answer: 1,
+        explanation: "Gregor Mendel conducted experiments on pea plants and established the fundamental laws of inheritance, earning him the title 'Father of Genetics.'"
       },
       {
-        question: "The transfer of pollen grains from anther to stigma of the same flower is called:",
-        options: ["Autogamy", "Geitonogamy", "Xenogamy", "Cleistogamy"],
-        answer: 0,
-        explanation: "(a) Autogamy - Self-pollination within the same flower is called autogamy."
-      },
-      {
-        question: "Which of these is NOT a part of the female reproductive system in humans?",
-        options: ["Ovary", "Fallopian tube", "Uterus", "Vas deferens"],
+        question: "Which of the following is a recessive trait in pea plants?",
+        options: ["Tall stem", "Round seed", "Green pod", "Wrinkled seed"],
         answer: 3,
-        explanation: "(d) Vas deferens - Vas deferens is part of the male reproductive system that carries sperm from epididymis to urethra."
+        explanation: "In Mendel’s experiments, wrinkled seeds were recessive (rr), while round seeds (RR or Rr) were dominant."
       },
       {
-        question: "The hormone responsible for ovulation is:",
-        options: ["Estrogen", "Progesterone", "LH (Luteinizing Hormone)", "FSH (Follicle Stimulating Hormone)"],
-        answer: 2,
-        explanation: "(c) LH (Luteinizing Hormone) - The LH surge triggers ovulation in the menstrual cycle."
+        question: "The phenotypic ratio of a monohybrid cross in F2 generation is:",
+        options: ["3:1", "1:2:1", "9:3:3:1", "1:1"],
+        answer: 0,
+        explanation: "In a monohybrid cross (e.g., Tt × Tt), the F2 generation shows a 3:1 phenotypic ratio (3 tall : 1 dwarf)."
       },
       {
-        question: "Which contraceptive method is also effective against STDs?",
-        options: ["Oral pills", "Copper-T", "Condoms", "Diaphragm"],
+        question: "A test cross is used to determine:",
+        options: ["Genotype of a dominant phenotype", "Number of alleles", "Mutation rate", "Sex linkage"],
+        answer: 0,
+        explanation: "A test cross (crossing with homozygous recessive) reveals whether a dominant phenotype is homozygous (TT) or heterozygous (Tt)."
+      },
+      {
+        question: "Incomplete dominance is seen in:",
+        options: ["Mirabilis jalapa (4 o’clock plant)", "Pisum sativum (pea plant)", "Drosophila (fruit fly)", "Oryza sativa (rice)"],
+        answer: 0,
+        explanation: "Incomplete dominance results in an intermediate phenotype (e.g., pink flowers from red and white parents)."
+      },
+      {
+        question: "ABO blood group system in humans is an example of:",
+        options: ["Multiple alleles", "Pleiotropy", "Polygenic inheritance", "Codominance"],
+        answer: 0,
+        explanation: "ABO blood groups are controlled by three alleles (IA, IB, i)—a classic example of multiple allelism."
+      },
+      {
+        question: "Which genetic disorder is caused by a recessive autosomal gene?",
+        options: ["Haemophilia", "Colour blindness", "Sickle-cell anaemia", "Huntington’s disease"],
         answer: 2,
-        explanation: "(c) Condoms - Condoms (both male and female) provide protection against sexually transmitted diseases along with contraception."
+        explanation: "Sickle-cell anaemia is an autosomal recessive disorder (mutated β-globin gene)."
+      },
+      {
+        question: "A woman with normal vision whose father was colourblind marries a colourblind man. What is the probability of their son being colourblind?",
+        options: ["25%", "50%", "75%", "100%"],
+        answer: 1,
+        explanation: "Colour blindness is X-linked recessive. The mother is a carrier (XᴺXᶜ), and the father is affected (XᶜY). Their son has a 50% chance of being colourblind."
+      },
+      {
+        question: "Which of the following is a sex-linked disease?",
+        options: ["Thalassemia", "Cystic fibrosis", "Haemophilia", "Phenylketonuria"],
+        answer: 2,
+        explanation: "Haemophilia is an X-linked recessive disorder (defect in blood clotting factors)."
       },
       {
         question: "The chromosomal theory of inheritance was proposed by:",
-        options: ["Gregor Mendel", "Thomas Hunt Morgan", "Walter Sutton and Theodor Boveri", "Barbara McClintock"],
-        answer: 2,
-        explanation: "(c) Walter Sutton and Theodor Boveri - They independently proposed that chromosomes carry genetic material (1902)."
-      },
-      {
-        question: "The process by which RNA is synthesized from DNA is called:",
-        options: ["Replication", "Transcription", "Translation", "Transformation"],
-        answer: 1,
-        explanation: "(b) Transcription - The process of RNA synthesis from a DNA template is called transcription."
-      },
-      {
-        question: "Which of these is NOT a vestigial organ in humans?",
-        options: ["Appendix", "Wisdom teeth", "Coccyx", "Pancreas"],
-        answer: 3,
-        explanation: "(d) Pancreas - The pancreas is a functional organ (endocrine and exocrine), while others are vestigial structures."
-      },
-      {
-        question: "The phenomenon where pollen from one species germinates on stigma of another species but fails to fertilize is called:",
-        options: ["Self-incompatibility", "Dichogamy", "Herkogamy", "Interspecific incompatibility"],
-        answer: 3,
-        explanation: "(d) Interspecific incompatibility - This prevents cross-species fertilization even if pollen reaches the stigma."
-      },
-      {
-        question: "The part of sperm that contains enzymes to penetrate ovum is:",
-        options: ["Head", "Acrosome", "Middle piece", "Tail"],
-        answer: 1,
-        explanation: "(b) Acrosome - The acrosome at the sperm head contains hydrolytic enzymes (hyaluronidase) that help penetrate the ovum."
-      },
-      {
-        question: "In flowering plants, the male gametophyte is represented by:",
-        options: ["Embryo sac", "Pollen grain", "Microspore mother cell", "Anther"],
-        answer: 1,
-        explanation: "(b) Pollen grain - The pollen grain is the male gametophyte that contains the male gametes."
-      },
-      {
-        question: "Which of the following is NOT a method of vegetative propagation?",
-        options: ["Bulbils", "Rhizome", "Zygote", "Sucker"],
-        answer: 2,
-        explanation: "(c) Zygote - Zygote is formed by sexual reproduction, not vegetative propagation."
-      },
-      {
-        question: "The outermost layer of the pollen wall is called:",
-        options: ["Intine", "Exine", "Sporopollenin", "Pollenkitt"],
-        answer: 1,
-        explanation: "(b) Exine - The outer wall of pollen grain is called exine and is made of sporopollenin."
-      },
-      {
-        question: "Double fertilization in angiosperms results in the formation of:",
-        options: ["Zygote and endosperm", "Embryo and endosperm", "Zygote and embryo", "Endosperm and cotyledons"],
+        options: ["Sutton and Boveri", "Watson and Crick", "Darwin and Wallace", "Mendel and Morgan"],
         answer: 0,
-        explanation: "(a) Zygote and endosperm - One sperm fertilizes the egg (zygote) and the other fuses with polar nuclei (endosperm)."
+        explanation: "Sutton and Boveri linked Mendel’s laws to chromosome behavior during meiosis."
       },
       {
-        question: "The female gametophyte in flowering plants is called:",
-        options: ["Megaspore", "Embryo sac", "Ovule", "Nucellus"],
+        question: "A cross between two pink-flowered plants (incomplete dominance) produces offspring with:",
+        options: ["All pink", "Red, pink, and white", "Only red and white", "Only pink and white"],
         answer: 1,
-        explanation: "(b) Embryo sac - The mature female gametophyte is called embryo sac which contains the egg apparatus."
+        explanation: "Incomplete dominance gives a 1:2:1 ratio (1 red : 2 pink : 1 white)."
       },
       {
-        question: "Which of these plants shows cleistogamy?",
-        options: ["Viola", "Sunflower", "Rose", "Orchid"],
+        question: "Which of the following is NOT a Mendelian disorder?",
+        options: ["Down syndrome", "Cystic fibrosis", "Thalassemia", "Haemophilia"],
         answer: 0,
-        explanation: "(a) Viola - Some flowers of Viola show cleistogamy (flowers that don't open and ensure self-pollination)."
+        explanation: "Down syndrome is a chromosomal disorder (trisomy 21), not Mendelian."
       },
       {
-        question: "The number of chromosomes in the endosperm of a plant with 2n=40 would be:",
-        options: ["20", "40", "60", "80"],
-        answer: 2,
-        explanation: "(c) 60 - Endosperm is triploid (3n) formed by fusion of one sperm (n) with two polar nuclei (n+n)."
-      },
-      {
-        question: "The function of the filiform apparatus is to:",
-        options: ["Nourish the pollen tube", "Guide the pollen tube", "Protect the egg", "Store starch"],
+        question: "The genotypic ratio in F2 generation of a dihybrid cross is:",
+        options: ["9:3:3:1", "1:2:1:2:4:2:1:2:1", "1:2:1", "3:1"],
         answer: 1,
-        explanation: "(b) Guide the pollen tube - The filiform apparatus in synergids helps guide the pollen tube into the embryo sac."
+        explanation: "Dihybrid cross genotypic ratio is 1:2:1:2:4:2:1:2:1 (9 genotypes)."
       },
       {
-        question: "Which of these is NOT a characteristic of wind-pollinated flowers?",
-        options: ["Light pollen grains", "Brightly colored petals", "Feathery stigma", "Large amount of pollen"],
-        answer: 1,
-        explanation: "(b) Brightly colored petals - Wind-pollinated flowers are usually small, inconspicuous and lack bright colors."
-      },
-      {
-        question: "Apomixis is:",
-        options: ["Formation of seeds without fertilization", "Formation of fruits without seeds", "Development of embryo from nucellus", "Development of seeds from integuments"],
+        question: "Which condition is due to aneuploidy?",
+        options: ["Turner syndrome (45, X)", "Sickle-cell anaemia", "Haemophilia", "Phenylketonuria"],
         answer: 0,
-        explanation: "(a) Formation of seeds without fertilization - Apomixis is asexual reproduction that mimics sexual reproduction."
+        explanation: "Turner syndrome is monosomy (45, X)—a type of aneuploidy."
       },
       {
-        question: "The hormone that prepares the uterus for pregnancy is:",
-        options: ["Estrogen", "Progesterone", "FSH", "LH"],
-        answer: 1,
-        explanation: "(b) Progesterone - It maintains the endometrium and prepares the uterus for implantation of the fertilized ovum."
-      },
-      {
-        question: "The acrosomal reaction is associated with:",
-        options: ["Sperm motility", "Sperm penetration", "Sperm production", "Sperm maturation"],
-        answer: 1,
-        explanation: "(b) Sperm penetration - The acrosomal reaction releases enzymes that help sperm penetrate the egg's protective layers."
-      },
-      {
-        question: "The site of fertilization in humans is:",
-        options: ["Ovary", "Uterus", "Fallopian tube", "Cervix"],
+        question: "A man with blood group A (heterozygous) marries a woman with blood group B (heterozygous). What is the possible blood group of their child?",
+        options: ["Only A or B", "Only AB", "A, B, AB, or O", "Only O"],
         answer: 2,
-        explanation: "(c) Fallopian tube - Fertilization typically occurs in the ampullary-isthmic junction of the fallopian tube."
+        explanation: "Parents (IAi × IBi) can produce children with A (IAi), B (IBi), AB (IAIB), or O (ii)."
       },
       {
-        question: "The hormone responsible for milk ejection is:",
-        options: ["Prolactin", "Oxytocin", "Estrogen", "Progesterone"],
-        answer: 1,
-        explanation: "(b) Oxytocin - It causes contraction of myoepithelial cells in mammary glands leading to milk ejection."
-      },
-      {
-        question: "The layer of uterus that is shed during menstruation is:",
-        options: ["Perimetrium", "Myometrium", "Endometrium", "Epimetrium"],
+        question: "Which law of Mendel is violated in linkage?",
+        options: ["Law of Dominance", "Law of Segregation", "Law of Independent Assortment", "Law of Unit Characters"],
         answer: 2,
-        explanation: "(c) Endometrium - The functional layer of endometrium is shed during menstruation if pregnancy doesn't occur."
+        explanation: "Linked genes do not assort independently (exception to Mendel’s 2ⁿᵈ law)."
       },
       {
-        question: "Which of these is NOT a component of semen?",
-        options: ["Sperm", "Seminal plasma", "Prostaglandins", "Fibrinogen"],
-        answer: 3,
-        explanation: "(d) Fibrinogen - Semen contains sperm and seminal plasma (secretions from seminal vesicles, prostate and bulbourethral glands)."
+        question: "Which technique is used to detect chromosomal abnormalities in a fetus?",
+        options: ["ELISA", "PCR", "Amniocentesis", "MRI"],
+        answer: 2,
+        explanation: "Amniocentesis involves analyzing amniotic fluid for fetal chromosomal defects."
       },
       {
-        question: "The correct sequence of embryonic development stages is:",
-        options: ["Zygote → Morula → Blastocyst → Gastrula", "Zygote → Blastocyst → Morula → Gastrula", "Zygote → Gastrula → Morula → Blastocyst", "Zygote → Morula → Gastrula → Blastocyst"],
+        question: "The phenomenon where a single gene affects multiple traits is called:",
+        options: ["Polygenic inheritance", "Pleiotropy", "Codominance", "Epistasis"],
+        answer: 1,
+        explanation: "Example: Phenylketonuria (PKU) affects skin, brain, and hair."
+      },
+      {
+        question: "Which of the following is a polygenic trait in humans?",
+        options: ["Blood group", "Skin colour", "Sickle-cell anaemia", "Colour blindness"],
+        answer: 1,
+        explanation: "Polygenic traits (e.g., skin colour, height) are controlled by multiple genes."
+      },
+      {
+        question: "The mutation that changes a single nucleotide is called:",
+        options: ["Frameshift mutation", "Point mutation", "Chromosomal mutation", "Silent mutation"],
+        answer: 1,
+        explanation: "Example: Sickle-cell anaemia (GAG → GTG, Glu → Val)."
+      },
+      {
+        question: "The transforming principle discovered by Griffith in Streptococcus pneumoniae was later identified by Avery, MacLeod, and McCarty as:",
+        options: ["Protein", "RNA", "DNA", "Lipid"],
+        answer: 2,
+        explanation: "Avery et al. (1944) proved that DNA (not protein or RNA) was the genetic material responsible for bacterial transformation."
+      },
+      {
+        question: "Hershey and Chase used which radioactive isotopes to confirm DNA as genetic material?",
+        options: ["³²P and ³⁵S", "¹⁴C and ³H", "¹⁵N and ¹⁸O", "²H and ¹³C"],
         answer: 0,
-        explanation: "(a) Zygote → Morula → Blastocyst → Gastrula - This is the correct sequence of early embryonic development."
+        explanation: "³²P labeled DNA (phosphorus in backbone), and ³⁵S labeled protein (sulfur in amino acids) in bacteriophages."
       },
       {
-        question: "The hormone responsible for spermatogenesis is:",
-        options: ["FSH", "LH", "Testosterone", "All of the above"],
-        answer: 3,
-        explanation: "(d) All of the above - FSH acts on Sertoli cells, LH on Leydig cells to produce testosterone, all essential for spermatogenesis."
-      },
-      {
-        question: "The contraceptive method that prevents implantation is:",
-        options: ["Condom", "Copper-T", "Oral pills", "Vasectomy"],
-        answer: 1,
-        explanation: "(b) Copper-T - IUCDs like Copper-T prevent implantation by making the uterus unsuitable for implantation."
-      },
-      {
-        question: "Which STD is caused by a protozoan?",
-        options: ["Gonorrhea", "Syphilis", "Trichomoniasis", "Genital herpes"],
-        answer: 2,
-        explanation: "(c) Trichomoniasis - Caused by Trichomonas vaginalis, a protozoan parasite."
-      },
-      {
-        question: "Medical Termination of Pregnancy (MTP) is considered safe up to:",
-        options: ["8 weeks", "12 weeks", "20 weeks", "24 weeks"],
-        answer: 1,
-        explanation: "(b) 12 weeks - MTP is relatively safe up to the first trimester (12 weeks) of pregnancy."
-      },
-      {
-        question: "The technique used to detect genetic disorders in the fetus is:",
-        options: ["IVF", "Amniocentesis", "Laparoscopy", "Hysterectomy"],
-        answer: 1,
-        explanation: "(b) Amniocentesis - It involves analysis of amniotic fluid to detect chromosomal abnormalities and genetic disorders."
-      },
-      {
-        question: "Which of these is NOT a barrier method of contraception?",
-        options: ["Diaphragm", "Condom", "Copper-T", "Cervical cap"],
-        answer: 2,
-        explanation: "(c) Copper-T - It's an intrauterine device, not a barrier method."
-      },
-      {
-        question: "The principle of dominance states that:",
-        options: ["Alleles separate during gamete formation", "Some alleles are dominant over others", "Genes assort independently", "Traits blend in offspring"],
-        answer: 1,
-        explanation: "(b) Some alleles are dominant over others - The principle of dominance explains that some alleles mask the expression of others."
-      },
-      {
-        question: "A test cross is used to determine:",
-        options: ["Genotype of dominant phenotype", "Phenotype of recessive parent", "Number of alleles", "Linkage between genes"],
+        question: "The double-helix structure of DNA was proposed by:",
+        options: ["Watson and Crick", "Meselson and Stahl", "Chargaff", "Franklin and Wilkins"],
         answer: 0,
-        explanation: "(a) Genotype of dominant phenotype - A test cross involves crossing with a recessive parent to reveal the genotype of the dominant phenotype."
+        explanation: "Watson and Crick (1953) proposed the double-helix model based on X-ray diffraction data from Rosalind Franklin."
       },
       {
-        question: "Incomplete dominance is shown by:",
-        options: ["Mirabilis jalapa flower color", "ABO blood groups", "Human height", "Drosophila eye color"],
+        question: "Chargaff’s rule states that in DNA:",
+        options: ["A + T = G + C", "A + G = T + C", "A = C and T = G", "A = U and G = C"],
+        answer: 1,
+        explanation: "Chargaff’s rules: A = T, G = C (base pairing). Purines (A+G) = Pyrimidines (T+C)."
+      },
+      {
+        question: "Which bond connects two nucleotides in the same DNA strand?",
+        options: ["Hydrogen bond", "Phosphodiester bond", "Glycosidic bond", "Peptide bond"],
+        answer: 1,
+        explanation: "Phosphodiester bonds link the 3’ OH of one nucleotide to the 5’ phosphate of the next, forming the DNA backbone."
+      },
+      {
+        question: "The enzyme that synthesizes DNA from a template strand is:",
+        options: ["RNA polymerase", "DNA ligase", "DNA polymerase", "Helicase"],
+        answer: 2,
+        explanation: "DNA polymerase adds nucleotides during replication (requires primer)."
+      },
+      {
+        question: "Semi-conservative DNA replication was demonstrated by:",
+        options: ["Watson and Crick", "Meselson and Stahl", "Hershey and Chase", "Kornberg"],
+        answer: 1,
+        explanation: "Used ¹⁵N (heavy) and ¹⁴N (light) isotopes to show that each new DNA molecule has one old and one new strand."
+      },
+      {
+        question: "The Okazaki fragments are synthesized on the:",
+        options: ["Leading strand", "Lagging strand", "Both strands", "Template strand"],
+        answer: 1,
+        explanation: "Okazaki fragments are short DNA pieces on the lagging strand (synthesized discontinuously)."
+      },
+      {
+        question: "Which enzyme joins Okazaki fragments?",
+        options: ["DNA polymerase III", "DNA ligase", "Primase", "Helicase"],
+        answer: 1,
+        explanation: "DNA ligase seals nicks between Okazaki fragments by forming phosphodiester bonds."
+      },
+      {
+        question: "The central dogma of molecular biology describes:",
+        options: ["DNA → RNA → Protein", "RNA → DNA → Protein", "Protein → RNA → DNA", "DNA → Protein → RNA"],
         answer: 0,
-        explanation: "(a) Mirabilis jalapa flower color - Cross between red and white flowers produces pink flowers, showing incomplete dominance."
+        explanation: "Proposed by Francis Crick: Genetic information flows from DNA → transcription → RNA → translation → Protein."
       },
       {
-        question: "The chromosomal basis of sex determination in humans is:",
-        options: ["XX-XO", "XX-XY", "ZZ-ZW", "Haplodiploidy"],
+        question: "Transcription is the synthesis of:",
+        options: ["DNA from DNA", "RNA from DNA", "Protein from RNA", "DNA from RNA"],
         answer: 1,
-        explanation: "(b) XX-XY - Females are XX and males are XY in humans."
+        explanation: "Transcription produces mRNA, tRNA, rRNA using DNA as a template."
       },
       {
-        question: "A woman with normal vision whose father was colorblind marries a colorblind man. What percentage of their sons will be colorblind?",
-        options: ["0%", "25%", "50%", "100%"],
-        answer: 3,
-        explanation: "(d) 100% - The woman is a carrier (X<sup>C</sup>X<sup>c</sup>). All sons inheriting the X<sup>c</sup> chromosome will be colorblind."
-      },
-      {
-        question: "The phenomenon where genes located close together on the same chromosome tend to be inherited together is called:",
-        options: ["Crossing over", "Linkage", "Epistasis", "Pleiotropy"],
-        answer: 1,
-        explanation: "(b) Linkage - Linked genes are inherited together because they are located on the same chromosome."
-      },
-      {
-        question: "The process that produces new combinations of genes is:",
-        options: ["Mitosis", "Meiosis", "Crossing over", "Binary fission"],
-        answer: 2,
-        explanation: "(c) Crossing over - It occurs during prophase I of meiosis and produces recombinant chromosomes."
-      },
-      {
-        question: "The genetic material in bacteriophages is:",
-        options: ["Only DNA", "Only RNA", "Either DNA or RNA", "Both DNA and RNA"],
-        answer: 2,
-        explanation: "(c) Either DNA or RNA - Bacteriophages may contain either DNA or RNA as genetic material, but not both."
-      },
-      {
-        question: "The transforming principle discovered by Griffith was later identified by Avery, MacLeod and McCarty as:",
-        options: ["Protein", "RNA", "DNA", "Polysaccharide"],
-        answer: 2,
-        explanation: "(c) DNA - Their experiments proved that DNA was the substance that transformed R strain to S strain in pneumococci."
-      },
-      {
-        question: "The length of DNA having 20 base pairs is:",
-        options: ["34 Å", "68 Å", "340 Å", "680 Å"],
-        answer: 3,
-        explanation: "(d) 680 Å - Each base pair is 3.4 Å apart, so 20 bp would be 20 × 34 = 680 Å (since complete turn is 10 bp = 34 Å)."
-      },
-      {
-        question: "The enzyme that joins Okazaki fragments is:",
-        options: ["DNA polymerase", "RNA polymerase", "DNA ligase", "Helicase"],
-        answer: 2,
-        explanation: "(c) DNA ligase - It forms phosphodiester bonds between Okazaki fragments on the lagging strand."
-      },
-      {
-        question: "The process of RNA synthesis using DNA template is called:",
-        options: ["Replication", "Transcription", "Translation", "Transformation"],
-        answer: 1,
-        explanation: "(b) Transcription - It's the process by which RNA is synthesized from a DNA template."
-      },
-      {
-        question: "The anticodon is present on:",
-        options: ["mRNA", "tRNA", "rRNA", "DNA"],
-        answer: 1,
-        explanation: "(b) tRNA - The anticodon loop of tRNA carries the anticodon that base pairs with the codon on mRNA."
-      },
-      {
-        question: "The lac operon is found in:",
-        options: ["Humans", "E. coli", "Yeast", "Drosophila"],
-        answer: 1,
-        explanation: "(b) E. coli - The lac operon is a well-studied operon in E. coli that regulates lactose metabolism."
-      },
-      {
-        question: "The human genome project was completed in:",
-        options: ["1990", "1995", "2000", "2003"],
-        answer: 3,
-        explanation: "(d) 2003 - The Human Genome Project was declared complete in April 2003."
-      },
-      {
-        question: "DNA fingerprinting involves identifying differences in:",
-        options: ["Satellite DNA", "Coding DNA", "rDNA", "mtDNA"],
+        question: "The promoter region in DNA is recognized by:",
+        options: ["RNA polymerase", "DNA polymerase", "Helicase", "Ligase"],
         answer: 0,
-        explanation: "(a) Satellite DNA - It uses repetitive sequences (VNTRs) in satellite DNA that show high degree of polymorphism."
+        explanation: "The promoter (TATA box in eukaryotes) binds RNA polymerase to initiate transcription."
+      },
+      {
+        question: "Introns are:",
+        options: ["Coding sequences", "Non-coding sequences", "Protein-binding sites", "Start codons"],
+        answer: 1,
+        explanation: "Introns are removed during splicing, while exons are expressed."
+      },
+      {
+        question: "The genetic code is:",
+        options: ["Overlapping", "Ambiguous", "Degenerate", "Non-universal"],
+        answer: 2,
+        explanation: "Multiple codons can code for the same amino acid (e.g., leucine has 6 codons)."
+      },
+      {
+        question: "The start codon for protein synthesis is:",
+        options: ["UAA", "UGA", "AUG", "UAG"],
+        answer: 2,
+        explanation: "AUG codes for methionine and initiates translation."
+      },
+      {
+        question: "The process of protein synthesis at ribosomes is called:",
+        options: ["Transcription", "Replication", "Translation", "Splicing"],
+        answer: 2,
+        explanation: "mRNA is 'translated' into a polypeptide chain at ribosomes."
+      },
+      {
+        question: "Which RNA carries amino acids to the ribosome?",
+        options: ["mRNA", "tRNA", "rRNA", "snRNA"],
+        answer: 1,
+        explanation: "tRNA has an anticodon that pairs with mRNA codons and delivers amino acids."
+      },
+      {
+        question: "The Lac operon in E. coli regulates the metabolism of:",
+        options: ["Glucose", "Lactose", "Tryptophan", "Galactose"],
+        answer: 1,
+        explanation: "Lac operon is inducible—turned on when lactose is present (repressor inactivated)."
+      },
+      {
+        question: "A mutation that changes a codon to a stop codon is called:",
+        options: ["Missense", "Nonsense", "Silent", "Frameshift"],
+        answer: 1,
+        explanation: "Nonsense mutations create premature stop codons (e.g., UAG, UAA, UGA)."
+      },
+      {
+        question: "The Human Genome Project was focused on:",
+        options: ["Cloning humans", "Sequencing all human DNA", "Gene therapy", "Creating GMOs"],
+        answer: 1,
+        explanation: "HGP (1990-2003) mapped and sequenced the entire human genome (~3 billion base pairs)."
       },
       {
         question: "The theory of natural selection was proposed by:",
-        options: ["Lamarck", "Darwin", "Hugo de Vries", "Hardy-Weinberg"],
+        options: ["Gregor Mendel", "Charles Darwin", "Alfred Wallace", "Lamarck"],
         answer: 1,
-        explanation: "(b) Darwin - Charles Darwin proposed the theory of natural selection in 'On the Origin of Species' (1859)."
+        explanation: "Darwin’s 'On the Origin of Species' (1859) proposed natural selection as the mechanism of evolution."
       },
       {
-        question: "The phenomenon of 'industrial melanism' is associated with:",
-        options: ["Peppered moth", "Finches", "Drosophila", "Bacteria"],
-        answer: 0,
-        explanation: "(a) Peppered moth - The dark-colored moths became more common during industrial revolution due to natural selection."
+        question: "Which of the following is NOT a component of Darwin’s theory?",
+        options: ["Overproduction of offspring", "Inheritance of acquired traits", "Struggle for existence", "Survival of the fittest"],
+        answer: 1,
+        explanation: "Lamarck proposed acquired traits inheritance, while Darwin emphasized variation + natural selection."
+      },
+      {
+        question: "The concept of 'use and disuse of organs' was given by:",
+        options: ["Darwin", "Lamarck", "Hugo de Vries", "Hardy-Weinberg"],
+        answer: 1,
+        explanation: "Lamarck’s theory (e.g., giraffe’s neck elongation) was later disproven."
+      },
+      {
+        question: "The phenomenon where more individuals are produced than can survive is called:",
+        options: ["Speciation", "Overproduction", "Genetic drift", "Adaptive radiation"],
+        answer: 1,
+        explanation: "Darwin observed that populations overproduce, leading to competition."
       },
       {
         question: "The process by which new species arise is called:",
-        options: ["Adaptation", "Speciation", "Mutation", "Variation"],
+        options: ["Natural selection", "Speciation", "Genetic drift", "Mutation"],
         answer: 1,
-        explanation: "(b) Speciation - It's the evolutionary process by which populations evolve to become distinct species."
+        explanation: "Speciation occurs due to reproductive isolation (allopatric/sympatric)."
       },
       {
-        question: "The type of natural selection that favors both extremes of a trait is:",
-        options: ["Stabilizing", "Directional", "Disruptive", "Balancing"],
-        answer: 2,
-        explanation: "(c) Disruptive - This selection favors both extremes over intermediate phenotypes."
+        question: "Adaptive radiation is best exemplified by:",
+        options: ["Darwin’s finches", "Peppered moths", "Drosophila melanogaster", "Homo sapiens"],
+        answer: 0,
+        explanation: "Finches in the Galápagos evolved different beak shapes for varied diets."
       },
       {
-        question: "The Hardy-Weinberg principle describes:",
-        options: ["Genetic drift", "Gene flow", "Genetic equilibrium", "Natural selection"],
-        answer: 2,
-        explanation: "(c) Genetic equilibrium - It states that allele frequencies remain constant in a population under certain conditions."
-      },
-      {
-        question: "The earliest organisms on earth were probably:",
-        options: ["Autotrophic and aerobic", "Heterotrophic and anaerobic", "Autotrophic and anaerobic", "Heterotrophic and aerobic"],
+        question: "The change in moth color due to industrial pollution is an example of:",
+        options: ["Genetic drift", "Directional selection", "Stabilizing selection", "Disruptive selection"],
         answer: 1,
-        explanation: "(b) Heterotrophic and anaerobic - First life forms likely obtained energy from organic molecules in absence of oxygen."
+        explanation: "Dark-colored peppered moths increased post-industrialization (shift in phenotype)."
       },
       {
-        question: "Which of these is NOT a vestigial organ in humans?",
-        options: ["Appendix", "Wisdom teeth", "Nictitating membrane", "Pancreas"],
+        question: "The Hardy-Weinberg equilibrium assumes:",
+        options: ["No mutations", "No natural selection", "Random mating", "All of the above"],
         answer: 3,
-        explanation: "(d) Pancreas - It's a functional organ while others are vestigial structures with reduced function."
+        explanation: "H-W equilibrium requires: No mutations, No gene flow, Large population, Random mating, No selection."
       },
       {
-        question: "The theory of inheritance of acquired characters was proposed by:",
-        options: ["Darwin", "Lamarck", "Mendel", "de Vries"],
+        question: "Genetic drift is most significant in:",
+        options: ["Large populations", "Small populations", "Migratory populations", "Hybrid populations"],
         answer: 1,
-        explanation: "(b) Lamarck - His theory suggested that characteristics acquired during an organism's life could be inherited."
+        explanation: "Random allele fluctuations (founder effect/bottleneck) are stronger in small groups."
+      },
+      {
+        question: "The fossil record provides evidence for:",
+        options: ["Microevolution", "Macroevolution", "Both a and b", "Neither"],
+        answer: 2,
+        explanation: "Fossils show gradual changes (micro) and major transitions (macro)."
+      },
+      {
+        question: "Homologous organs indicate:",
+        options: ["Convergent evolution", "Divergent evolution", "Parallel evolution", "Adaptive radiation"],
+        answer: 1,
+        explanation: "Homologous structures (e.g., human arm, whale flipper) share a common ancestor."
       },
       {
         question: "Analogous organs arise due to:",
-        options: ["Divergent evolution", "Convergent evolution", "Mutation", "Genetic drift"],
+        options: ["Common ancestry", "Similar function", "Genetic drift", "Mutations"],
         answer: 1,
-        explanation: "(b) Convergent evolution - Analogous organs have similar functions but different origins (e.g., wings of birds and insects)."
+        explanation: "Analogous organs (e.g., wings of bats & insects) evolve independently for similar functions."
       },
       {
-        question: "Which of these is NOT a pre-zygotic isolating mechanism?",
-        options: ["Habitat isolation", "Temporal isolation", "Hybrid sterility", "Behavioral isolation"],
-        answer: 2,
-        explanation: "(c) Hybrid sterility - It's a post-zygotic mechanism where hybrids are sterile (e.g., mule)."
-      },
-      {
-        question: "The most accepted theory of origin of life is:",
-        options: ["Theory of special creation", "Theory of spontaneous generation", "Cosmozoic theory", "Chemical evolution theory"],
-        answer: 3,
-        explanation: "(d) Chemical evolution theory - Proposed by Oparin and Haldane, it suggests life arose from non-living molecules through chemical evolution."
-      },
-      {
-        question: "The experiment that simulated early earth conditions was conducted by:",
-        options: ["Darwin", "Miller and Urey", "Oparin", "Haldane"],
+        question: "The theory of 'continental drift' explains:",
+        options: ["Mass extinctions", "Biogeographical distribution", "Genetic mutations", "Sexual selection"],
         answer: 1,
-        explanation: "(b) Miller and Urey - Their experiment showed that organic molecules could form under simulated early earth conditions."
+        explanation: "Pangea’s breakup influenced species distribution (e.g., marsupials in Australia)."
       },
       {
-        question: "The pollen grain is the:",
-        options: ["Male gamete", "Male gametophyte", "Sporophyte", "Female gametophyte"],
-        answer: 1,
-        explanation: "(b) Male gametophyte - The pollen grain is the mature male gametophyte that produces male gametes."
-      },
-      {
-        question: "The innermost wall layer of microsporangium is:",
-        options: ["Epidermis", "Endothecium", "Tapetum", "Middle layers"],
-        answer: 2,
-        explanation: "(c) Tapetum - The tapetum is the innermost nutritive layer that nourishes developing pollen grains."
-      },
-      {
-        question: "The number of meiotic divisions required to produce 100 pollen grains is:",
-        options: ["25", "50", "100", "200"],
+        question: "Which of the following is a vestigial organ in humans?",
+        options: ["Appendix", "Heart", "Lung", "Kidney"],
         answer: 0,
-        explanation: "(a) 25 - Each meiotic division in microspore mother cell produces 4 microspores (pollen grains), so 100/4 = 25 divisions."
+        explanation: "Vestigial organs (e.g., appendix, tailbone) are non-functional remnants of ancestors."
       },
       {
-        question: "The embryo sac is:",
-        options: ["8-nucleate and 7-celled", "7-nucleate and 8-celled", "8-nucleate and 8-celled", "7-nucleate and 7-celled"],
+        question: "The first life forms on Earth were likely:",
+        options: ["Photosynthetic bacteria", "Chemoautotrophs", "Eukaryotes", "Viruses"],
+        answer: 1,
+        explanation: "Early prokaryotes (e.g., archaebacteria) thrived in anaerobic, high-temperature environments."
+      },
+      {
+        question: "The Miller-Urey experiment demonstrated:",
+        options: ["RNA world hypothesis", "Abiogenesis", "Panspermia", "Natural selection"],
+        answer: 1,
+        explanation: "Simulated early Earth conditions produced amino acids, supporting chemical evolution."
+      },
+      {
+        question: "Which era is known as the 'Age of Reptiles'?",
+        options: ["Paleozoic", "Mesozoic", "Cenozoic", "Precambrian"],
+        answer: 1,
+        explanation: "Mesozoic era (252–66 MYA) saw dinosaurs dominate."
+      },
+      {
+        question: "The most recent mass extinction event occurred in the:",
+        options: ["Permian", "Cretaceous", "Devonian", "Quaternary"],
+        answer: 1,
+        explanation: "Cretaceous-Paleogene (K-Pg) extinction wiped out dinosaurs (~65 MYA)."
+      },
+      {
+        question: "Human evolution is studied under:",
+        options: ["Anthropogeny", "Ontogeny", "Phylogeny", "Biogeny"],
         answer: 0,
-        explanation: "(a) 8-nucleate and 7-celled - The mature embryo sac has 8 nuclei organized into 7 cells (3 antipodal, 2 synergids, 1 egg, 1 central cell with 2 nuclei)."
+        explanation: "Anthropogeny focuses on human origins (e.g., Homo habilis → H. sapiens)."
       },
       {
-        question: "The pollen tube enters the embryo sac through:",
-        options: ["Egg apparatus", "Antipodal cells", "Chalazal end", "Micropyle"],
-        answer: 3,
-        explanation: "(d) Micropyle - The pollen tube enters through the micropylar end of the ovule where the egg apparatus is located."
-      },
-      {
-        question: "The endosperm in angiosperms is:",
-        options: ["Haploid", "Diploid", "Triploid", "Tetraploid"],
-        answer: 2,
-        explanation: "(c) Triploid - Formed by fusion of one sperm (n) with two polar nuclei (n+n) to form 3n endosperm."
-      },
-      {
-        question: "The function of the filiform apparatus is to:",
-        options: ["Nourish the pollen tube", "Guide the pollen tube", "Protect the egg", "Store starch"],
+        question: "The 'Out of Africa' theory suggests:",
+        options: ["Humans evolved in multiple regions", "Humans migrated from Africa to other continents", "Neanderthals were ancestors of modern humans", "Dinosaurs evolved into birds"],
         answer: 1,
-        explanation: "(b) Guide the pollen tube - The filiform apparatus in synergids helps guide the pollen tube into the embryo sac."
+        explanation: "Homo sapiens originated in Africa ~200,000 years ago and dispersed globally."
       },
       {
-        question: "Which of these plants shows cleistogamy?",
-        options: ["Viola", "Sunflower", "Rose", "Orchid"],
+        question: "Which of the following is a bacterial disease?",
+        options: ["Influenza", "Tuberculosis", "Malaria", "Dengue"],
+        answer: 1,
+        explanation: "Tuberculosis is caused by Mycobacterium tuberculosis, a bacterium, while others are viral (influenza, dengue) or parasitic (malaria)."
+      },
+      {
+        question: "The vector for malaria is:",
+        options: ["Anopheles mosquito", "Aedes mosquito", "Culex mosquito", "Housefly"],
         answer: 0,
-        explanation: "(a) Viola - Some flowers of Viola show cleistogamy (flowers that don't open and ensure self-pollination)."
+        explanation: "Female Anopheles mosquitoes transmit Plasmodium (malaria parasite)."
       },
       {
-        question: "The number of chromosomes in the endosperm of a plant with 2n=40 would be:",
-        options: ["20", "40", "60", "80"],
-        answer: 2,
-        explanation: "(c) 60 - Endosperm is triploid (3n) formed by fusion of one sperm (n) with two polar nuclei (n+n)."
-      },
-      {
-        question: "The function of the filiform apparatus is to:",
-        options: ["Nourish the pollen tube", "Guide the pollen tube", "Protect the egg", "Store starch"],
+        question: "Which disease is caused by Wuchereria bancrofti?",
+        options: ["Typhoid", "Filariasis", "Pneumonia", "Cholera"],
         answer: 1,
-        explanation: "(b) Guide the pollen tube - The filiform apparatus in synergids helps guide the pollen tube into the embryo sac."
+        explanation: "Wuchereria bancrofti causes lymphatic filariasis (elephantiasis), transmitted by mosquitoes."
       },
       {
-        question: "Which of these is NOT a characteristic of wind-pollinated flowers?",
-        options: ["Light pollen grains", "Brightly colored petals", "Feathery stigma", "Large amount of pollen"],
+        question: "HIV primarily targets which cells?",
+        options: ["B-lymphocytes", "T-helper cells (CD4+)", "Platelets", "Neutrophils"],
         answer: 1,
-        explanation: "(b) Brightly colored petals - Wind-pollinated flowers are usually small, inconspicuous and lack bright colors."
+        explanation: "HIV attacks CD4+ T cells, weakening the immune system (leads to AIDS)."
       },
       {
-        question: "Apomixis is:",
-        options: ["Formation of seeds without fertilization", "Formation of fruits without seeds", "Development of embryo from nucellus", "Development of seeds from integuments"],
+        question: "The confirmatory test for HIV is:",
+        options: ["ELISA", "Western blot", "PCR", "Widal test"],
+        answer: 1,
+        explanation: "ELISA is a screening test; Western blot is confirmatory for HIV."
+      },
+      {
+        question: "Which of the following is an autoimmune disease?",
+        options: ["Asthma", "Rheumatoid arthritis", "Tuberculosis", "Cholera"],
+        answer: 1,
+        explanation: "Autoimmune diseases occur when the immune system attacks self-tissues (e.g., RA, Type 1 diabetes)."
+      },
+      {
+        question: "The causative agent of typhoid is:",
+        options: ["Salmonella typhi", "Vibrio cholerae", "Escherichia coli", "Streptococcus pneumoniae"],
         answer: 0,
-        explanation: "(a) Formation of seeds without fertilization - Apomixis is asexual reproduction that mimics sexual reproduction."
+        explanation: "Typhoid fever is caused by S. typhi, transmitted via contaminated food/water."
       },
       {
-        question: "The hormone that prepares the uterus for pregnancy is:",
-        options: ["Estrogen", "Progesterone", "FSH", "LH"],
+        question: "Which of the following is a protozoan disease?",
+        options: ["Ascariasis", "Amoebiasis", "Filariasis", "Ringworm"],
         answer: 1,
-        explanation: "(b) Progesterone - It maintains the endometrium and prepares the uterus for implantation of the fertilized ovum."
+        explanation: "Amoebiasis is caused by Entamoeba histolytica (protozoan), while others are helminthic (ascariasis, filariasis) or fungal (ringworm)."
       },
       {
-        question: "The acrosomal reaction is associated with:",
-        options: ["Sperm motility", "Sperm penetration", "Sperm production", "Sperm maturation"],
+        question: "The drug used for treating malaria is:",
+        options: ["Paracetamol", "Chloroquine", "Penicillin", "ORS"],
         answer: 1,
-        explanation: "(b) Sperm penetration - The acrosomal reaction releases enzymes that help sperm penetrate the egg's protective layers."
+        explanation: "Chloroquine is an antimalarial drug (though resistance is now common)."
       },
       {
-        question: "The site of fertilization in humans is:",
-        options: ["Ovary", "Uterus", "Fallopian tube", "Cervix"],
-        answer: 2,
-        explanation: "(c) Fallopian tube - Fertilization typically occurs in the ampullary-isthmic junction of the fallopian tube."
-      },
-      {
-        question: "The hormone responsible for milk ejection is:",
-        options: ["Prolactin", "Oxytocin", "Estrogen", "Progesterone"],
-        answer: 1,
-        explanation: "(b) Oxytocin - It causes contraction of myoepithelial cells in mammary glands leading to milk ejection."
-      },
-      {
-        question: "The layer of uterus that is shed during menstruation is:",
-        options: ["Perimetrium", "Myometrium", "Endometrium", "Epimetrium"],
-        answer: 2,
-        explanation: "(c) Endometrium - The functional layer of endometrium is shed during menstruation if pregnancy doesn't occur."
-      },
-      {
-        question: "Which of these is NOT a component of semen?",
-        options: ["Sperm", "Seminal plasma", "Prostaglandins", "Fibrinogen"],
-        answer: 3,
-        explanation: "(d) Fibrinogen - Semen contains sperm and seminal plasma (secretions from seminal vesicles, prostate and bulbourethral glands)."
-      },
-      {
-        question: "The correct sequence of embryonic development stages is:",
-        options: ["Zygote → Morula → Blastocyst → Gastrula", "Zygote → Blastocyst → Morula → Gastrula", "Zygote → Gastrula → Morula → Blastocyst", "Zygote → Morula → Gastrula → Blastocyst"],
+        question: "Which disease is prevented by the BCG vaccine?",
+        options: ["Tuberculosis", "Polio", "Hepatitis B", "Tetanus"],
         answer: 0,
-        explanation: "(a) Zygote → Morula → Blastocyst → Gastrula - This is the correct sequence of early embryonic development."
+        explanation: "BCG (Bacillus Calmette-Guérin) vaccine protects against TB."
       },
       {
-        question: "The hormone responsible for spermatogenesis is:",
-        options: ["FSH", "LH", "Testosterone", "All of the above"],
+        question: "The main symptom of dengue hemorrhagic fever is:",
+        options: ["High fever", "Low platelet count", "Joint pain", "All of the above"],
         answer: 3,
-        explanation: "(d) All of the above - FSH acts on Sertoli cells, LH on Leydig cells to produce testosterone, all essential for spermatogenesis."
+        explanation: "Dengue symptoms include high fever, thrombocytopenia (low platelets), and severe joint/muscle pain."
       },
       {
-        question: "The contraceptive method that prevents implantation is:",
-        options: ["Condom", "Copper-T", "Oral pills", "Vasectomy"],
+        question: "Which organ is most affected by hepatitis B?",
+        options: ["Kidney", "Liver", "Lung", "Heart"],
         answer: 1,
-        explanation: "(b) Copper-T - IUCDs like Copper-T prevent implantation by making the uterus unsuitable for implantation."
+        explanation: "Hepatitis B virus (HBV) causes liver inflammation, leading to cirrhosis or cancer."
       },
       {
-        question: "Which STD is caused by a protozoan?",
-        options: ["Gonorrhea", "Syphilis", "Trichomoniasis", "Genital herpes"],
+        question: "The term 'oncogene' is related to:",
+        options: ["Bacterial infection", "Viral infection", "Cancer", "Allergy"],
         answer: 2,
-        explanation: "(c) Trichomoniasis - Caused by Trichomonas vaginalis, a protozoan parasite."
+        explanation: "Oncogenes are mutated genes that promote uncontrolled cell division (e.g., RAS, MYC)."
       },
       {
-        question: "Medical Termination of Pregnancy (MTP) is considered safe up to:",
-        options: ["8 weeks", "12 weeks", "20 weeks", "24 weeks"],
+        question: "Which of the following is a fungal infection?",
+        options: ["Leprosy", "Ringworm", "Diphtheria", "Pertussis"],
         answer: 1,
-        explanation: "(b) 12 weeks - MTP is relatively safe up to the first trimester (12 weeks) of pregnancy."
+        explanation: "Ringworm (tinea) is caused by fungi (Microsporum, Trichophyton), not worms."
       },
       {
-        question: "The technique used to detect genetic disorders in the fetus is:",
-        options: ["IVF", "Amniocentesis", "Laparoscopy", "Hysterectomy"],
-        answer: 1,
-        explanation: "(b) Amniocentesis - It involves analysis of amniotic fluid to detect chromosomal abnormalities and genetic disorders."
-      },
-      {
-        question: "Which of these is NOT a barrier method of contraception?",
-        options: ["Diaphragm", "Condom", "Copper-T", "Cervical cap"],
-        answer: 2,
-        explanation: "(c) Copper-T - It's an intrauterine device, not a barrier method."
-      },
-      {
-        question: "The principle of dominance states that:",
-        options: ["Alleles separate during gamete formation", "Some alleles are dominant over others", "Genes assort independently", "Traits blend in offspring"],
-        answer: 1,
-        explanation: "(b) Some alleles are dominant over others - The principle of dominance explains that some alleles mask the expression of others."
-      },
-      {
-        question: "A test cross is used to determine:",
-        options: ["Genotype of dominant phenotype", "Phenotype of recessive parent", "Number of alleles", "Linkage between genes"],
+        question: "The disease caused by Streptococcus pneumoniae is:",
+        options: ["Pneumonia", "Typhoid", "Cholera", "Tetanus"],
         answer: 0,
-        explanation: "(a) Genotype of dominant phenotype - A test cross involves crossing with a recessive parent to reveal the genotype of the dominant phenotype."
+        explanation: "S. pneumoniae causes pneumonia (lung infection)."
       },
       {
-        question: "Incomplete dominance is shown by:",
-        options: ["Mirabilis jalapa flower color", "ABO blood groups", "Human height", "Drosophila eye color"],
+        question: "Which of the following is a viral disease?",
+        options: ["Tuberculosis", "Cholera", "Common cold", "Anthrax"],
+        answer: 2,
+        explanation: "Common cold is caused by rhinoviruses, while others are bacterial."
+      },
+      {
+        question: "The 'Triple Antigen' vaccine protects against:",
+        options: ["Polio, measles, mumps", "Diphtheria, pertussis, tetanus (DPT)", "Hepatitis A, B, C", "Typhoid, cholera, tuberculosis"],
+        answer: 1,
+        explanation: "DPT vaccine covers diphtheria, whooping cough (pertussis), and tetanus."
+      },
+      {
+        question: "Which of the following is a helminthic disease?",
+        options: ["Malaria", "Ascariasis", "Influenza", "Rabies"],
+        answer: 1,
+        explanation: "Ascariasis is caused by the roundworm Ascaris lumbricoides."
+      },
+      {
+        question: "The diagnostic test for typhoid is:",
+        options: ["ELISA", "Widal test", "PCR", "Blood culture"],
+        answer: 1,
+        explanation: "Widal test detects antibodies against Salmonella typhi."
+      },
+      {
+        question: "Which of the following is NOT a communicable disease?",
+        options: ["Diabetes", "Tuberculosis", "Chickenpox", "Hepatitis B"],
         answer: 0,
-        explanation: "(a) Mirabilis jalapa flower color - Cross between red and white flowers produces pink flowers, showing incomplete dominance."
+        explanation: "Diabetes is a metabolic disorder, not transmitted between individuals."
       },
       {
-        question: "The chromosomal basis of sex determination in humans is:",
-        options: ["XX-XO", "XX-XY", "ZZ-ZW", "Haplodiploidy"],
+        question: "The process of crossing two genetically dissimilar plants to produce a hybrid is called:",
+        options: ["Inbreeding", "Outbreeding", "Crossbreeding", "Cloning"],
         answer: 1,
-        explanation: "(b) XX-XY - Females are XX and males are XY in humans."
+        explanation: "Outbreeding introduces genetic diversity by crossing unrelated plants (e.g., hybrid maize)."
       },
       {
-        question: "A woman with normal vision whose father was colorblind marries a colorblind man. What percentage of their sons will be colorblind?",
-        options: ["0%", "25%", "50%", "100%"],
-        answer: 3,
-        explanation: "(d) 100% - The woman is a carrier (X<sup>C</sup>X<sup>c</sup>). All sons inheriting the X<sup>c</sup> chromosome will be colorblind."
-      },
-      {
-        question: "The phenomenon where genes located close together on the same chromosome tend to be inherited together is called:",
-        options: ["Crossing over", "Linkage", "Epistasis", "Pleiotropy"],
-        answer: 1,
-        explanation: "(b) Linkage - Linked genes are inherited together because they are located on the same chromosome."
-      },
-      {
-        question: "The process that produces new combinations of genes is:",
-        options: ["Mitosis", "Meiosis", "Crossing over", "Binary fission"],
-        answer: 2,
-        explanation: "(c) Crossing over - It occurs during prophase I of meiosis and produces recombinant chromosomes."
-      },
-      {
-        question: "The genetic material in bacteriophages is:",
-        options: ["Only DNA", "Only RNA", "Either DNA or RNA", "Both DNA and RNA"],
-        answer: 2,
-        explanation: "(c) Either DNA or RNA - Bacteriophages may contain either DNA or RNA as genetic material, but not both."
-      },
-      {
-        question: "The transforming principle discovered by Griffith was later identified by Avery, MacLeod and McCarty as:",
-        options: ["Protein", "RNA", "DNA", "Polysaccharide"],
-        answer: 2,
-        explanation: "(c) DNA - Their experiments proved that DNA was the substance that transformed R strain to S strain in pneumococci."
-      },
-      {
-        question: "The length of DNA having 20 base pairs is:",
-        options: ["34 Å", "68 Å", "340 Å", "680 Å"],
-        answer: 3,
-        explanation: "(d) 680 Å - Each base pair is 3.4 Å apart, so 20 bp would be 20 × 34 = 680 Å (since complete turn is 10 bp = 34 Å)."
-      },
-      {
-        question: "The enzyme that joins Okazaki fragments is:",
-        options: ["DNA polymerase", "RNA polymerase", "DNA ligase", "Helicase"],
-        answer: 2,
-        explanation: "(c) DNA ligase - It forms phosphodiester bonds between Okazaki fragments on the lagging strand."
-      },
-      {
-        question: "The process of RNA synthesis using DNA template is called:",
-        options: ["Replication", "Transcription", "Translation", "Transformation"],
-        answer: 1,
-        explanation: "(b) Transcription - It's the process by which RNA is synthesized from a DNA template."
-      },
-      {
-        question: "The anticodon is present on:",
-        options: ["mRNA", "tRNA", "rRNA", "DNA"],
-        answer: 1,
-        explanation: "(b) tRNA - The anticodon loop of tRNA carries the anticodon that base pairs with the codon on mRNA."
-      },
-      {
-        question: "The lac operon is found in:",
-        options: ["Humans", "E. coli", "Yeast", "Drosophila"],
-        answer: 1,
-        explanation: "(b) E. coli - The lac operon is a well-studied operon in E. coli that regulates lactose metabolism."
-      },
-      {
-        question: "The human genome project was completed in:",
-        options: ["1990", "1995", "2000", "2003"],
-        answer: 3,
-        explanation: "(d) 2003 - The Human Genome Project was declared complete in April 2003."
-      },
-      {
-        question: "DNA fingerprinting involves identifying differences in:",
-        options: ["Satellite DNA", "Coding DNA", "rDNA", "mtDNA"],
+        question: "Which of the following is a method of plant breeding to develop disease-resistant crops?",
+        options: ["Mutation breeding", "Polyploidy", "Tissue culture", "Biofortification"],
         answer: 0,
-        explanation: "(a) Satellite DNA - It uses repetitive sequences (VNTRs) in satellite DNA that show high degree of polymorphism."
+        explanation: "Mutation breeding uses radiation/chemicals to induce mutations for traits like disease resistance."
       },
       {
-        question: "The theory of natural selection was proposed by:",
-        options: ["Lamarck", "Darwin", "Hugo de Vries", "Hardy-Weinberg"],
+        question: "The term 'heterosis' refers to:",
+        options: ["Reduced vigor in hybrids", "Increased yield in hybrids", "Genetic uniformity", "Clonal propagation"],
         answer: 1,
-        explanation: "(b) Darwin - Charles Darwin proposed the theory of natural selection in 'On the Origin of Species' (1859)."
+        explanation: "Heterosis (hybrid vigor) results in superior traits (e.g., higher yield) in F1 hybrids."
       },
       {
-        question: "The phenomenon of 'industrial melanism' is associated with:",
-        options: ["Peppered moth", "Finches", "Drosophila", "Bacteria"],
+        question: "Sonalika and Kalyan Sona are improved varieties of:",
+        options: ["Rice", "Wheat", "Maize", "Barley"],
+        answer: 1,
+        explanation: "These are high-yielding, semi-dwarf wheat varieties from the Green Revolution."
+      },
+      {
+        question: "The technique used to grow plants from single cells or tissues in a nutrient medium is called:",
+        options: ["Hydroponics", "Tissue culture", "Grafting", "Hybridization"],
+        answer: 1,
+        explanation: "Tissue culture (micropropagation) produces genetically identical plants (clones) under sterile conditions."
+      },
+      {
+        question: "Which hormone is added to tissue culture media to promote shoot formation?",
+        options: ["Auxin", "Gibberellin", "Cytokinin", "Ethylene"],
+        answer: 2,
+        explanation: "Cytokinins (e.g., BAP) stimulate shoot growth, while auxins (e.g., NAA) promote roots."
+      },
+      {
+        question: "The practice of growing two or more crops simultaneously on the same field is called:",
+        options: ["Crop rotation", "Intercropping", "Monoculture", "Mixed farming"],
+        answer: 1,
+        explanation: "Intercropping (e.g., maize + soybean) maximizes land use and reduces pests."
+      },
+      {
+        question: "Which of the following is a biofortified crop?",
+        options: ["Golden Rice", "Bt Cotton", "Flavr Savr Tomato", "Hybrid Maize"],
         answer: 0,
-        explanation: "(a) Peppered moth - The dark-colored moths became more common during industrial revolution due to natural selection."
+        explanation: "Golden Rice is genetically modified to produce beta-carotene (Vitamin A)."
       },
       {
-        question: "The process by which new species arise is called:",
-        options: ["Adaptation", "Speciation", "Mutation", "Variation"],
+        question: "Bt cotton is resistant to:",
+        options: ["Bacterial blight", "Bollworm", "Fungal rust", "Aphids"],
         answer: 1,
-        explanation: "(b) Speciation - It's the evolutionary process by which populations evolve to become distinct species."
+        explanation: "Bt cotton expresses the cry gene from Bacillus thuringiensis, toxic to bollworm larvae."
       },
       {
-        question: "The type of natural selection that favors both extremes of a trait is:",
-        options: ["Stabilizing", "Directional", "Disruptive", "Balancing"],
+        question: "The Green Revolution in India was led by:",
+        options: ["M.S. Swaminathan", "Norman Borlaug", "Gregor Mendel", "Charles Darwin"],
+        answer: 0,
+        explanation: "Swaminathan introduced high-yielding wheat/rice varieties in the 1960s."
+      },
+      {
+        question: "Which of the following is a marine fish variety?",
+        options: ["Rohu", "Catla", "Sardine", "Mrigal"],
         answer: 2,
-        explanation: "(c) Disruptive - This selection favors both extremes over intermediate phenotypes."
+        explanation: "Sardine is a marine fish, while others (Rohu, Catla, Mrigal) are freshwater."
       },
       {
-        question: "The Hardy-Weinberg principle describes:",
-        options: ["Genetic drift", "Gene flow", "Genetic equilibrium", "Natural selection"],
-        answer: 2,
-        explanation: "(c) Genetic equilibrium - It states that allele frequencies remain constant in a population under certain conditions."
+        question: "The hormonal method to induce breeding in fish is called:",
+        options: ["Hypophysation", "Hybridization", "Polyploidy", "Cryopreservation"],
+        answer: 0,
+        explanation: "Fish pituitary gland extract is injected to induce spawning."
       },
       {
-        question: "The earliest organisms on earth were probably:",
-        options: ["Autotrophic and aerobic", "Heterotrophic and anaerobic", "Autotrophic and anaerobic", "Heterotrophic and aerobic"],
+        question: "Poultry farming includes rearing of:",
+        options: ["Chickens and ducks", "Cows and buffaloes", "Fish and prawns", "Sheep and goats"],
+        answer: 0,
+        explanation: "Poultry focuses on domesticated birds (chickens, turkeys, ducks) for eggs/meat."
+      },
+      {
+        question: "Which of the following is an exotic cattle breed?",
+        options: ["Sahiwal", "Jersey", "Gir", "Red Sindhi"],
         answer: 1,
-        explanation: "(b) Heterotrophic and anaerobic - First life forms likely obtained energy from organic molecules in absence of oxygen."
+        explanation: "Jersey (from the UK) is exotic, while others (Sahiwal, Gir, Red Sindhi) are indigenous."
       },
       {
-        question: "Which of these is NOT a vestigial organ in humans?",
-        options: ["Appendix", "Wisdom teeth", "Nictitating membrane", "Pancreas"],
+        question: "The process of preserving animal semen at ultra-low temperatures is called:",
+        options: ["Artificial insemination", "Embryo transfer", "Cryopreservation", "Cloning"],
+        answer: 2,
+        explanation: "Semen is stored in liquid nitrogen (−196°C) for artificial insemination."
+      },
+      {
+        question: "Which of the following is a fungal disease in poultry?",
+        options: ["Ranikhet", "Aspergillosis", "Foot-and-mouth", "Anthrax"],
+        answer: 1,
+        explanation: "Caused by Aspergillus fungi, while Ranikhet is viral, and FMD/anthrax affect cattle."
+      },
+      {
+        question: "The technique of producing genetically identical animals is called:",
+        options: ["Hybridization", "Cloning", "Crossbreeding", "Mutagenesis"],
+        answer: 1,
+        explanation: "Cloning (e.g., Dolly the sheep) creates genetic copies via somatic cell nuclear transfer."
+      },
+      {
+        question: "Which of the following is a viral disease in cattle?",
+        options: ["Anthrax", "Foot-and-mouth disease", "Tuberculosis", "Brucellosis"],
+        answer: 1,
+        explanation: "FMD is caused by a picornavirus, while others are bacterial."
+      },
+      {
+        question: "MOET (Multiple Ovulation Embryo Transfer) is used in:",
+        options: ["Fish breeding", "Poultry farming", "Cattle breeding", "Beekeeping"],
+        answer: 2,
+        explanation: "MOET enhances high-yielding cattle production by transferring embryos to surrogate mothers."
+      },
+      {
+        question: "Apiculture refers to the rearing of:",
+        options: ["Silkworms", "Honeybees", "Fish", "Poultry"],
+        answer: 1,
+        explanation: "Apiculture involves beekeeping for honey, wax, and pollination services."
+      },
+      {
+        question: "Which microorganism is used in the production of curd from milk?",
+        options: ["Lactobacillus", "Saccharomyces", "Rhizobium", "Penicillium"],
+        answer: 0,
+        explanation: "Lactobacillus bacteria ferment lactose into lactic acid, coagulating milk proteins to form curd."
+      },
+      {
+        question: "The gas produced during dough fermentation in bread-making is:",
+        options: ["Oxygen", "Carbon dioxide", "Methane", "Hydrogen"],
+        answer: 1,
+        explanation: "Yeast (Saccharomyces cerevisiae) produces CO₂ during fermentation, causing dough to rise."
+      },
+      {
+        question: "Which of the following is a fungal source of antibiotics?",
+        options: ["Bacillus subtilis", "Streptomyces", "Penicillium notatum", "Escherichia coli"],
+        answer: 2,
+        explanation: "Alexander Fleming discovered penicillin from the fungus Penicillium notatum."
+      },
+      {
+        question: "The primary use of Trichoderma polysporum is in the production of:",
+        options: ["Citric acid", "Cyclosporin A", "Ethanol", "Lactic acid"],
+        answer: 1,
+        explanation: "This fungus produces cyclosporin A, an immunosuppressant used in organ transplants."
+      },
+      {
+        question: "Which bacterium is used as a biofertilizer for legumes?",
+        options: ["Azotobacter", "Rhizobium", "Nostoc", "Bacillus thuringiensis"],
+        answer: 1,
+        explanation: "Rhizobium forms root nodules in legumes and fixes atmospheric nitrogen."
+      },
+      {
+        question: "The microbial source of statins (cholesterol-lowering drugs) is:",
+        options: ["Aspergillus terreus", "Monascus purpureus", "Streptomyces", "Acetobacter"],
+        answer: 1,
+        explanation: "This yeast produces lovastatin, a natural statin."
+      },
+      {
+        question: "Which microbe is used in biogas production?",
+        options: ["Methanobacterium", "Clostridium", "Nitrosomonas", "Thiobacillus"],
+        answer: 0,
+        explanation: "Methanogens like Methanobacterium convert organic waste into methane (biogas)."
+      },
+      {
+        question: "The enzyme used in PCR (Polymerase Chain Reaction) is derived from:",
+        options: ["E. coli", "Thermus aquaticus", "Bacillus subtilis", "Agrobacterium"],
+        answer: 1,
+        explanation: "Taq polymerase (heat-stable DNA polymerase) is isolated from this thermophilic bacterium."
+      },
+      {
+        question: "Which microorganism is responsible for converting alcohol to acetic acid?",
+        options: ["Lactobacillus", "Acetobacter aceti", "Saccharomyces", "Aspergillus"],
+        answer: 1,
+        explanation: "This bacterium oxidizes ethanol to acetic acid (vinegar production)."
+      },
+      {
+        question: "The biocontrol agent used to treat butterfly caterpillars is:",
+        options: ["Bacillus thuringiensis (Bt)", "Trichoderma", "Pseudomonas", "Rhizobium"],
+        answer: 0,
+        explanation: "Bt produces Cry proteins toxic to insect larvae (e.g., caterpillars)."
+      },
+      {
+        question: "Which of the following microbes is used in sewage treatment?",
+        options: ["Mycobacterium", "Flavobacterium", "Vibrio", "Salmonella"],
+        answer: 1,
+        explanation: "Flavobacterium degrades organic sludge in aerobic sewage treatment."
+      },
+      {
+        question: "The industrial production of citric acid involves:",
+        options: ["Aspergillus niger", "Clostridium", "Lactobacillus", "Streptococcus"],
+        answer: 0,
+        explanation: "This fungus is used in citric acid fermentation."
+      },
+      {
+        question: "Which of the following is a free-living nitrogen-fixing bacterium?",
+        options: ["Rhizobium", "Azospirillum", "Nostoc", "Azotobacter"],
         answer: 3,
-        explanation: "(d) Pancreas - It's a functional organ while others are vestigial structures with reduced function."
+        explanation: "Azotobacter fixes nitrogen without symbiotic association."
       },
       {
-        question: "The theory of inheritance of acquired characters was proposed by:",
-        options: ["Darwin", "Lamarck", "Mendel", "de Vries"],
-        answer: 1,
-        explanation: "(b) Lamarck - His theory suggested that characteristics acquired during an organism's life could be inherited."
-      },
-      {
-        question: "Analogous organs arise due to:",
-        options: ["Divergent evolution", "Convergent evolution", "Mutation", "Genetic drift"],
-        answer: 1,
-        explanation: "(b) Convergent evolution - Analogous organs have similar functions but different origins (e.g., wings of birds and insects)."
-      },
-      {
-        question: "Which of these is NOT a pre-zygotic isolating mechanism?",
-        options: ["Habitat isolation", "Temporal isolation", "Hybrid sterility", "Behavioral isolation"],
+        question: "The microbial product used as a 'blood cholesterol-lowering agent' is:",
+        options: ["Insulin", "Streptokinase", "Statins", "Cyclosporin"],
         answer: 2,
-        explanation: "(c) Hybrid sterility - It's a post-zygotic mechanism where hybrids are sterile (e.g., mule)."
+        explanation: "Statins (e.g., lovastatin) inhibit HMG-CoA reductase, reducing cholesterol synthesis."
       },
       {
-        question: "The most accepted theory of origin of life is:",
-        options: ["Theory of special creation", "Theory of spontaneous generation", "Cosmozoic theory", "Chemical evolution theory"],
-        answer: 3,
-        explanation: "(d) Chemical evolution theory - Proposed by Oparin and Haldane, it suggests life arose from non-living molecules through chemical evolution."
-      },
-      {
-        question: "The experiment that simulated early earth conditions was conducted by:",
-        options: ["Darwin", "Miller and Urey", "Oparin", "Haldane"],
+        question: "Which microbe is used to produce Swiss cheese with large holes?",
+        options: ["Lactobacillus", "Propionibacterium shermanii", "Saccharomyces", "Penicillium"],
         answer: 1,
-        explanation: "(b) Miller and Urey - Their experiment showed that organic molecules could form under simulated early earth conditions."
+        explanation: "This bacterium releases CO₂, creating characteristic holes in Swiss cheese."
+      },
+      {
+        question: "The biocontrol agent Trichoderma is a:",
+        options: ["Bacterium", "Fungus", "Virus", "Alga"],
+        answer: 1,
+        explanation: "Trichoderma is a fungal biocontrol agent against soil-borne plant pathogens."
+      },
+      {
+        question: "Which of the following is produced using Saccharomyces cerevisiae?",
+        options: ["Yogurt", "Cheese", "Bread", "Vinegar"],
+        answer: 2,
+        explanation: "S. cerevisiae (yeast) is used in bread, beer, and wine production."
+      },
+      {
+        question: "The primary role of Nitrosomonas in the nitrogen cycle is:",
+        options: ["Nitrogen fixation", "Nitrification", "Denitrification", "Ammonification"],
+        answer: 1,
+        explanation: "Nitrosomonas converts ammonia (NH₃) to nitrite (NO₂⁻) in soil."
+      },
+      {
+        question: "Which microbe is used to produce vitamin B12 commercially?",
+        options: ["Pseudomonas", "Streptomyces", "Propionibacterium", "E. coli"],
+        answer: 2,
+        explanation: "This bacterium is cultured to produce vitamin B12 (cyanocobalamin)."
+      },
+      {
+        question: "The microbial enzyme used to dissolve blood clots is:",
+        options: ["Lipase", "Amylase", "Streptokinase", "Protease"],
+        answer: 2,
+        explanation: "Streptococcus produces streptokinase, a clot-busting enzyme used in heart attack treatment."
       }
     ];
 
@@ -1672,15 +1707,15 @@
         }
       });
       
-      // Calculate marks (+4 for correct, -1 for wrong)
-      const obtainedMarks = (correct * 4) - (wrong * 1);
+      // Calculate marks (+1 for correct, -1/3 for wrong)
+      const obtainedMarks = (correct * 1) - (wrong * (1/3));
       
       document.getElementById("quiz-box").style.display = "none";
       document.querySelector(".timer").style.display = "none";
       document.getElementById("correct-count").textContent = correct;
       document.getElementById("wrong-count").textContent = wrong;
       document.getElementById("unattempted-count").textContent = unattempted;
-      document.getElementById("obtained-marks").textContent = obtainedMarks;
+      document.getElementById("obtained-marks").textContent = obtainedMarks.toFixed(2);
       document.getElementById("summary").style.display = "block";
     }
 
