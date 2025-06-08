@@ -1,1763 +1,774 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biology Test for NEET</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ULTIMATE NEET/JEE Prep</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
   <style>
     :root {
-      --primary: #4a6bff;
-      --primary-light: #6c8cff;
-      --correct: #28a745;
-      --wrong: #dc3545;
-      --unattempted: #ffc107;
-      --answered: #17a2b8;
-      --text-dark: #212529;
-      --text-light: #f8f9fa;
+      --primary: #6C63FF;
+      --secondary: #FF6584;
+      --dark: #1A1A2E;
+      --light: #F5F5F7;
+      --success: #28C76F;
+      --danger: #EA5455;
+      --warning: #FF9F43;
+      --premium: #FFD700;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     
     body {
       font-family: 'Poppins', sans-serif;
-      background: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      color: var(--text-dark);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background-color: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
     }
     
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-      flex: 1;
-    }
-    
-    #welcome-screen {
+    /* 3D Background Canvas */
+    #bg-canvas {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      color: white;
-      animation: fadeOut 5s forwards;
+      z-index: -1;
+      opacity: 0.15;
     }
     
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-    
-    #welcome-screen h1 {
-      margin: 0;
-      font-size: 4rem;
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      animation: pulse 2s infinite;
+    /* Premium Glow Effects */
+    .glow {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      animation: pulse 2s infinite alternate;
     }
     
     @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+      from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+      to { text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px var(--primary); }
     }
     
-    #welcome-screen p {
-      font-size: 2rem;
-      margin-top: 20px;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: rgba(26, 26, 46, 0.8);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       display: flex;
       align-items: center;
-      gap: 10px;
     }
     
-    #welcome-screen .icon {
-      font-size: 2.5rem;
-      animation: bounce 2s infinite;
+    .logo i {
+      margin-right: 0.5rem;
+      font-size: 2rem;
     }
     
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
     }
     
-    #intro-screen {
-      text-align: center;
-      padding: 20px;
+    .nav-link {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
     }
     
-    .title {
-      font-size: 2.5rem;
-      font-weight: 700;
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .nav-link:hover {
       color: var(--primary);
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #4a6bff, #8a2be2);
+    }
+    
+    .premium-badge {
+      background: linear-gradient(45deg, var(--premium), #FFA500);
+      color: var(--dark);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+    }
+    
+    .premium-badge i {
+      margin-right: 0.3rem;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 5rem;
+    }
+    
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     
-    .test-details {
-      background: #f1f5ff;
-      padding: 25px;
-      border-radius: 15px;
-      margin: 25px 0;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .test-details::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
-      background: var(--primary);
-    }
-    
-    .test-details p {
-      margin: 10px 0;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .test-details i {
-      color: var(--primary);
-      width: 20px;
-      text-align: center;
-    }
-    
-    .test-details strong {
-      color: var(--primary);
+    .hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.6;
     }
     
     .btn {
-      padding: 12px 30px;
-      border: none;
+      display: inline-block;
+      padding: 1rem 2rem;
       border-radius: 50px;
-      background: var(--primary);
-      color: white;
-      font-size: 1.1rem;
       font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 10px rgba(74, 107, 255, 0.3);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(74, 107, 255, 0.4);
-      background: var(--primary-light);
-    }
-    
-    .btn:active {
-      transform: translateY(0);
-    }
-    
-    .timer {
-      background: #fff4e6;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #e67e22;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    #quiz-box {
-      display: none;
-    }
-    
-    .question-text {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      line-height: 1.5;
-      color: var(--text-dark);
-    }
-    
-    .options-container {
-      margin-bottom: 20px;
-    }
-    
-    .option {
-      display: block;
-      margin-bottom: 12px;
-      padding: 15px;
-      background: #f8f9fa;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 2px solid transparent;
+      text-decoration: none;
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
     }
     
-    .option:hover {
-      background: #e9ecef;
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
     }
     
-    .option.selected {
-      background: #d1e7fd;
-      border-color: var(--primary);
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(108, 99, 255, 0.6);
     }
     
-    .option.correct {
-      background: #d4edda;
-      border-color: var(--correct);
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      backdrop-filter: blur(5px);
+      margin-left: 1rem;
     }
     
-    .option.incorrect {
-      background: #f8d7da;
-      border-color: var(--wrong);
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
     
-    .option.correct-answer {
-      background: #d1e7fd;
-      border-color: var(--primary);
+    /* Test Cards Grid */
+    .tests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
     }
     
-    .option-icon {
-      margin-right: 10px;
-      font-size: 1.2rem;
+    .test-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
     }
     
-    .option.correct .option-icon {
-      color: var(--correct);
+    .test-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(108, 99, 255, 0.5);
     }
     
-    .option.incorrect .option-icon {
-      color: var(--wrong);
+    .test-card-premium {
+      border: 2px solid var(--premium);
+      position: relative;
     }
     
-    .option.correct-answer .option-icon {
-      color: var(--primary);
-    }
-    
-    .explanation {
-      margin-top: 20px;
-      padding: 20px;
-      background: #e7f5ff;
-      border-radius: 8px;
-      border-left: 4px solid var(--primary);
-      display: none;
-      animation: fadeIn 0.5s ease-out;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .explanation-title {
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    #summary {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      background: #f8f9fa;
-      border-radius: 10px;
-      margin-top: 30px;
-      animation: fadeIn 0.5s ease-out;
-    }
-    
-    .result-card {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    
-    .result-title {
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .result-stats {
-      display: flex;
-      justify-content: space-around;
-      margin: 25px 0;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    
-    .stat {
-      text-align: center;
-      min-width: 100px;
-      padding: 15px;
-      border-radius: 10px;
-    }
-    
-    .stat-correct {
-      background: #d4edda;
-    }
-    
-    .stat-wrong {
-      background: #f8d7da;
-    }
-    
-    .stat-unattempted {
-      background: #fff3cd;
-    }
-    
-    .stat-marks {
-      background: #e7f5ff;
-      border: 2px solid var(--primary);
-    }
-    
-    .stat-value {
-      font-size: 2rem;
+    .test-card-premium:before {
+      content: 'PREMIUM';
+      position: absolute;
+      top: 10px;
+      right: -30px;
+      background: var(--premium);
+      color: var(--dark);
+      padding: 0.2rem 2rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      margin-bottom: 5px;
+      transform: rotate(45deg);
+      z-index: 1;
     }
     
-    .stat-correct .stat-value {
-      color: var(--correct);
+    .test-card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
     }
     
-    .stat-wrong .stat-value {
-      color: var(--wrong);
+    .test-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
     }
     
-    .stat-unattempted .stat-value {
-      color: var(--unattempted);
+    .test-card-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      display: flex;
+      align-items: center;
     }
     
-    .stat-marks .stat-value {
+    .test-card-subtitle i {
+      margin-right: 0.5rem;
+    }
+    
+    .test-card-body {
+      padding: 1.5rem;
+    }
+    
+    .test-card-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .test-card-features li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .test-card-features i {
+      margin-right: 0.7rem;
       color: var(--primary);
     }
     
-    .review-controls {
+    .test-card-footer {
       display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
-    
-    .question-nav-container {
-      margin-top: 20px;
-      text-align: center;
-    }
-    
-    .toggle-nav-btn {
-      padding: 10px 20px;
-      border-radius: 50px;
-      background: #6c757d;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-bottom: 15px;
-      font-weight: 600;
-      display: inline-flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      transition: all 0.3s;
+      padding: 0 1.5rem 1.5rem;
     }
     
-    .toggle-nav-btn:hover {
-      background: #5a6268;
-      transform: translateY(-2px);
+    .test-card-price {
+      font-size: 1.5rem;
+      font-weight: 700;
     }
     
-    .question-nav {
-      display: none;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      animation: fadeIn 0.3s ease-out;
+    .test-card-price.free {
+      color: var(--success);
     }
     
-    .question-nav.active {
-      display: flex;
+    .test-card-price.premium {
+      color: var(--premium);
     }
     
-    .q-nav-btn {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .q-nav-btn::after {
-      content: '';
+    /* Animated Floating Elements */
+    .floating-elements {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      opacity: 0;
-      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: -1;
     }
     
-    .q-nav-btn:hover::after {
-      opacity: 1;
+    .floating-element {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.2;
     }
     
-    .q-nav-btn.unattempted {
-      background: var(--unattempted);
-      color: #333;
+    .floating-element:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: 20%;
+      left: 10%;
+      animation: float 15s infinite ease-in-out;
     }
     
-    .q-nav-btn.answered {
-      background: var(--answered);
-      color: white;
+    .floating-element:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      top: 60%;
+      left: 60%;
+      animation: float 20s infinite ease-in-out reverse;
     }
     
-    .q-nav-btn.correct {
-      background: var(--correct);
-      color: white;
+    .floating-element:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      background: var(--warning);
+      top: 30%;
+      left: 80%;
+      animation: float 12s infinite ease-in-out;
     }
     
-    .q-nav-btn.incorrect {
-      background: var(--wrong);
-      color: white;
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(50px, 50px); }
+      50% { transform: translate(0, 100px); }
+      75% { transform: translate(-50px, 50px); }
     }
     
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    
-    .nav-btn {
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .nav-btn:active {
-      transform: translateY(0);
-    }
-    
-    .confirmation-dialog {
-      display: none;
+    /* Test Launch Animation */
+    .test-launch-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.3s ease-out;
-    }
-    
-    .confirmation-box {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      transform: translateY(-20px);
-      animation: slideUp 0.3s ease-out forwards;
-    }
-    
-    @keyframes slideUp {
-      to { transform: translateY(0); }
-    }
-    
-    .confirmation-box h3 {
-      margin-top: 0;
-      color: var(--primary);
-      font-size: 1.5rem;
-    }
-    
-    .confirmation-buttons {
+      background: rgba(0, 0, 0, 0.9);
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-top: 25px;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
     }
     
-    .confirmation-btn {
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 2px solid transparent;
+    .test-launch-overlay.active {
+      opacity: 1;
+      pointer-events: all;
     }
     
-    .confirmation-btn-primary {
-      background: var(--primary);
+    .test-launch-container {
+      text-align: center;
+    }
+    
+    .test-launch-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .countdown {
+      font-size: 5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
       color: white;
     }
     
-    .confirmation-btn-primary:hover {
-      background: var(--primary-light);
-    }
-    
-    .confirmation-btn-secondary {
-      background: white;
-      color: var(--text-dark);
-      border-color: #6c757d;
-    }
-    
-    .confirmation-btn-secondary:hover {
-      background: #f8f9fa;
-    }
-    
+    /* Responsive */
     @media (max-width: 768px) {
-      .container {
-        padding: 20px;
-        margin: 15px;
+      .navbar {
+        padding: 1rem;
       }
       
-      #welcome-screen h1 {
-        font-size: 3rem;
+      .nav-links {
+        display: none;
       }
       
-      #welcome-screen p {
-        font-size: 1.5rem;
-      }
-      
-      .title {
-        font-size: 2rem;
-      }
-      
-      .test-details {
-        padding: 20px;
-      }
-      
-      .controls {
-        flex-direction: column;
-      }
-      
-      .nav-buttons {
-        width: 100%;
-        justify-content: space-between;
-      }
-      
-      .nav-btn, .btn {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .q-nav-btn {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .result-stats {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .stat {
-        width: 100%;
-        max-width: 200px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      #welcome-screen h1 {
+      .hero-title {
         font-size: 2.5rem;
       }
       
-      #welcome-screen p {
-        font-size: 1.2rem;
+      .hero {
+        margin-top: 4rem;
+        padding-top: 2rem;
       }
       
-      .test-details p {
-        font-size: 1rem;
+      .tests-grid {
+        grid-template-columns: 1fr;
       }
       
-      .btn, .nav-btn {
-        padding: 10px 15px;
-        font-size: 1rem;
+      .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
       }
       
-      .question-text {
-        font-size: 1.1rem;
-      }
-      
-      .option {
-        padding: 12px;
+      .btn-secondary {
+        margin-left: 0;
       }
     }
   </style>
 </head>
 <body>
-  <div id="welcome-screen">
-    <h1>All the Best❤</h1>
-    <p><i class="fas fa-heart icon"></i> Meri SANA! ❤️</p>
+  <!-- 3D Background -->
+  <canvas id="bg-canvas"></canvas>
+  
+  <!-- Floating Elements -->
+  <div class="floating-elements">
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
   </div>
-
-  <div class="confirmation-dialog" id="confirmation-dialog">
-    <div class="confirmation-box">
-      <h3><i class="fas fa-question-circle"></i> Confirm Your Answer</h3>
-      <p>Are you sure about your selection?</p>
-      <div class="confirmation-buttons">
-        <button class="confirmation-btn confirmation-btn-primary" onclick="confirmSelection()">
-          <i class="fas fa-check"></i> Yes, Submit
-        </button>
-        <button class="confirmation-btn confirmation-btn-secondary" onclick="cancelSelection()">
-          <i class="fas fa-times"></i> No, Change
-        </button>
+  
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-graduation-cap"></i>
+      <span>ULTIMATE<span class="glow">PREP</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Tests</a>
+      <a href="#" class="nav-link">Performance</a>
+      <a href="#" class="nav-link">Premium <span class="premium-badge"><i class="fas fa-crown"></i> PRO</span></a>
+      <a href="#" class="nav-link">Login</a>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">NEET/JEE Preparation <span class="glow">Reinvented</span></h1>
+        <p class="hero-subtitle">
+          India's most advanced test preparation platform with AI-powered analytics, 
+          3D visualizations, and personalized learning paths to crack NEET/JEE with top ranks.
+        </p>
+        <div>
+          <a href="#" class="btn btn-primary">Start Free Test</a>
+          <a href="#" class="btn btn-secondary">Explore Premium</a>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="container">
-    <div id="intro-screen">
-      <div class="title">Sana Sab Kar Legi</div>
-      <div class="test-details">
-        <p><i class="fas fa-book"></i> <strong>Subject:</strong> Biology (12th)</p>
-        <p><i class="fas fa-tags"></i> <strong>Topics:</strong> Inheritance, Molecular Basis, Evolution, Human Health, Food Production, Microbes</p>
-        <p><i class="fas fa-question-circle"></i> <strong>Total Questions:</strong> 120</p>
-        <p><i class="fas fa-clock"></i> <strong>Time Limit:</strong> 90 minutes</p>
-        <p><i class="fas fa-star"></i> <strong>Marks:</strong> +1 for correct, -⅓ for wrong, 0 for unattempted</p>
+  </section>
+  
+  <!-- Tests Grid -->
+  <section class="container">
+    <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">Choose Your <span class="glow">Battle</span></h2>
+    
+    <div class="tests-grid">
+      <!-- Free Test Card -->
+      <div class="test-card">
+        <div class="test-card-header">
+          <h3 class="test-card-title">NEET Free Mock Test</h3>
+          <p class="test-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 180 questions</p>
+        </div>
+        <div class="test-card-body">
+          <ul class="test-card-features">
+            <li><i class="fas fa-check-circle"></i> Full syllabus coverage</li>
+            <li><i class="fas fa-check-circle"></i> Detailed solutions</li>
+            <li><i class="fas fa-check-circle"></i> Performance analysis</li>
+            <li><i class="fas fa-check-circle"></i> All India ranking</li>
+          </ul>
+        </div>
+        <div class="test-card-footer">
+          <div class="test-card-price free">FREE</div>
+          <a href="#" class="btn btn-primary" onclick="launchTest('neet-free')">Start Test</a>
+        </div>
       </div>
-      <button class="btn" onclick="startQuiz()">
-        <i class="fas fa-play"></i> Start Test
+      
+      <!-- Premium Test Card -->
+      <div class="test-card test-card-premium">
+        <div class="test-card-header">
+          <h3 class="test-card-title">NEET Grand Master</h3>
+          <p class="test-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 200 questions</p>
+        </div>
+        <div class="test-card-body">
+          <ul class="test-card-features">
+            <li><i class="fas fa-star"></i> AI-generated questions</li>
+            <li><i class="fas fa-star"></i> 3D concept visualizer</li>
+            <li><i class="fas fa-star"></i> Video solutions</li>
+            <li><i class="fas fa-star"></i> Personalized weak area analysis</li>
+          </ul>
+        </div>
+        <div class="test-card-footer">
+          <div class="test-card-price premium">₹299</div>
+          <a href="#" class="btn btn-primary" onclick="showPaymentModal('neet-grand-master')">Unlock Now</a>
+        </div>
+      </div>
+      
+      <!-- JEE Test Card -->
+      <div class="test-card">
+        <div class="test-card-header">
+          <h3 class="test-card-title">JEE Mains Mock Test</h3>
+          <p class="test-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 90 questions</p>
+        </div>
+        <div class="test-card-body">
+          <ul class="test-card-features">
+            <li><i class="fas fa-check-circle"></i> Physics, Chemistry, Maths</li>
+            <li><i class="fas fa-check-circle"></i> NTA pattern questions</li>
+            <li><i class="fas fa-check-circle"></i> Detailed percentile analysis</li>
+            <li><i class="fas fa-check-circle"></i> Previous year trends</li>
+          </ul>
+        </div>
+        <div class="test-card-footer">
+          <div class="test-card-price free">FREE</div>
+          <a href="#" class="btn btn-primary" onclick="launchTest('jee-mains')">Start Test</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Test Launch Overlay -->
+  <div class="test-launch-overlay" id="test-launch-overlay">
+    <div class="test-launch-container">
+      <h2 class="test-launch-title" id="test-launch-title">NEET Grand Master</h2>
+      <div class="countdown" id="countdown">3</div>
+      <p style="color: white; font-size: 1.2rem;">Get ready! Test starts in...</p>
+    </div>
+  </div>
+  
+  <!-- Payment Modal -->
+  <div class="modal" id="payment-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+    <div style="background: #1A1A2E; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; border: 2px solid var(--premium);">
+      <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--premium); display: flex; align-items: center;">
+        <i class="fas fa-crown" style="margin-right: 0.5rem;"></i> Unlock Premium Test
+      </h2>
+      <p style="margin-bottom: 1.5rem; opacity: 0.8;">Get full access to this premium test and all features for just ₹299</p>
+      
+      <div style="margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>Test:</span>
+          <span style="font-weight: 600;" id="payment-test-name">NEET Grand Master</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>Validity:</span>
+          <span style="font-weight: 600;">30 days</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 1.2rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+          <span>Total:</span>
+          <span style="font-weight: 700; color: var(--premium);">₹299</span>
+        </div>
+      </div>
+      
+      <button onclick="processPayment()" style="width: 100%; padding: 1rem; background: linear-gradient(45deg, var(--premium), #FFA500); border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; margin-bottom: 1rem;">
+        Pay Now with Razorpay
+      </button>
+      
+      <button onclick="document.getElementById('payment-modal').style.display = 'none'" style="width: 100%; padding: 1rem; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; color: white;">
+        Cancel
       </button>
     </div>
-
-    <div class="timer" style="display: none;">
-      <i class="fas fa-clock"></i> <span id="timer">90:00</span>
-    </div>
-
-    <div id="quiz-box">
-      <div class="question-text" id="question-text"></div>
-      <div class="options-container" id="options"></div>
-      <div class="explanation" id="explanation">
-        <div class="explanation-title">
-          <i class="fas fa-lightbulb"></i> Explanation
-        </div>
-        <div id="explanation-text"></div>
-      </div>
-      
-      <div class="controls">
-        <div class="nav-buttons">
-          <button class="nav-btn" onclick="prevQuestion()">
-            <i class="fas fa-arrow-left"></i> Previous
-          </button>
-          <button class="nav-btn" onclick="nextQuestion()">
-            Next <i class="fas fa-arrow-right"></i>
-          </button>
-        </div>
-        <button class="btn" onclick="confirmSubmit()">
-          <i class="fas fa-stop"></i> End Test
-        </button>
-      </div>
-      
-      <div class="question-nav-container">
-        <button class="toggle-nav-btn" onclick="toggleQuestionNav()">
-          <i class="fas fa-list-ol"></i> Jump to Question
-        </button>
-        <div class="question-nav" id="question-nav"></div>
-      </div>
-    </div>
-
-    <div id="summary">
-      <div class="result-card">
-        <div class="result-title">
-          <i class="fas fa-trophy"></i> Your Test Results
-        </div>
-        <div class="result-stats">
-          <div class="stat stat-correct">
-            <div class="stat-value" id="correct-count">0</div>
-            <div>Correct</div>
-          </div>
-          <div class="stat stat-wrong">
-            <div class="stat-value" id="wrong-count">0</div>
-            <div>Wrong</div>
-          </div>
-          <div class="stat stat-unattempted">
-            <div class="stat-value" id="unattempted-count">0</div>
-            <div>Unattempted</div>
-          </div>
-          <div class="stat stat-marks">
-            <div class="stat-value" id="obtained-marks">0</div>
-            <div>Marks Obtained</div>
-          </div>
-          <div class="stat stat-marks">
-            <div class="stat-value">120</div>
-            <div>Total Marks</div>
-          </div>
-        </div>
-        
-        <div class="review-controls">
-          <button class="btn" onclick="reviewTest()">
-            <i class="fas fa-search"></i> Review Responses
-          </button>
-          <button class="btn" style="background: #6c757d;" onclick="location.reload()">
-            <i class="fas fa-redo"></i> New Test
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
-
+  
   <script>
-    const quiz = [
-      {
-        question: "Who is regarded as the 'Father of Genetics'?",
-        options: ["Charles Darwin", "Gregor Mendel", "T.H. Morgan", "Hugo de Vries"],
-        answer: 1,
-        explanation: "Gregor Mendel conducted experiments on pea plants and established the fundamental laws of inheritance, earning him the title 'Father of Genetics.'"
-      },
-      {
-        question: "Which of the following is a recessive trait in pea plants?",
-        options: ["Tall stem", "Round seed", "Green pod", "Wrinkled seed"],
-        answer: 3,
-        explanation: "In Mendel’s experiments, wrinkled seeds were recessive (rr), while round seeds (RR or Rr) were dominant."
-      },
-      {
-        question: "The phenotypic ratio of a monohybrid cross in F2 generation is:",
-        options: ["3:1", "1:2:1", "9:3:3:1", "1:1"],
-        answer: 0,
-        explanation: "In a monohybrid cross (e.g., Tt × Tt), the F2 generation shows a 3:1 phenotypic ratio (3 tall : 1 dwarf)."
-      },
-      {
-        question: "A test cross is used to determine:",
-        options: ["Genotype of a dominant phenotype", "Number of alleles", "Mutation rate", "Sex linkage"],
-        answer: 0,
-        explanation: "A test cross (crossing with homozygous recessive) reveals whether a dominant phenotype is homozygous (TT) or heterozygous (Tt)."
-      },
-      {
-        question: "Incomplete dominance is seen in:",
-        options: ["Mirabilis jalapa (4 o’clock plant)", "Pisum sativum (pea plant)", "Drosophila (fruit fly)", "Oryza sativa (rice)"],
-        answer: 0,
-        explanation: "Incomplete dominance results in an intermediate phenotype (e.g., pink flowers from red and white parents)."
-      },
-      {
-        question: "ABO blood group system in humans is an example of:",
-        options: ["Multiple alleles", "Pleiotropy", "Polygenic inheritance", "Codominance"],
-        answer: 0,
-        explanation: "ABO blood groups are controlled by three alleles (IA, IB, i)—a classic example of multiple allelism."
-      },
-      {
-        question: "Which genetic disorder is caused by a recessive autosomal gene?",
-        options: ["Haemophilia", "Colour blindness", "Sickle-cell anaemia", "Huntington’s disease"],
-        answer: 2,
-        explanation: "Sickle-cell anaemia is an autosomal recessive disorder (mutated β-globin gene)."
-      },
-      {
-        question: "A woman with normal vision whose father was colourblind marries a colourblind man. What is the probability of their son being colourblind?",
-        options: ["25%", "50%", "75%", "100%"],
-        answer: 1,
-        explanation: "Colour blindness is X-linked recessive. The mother is a carrier (XᴺXᶜ), and the father is affected (XᶜY). Their son has a 50% chance of being colourblind."
-      },
-      {
-        question: "Which of the following is a sex-linked disease?",
-        options: ["Thalassemia", "Cystic fibrosis", "Haemophilia", "Phenylketonuria"],
-        answer: 2,
-        explanation: "Haemophilia is an X-linked recessive disorder (defect in blood clotting factors)."
-      },
-      {
-        question: "The chromosomal theory of inheritance was proposed by:",
-        options: ["Sutton and Boveri", "Watson and Crick", "Darwin and Wallace", "Mendel and Morgan"],
-        answer: 0,
-        explanation: "Sutton and Boveri linked Mendel’s laws to chromosome behavior during meiosis."
-      },
-      {
-        question: "A cross between two pink-flowered plants (incomplete dominance) produces offspring with:",
-        options: ["All pink", "Red, pink, and white", "Only red and white", "Only pink and white"],
-        answer: 1,
-        explanation: "Incomplete dominance gives a 1:2:1 ratio (1 red : 2 pink : 1 white)."
-      },
-      {
-        question: "Which of the following is NOT a Mendelian disorder?",
-        options: ["Down syndrome", "Cystic fibrosis", "Thalassemia", "Haemophilia"],
-        answer: 0,
-        explanation: "Down syndrome is a chromosomal disorder (trisomy 21), not Mendelian."
-      },
-      {
-        question: "The genotypic ratio in F2 generation of a dihybrid cross is:",
-        options: ["9:3:3:1", "1:2:1:2:4:2:1:2:1", "1:2:1", "3:1"],
-        answer: 1,
-        explanation: "Dihybrid cross genotypic ratio is 1:2:1:2:4:2:1:2:1 (9 genotypes)."
-      },
-      {
-        question: "Which condition is due to aneuploidy?",
-        options: ["Turner syndrome (45, X)", "Sickle-cell anaemia", "Haemophilia", "Phenylketonuria"],
-        answer: 0,
-        explanation: "Turner syndrome is monosomy (45, X)—a type of aneuploidy."
-      },
-      {
-        question: "A man with blood group A (heterozygous) marries a woman with blood group B (heterozygous). What is the possible blood group of their child?",
-        options: ["Only A or B", "Only AB", "A, B, AB, or O", "Only O"],
-        answer: 2,
-        explanation: "Parents (IAi × IBi) can produce children with A (IAi), B (IBi), AB (IAIB), or O (ii)."
-      },
-      {
-        question: "Which law of Mendel is violated in linkage?",
-        options: ["Law of Dominance", "Law of Segregation", "Law of Independent Assortment", "Law of Unit Characters"],
-        answer: 2,
-        explanation: "Linked genes do not assort independently (exception to Mendel’s 2ⁿᵈ law)."
-      },
-      {
-        question: "Which technique is used to detect chromosomal abnormalities in a fetus?",
-        options: ["ELISA", "PCR", "Amniocentesis", "MRI"],
-        answer: 2,
-        explanation: "Amniocentesis involves analyzing amniotic fluid for fetal chromosomal defects."
-      },
-      {
-        question: "The phenomenon where a single gene affects multiple traits is called:",
-        options: ["Polygenic inheritance", "Pleiotropy", "Codominance", "Epistasis"],
-        answer: 1,
-        explanation: "Example: Phenylketonuria (PKU) affects skin, brain, and hair."
-      },
-      {
-        question: "Which of the following is a polygenic trait in humans?",
-        options: ["Blood group", "Skin colour", "Sickle-cell anaemia", "Colour blindness"],
-        answer: 1,
-        explanation: "Polygenic traits (e.g., skin colour, height) are controlled by multiple genes."
-      },
-      {
-        question: "The mutation that changes a single nucleotide is called:",
-        options: ["Frameshift mutation", "Point mutation", "Chromosomal mutation", "Silent mutation"],
-        answer: 1,
-        explanation: "Example: Sickle-cell anaemia (GAG → GTG, Glu → Val)."
-      },
-      {
-        question: "The transforming principle discovered by Griffith in Streptococcus pneumoniae was later identified by Avery, MacLeod, and McCarty as:",
-        options: ["Protein", "RNA", "DNA", "Lipid"],
-        answer: 2,
-        explanation: "Avery et al. (1944) proved that DNA (not protein or RNA) was the genetic material responsible for bacterial transformation."
-      },
-      {
-        question: "Hershey and Chase used which radioactive isotopes to confirm DNA as genetic material?",
-        options: ["³²P and ³⁵S", "¹⁴C and ³H", "¹⁵N and ¹⁸O", "²H and ¹³C"],
-        answer: 0,
-        explanation: "³²P labeled DNA (phosphorus in backbone), and ³⁵S labeled protein (sulfur in amino acids) in bacteriophages."
-      },
-      {
-        question: "The double-helix structure of DNA was proposed by:",
-        options: ["Watson and Crick", "Meselson and Stahl", "Chargaff", "Franklin and Wilkins"],
-        answer: 0,
-        explanation: "Watson and Crick (1953) proposed the double-helix model based on X-ray diffraction data from Rosalind Franklin."
-      },
-      {
-        question: "Chargaff’s rule states that in DNA:",
-        options: ["A + T = G + C", "A + G = T + C", "A = C and T = G", "A = U and G = C"],
-        answer: 1,
-        explanation: "Chargaff’s rules: A = T, G = C (base pairing). Purines (A+G) = Pyrimidines (T+C)."
-      },
-      {
-        question: "Which bond connects two nucleotides in the same DNA strand?",
-        options: ["Hydrogen bond", "Phosphodiester bond", "Glycosidic bond", "Peptide bond"],
-        answer: 1,
-        explanation: "Phosphodiester bonds link the 3’ OH of one nucleotide to the 5’ phosphate of the next, forming the DNA backbone."
-      },
-      {
-        question: "The enzyme that synthesizes DNA from a template strand is:",
-        options: ["RNA polymerase", "DNA ligase", "DNA polymerase", "Helicase"],
-        answer: 2,
-        explanation: "DNA polymerase adds nucleotides during replication (requires primer)."
-      },
-      {
-        question: "Semi-conservative DNA replication was demonstrated by:",
-        options: ["Watson and Crick", "Meselson and Stahl", "Hershey and Chase", "Kornberg"],
-        answer: 1,
-        explanation: "Used ¹⁵N (heavy) and ¹⁴N (light) isotopes to show that each new DNA molecule has one old and one new strand."
-      },
-      {
-        question: "The Okazaki fragments are synthesized on the:",
-        options: ["Leading strand", "Lagging strand", "Both strands", "Template strand"],
-        answer: 1,
-        explanation: "Okazaki fragments are short DNA pieces on the lagging strand (synthesized discontinuously)."
-      },
-      {
-        question: "Which enzyme joins Okazaki fragments?",
-        options: ["DNA polymerase III", "DNA ligase", "Primase", "Helicase"],
-        answer: 1,
-        explanation: "DNA ligase seals nicks between Okazaki fragments by forming phosphodiester bonds."
-      },
-      {
-        question: "The central dogma of molecular biology describes:",
-        options: ["DNA → RNA → Protein", "RNA → DNA → Protein", "Protein → RNA → DNA", "DNA → Protein → RNA"],
-        answer: 0,
-        explanation: "Proposed by Francis Crick: Genetic information flows from DNA → transcription → RNA → translation → Protein."
-      },
-      {
-        question: "Transcription is the synthesis of:",
-        options: ["DNA from DNA", "RNA from DNA", "Protein from RNA", "DNA from RNA"],
-        answer: 1,
-        explanation: "Transcription produces mRNA, tRNA, rRNA using DNA as a template."
-      },
-      {
-        question: "The promoter region in DNA is recognized by:",
-        options: ["RNA polymerase", "DNA polymerase", "Helicase", "Ligase"],
-        answer: 0,
-        explanation: "The promoter (TATA box in eukaryotes) binds RNA polymerase to initiate transcription."
-      },
-      {
-        question: "Introns are:",
-        options: ["Coding sequences", "Non-coding sequences", "Protein-binding sites", "Start codons"],
-        answer: 1,
-        explanation: "Introns are removed during splicing, while exons are expressed."
-      },
-      {
-        question: "The genetic code is:",
-        options: ["Overlapping", "Ambiguous", "Degenerate", "Non-universal"],
-        answer: 2,
-        explanation: "Multiple codons can code for the same amino acid (e.g., leucine has 6 codons)."
-      },
-      {
-        question: "The start codon for protein synthesis is:",
-        options: ["UAA", "UGA", "AUG", "UAG"],
-        answer: 2,
-        explanation: "AUG codes for methionine and initiates translation."
-      },
-      {
-        question: "The process of protein synthesis at ribosomes is called:",
-        options: ["Transcription", "Replication", "Translation", "Splicing"],
-        answer: 2,
-        explanation: "mRNA is 'translated' into a polypeptide chain at ribosomes."
-      },
-      {
-        question: "Which RNA carries amino acids to the ribosome?",
-        options: ["mRNA", "tRNA", "rRNA", "snRNA"],
-        answer: 1,
-        explanation: "tRNA has an anticodon that pairs with mRNA codons and delivers amino acids."
-      },
-      {
-        question: "The Lac operon in E. coli regulates the metabolism of:",
-        options: ["Glucose", "Lactose", "Tryptophan", "Galactose"],
-        answer: 1,
-        explanation: "Lac operon is inducible—turned on when lactose is present (repressor inactivated)."
-      },
-      {
-        question: "A mutation that changes a codon to a stop codon is called:",
-        options: ["Missense", "Nonsense", "Silent", "Frameshift"],
-        answer: 1,
-        explanation: "Nonsense mutations create premature stop codons (e.g., UAG, UAA, UGA)."
-      },
-      {
-        question: "The Human Genome Project was focused on:",
-        options: ["Cloning humans", "Sequencing all human DNA", "Gene therapy", "Creating GMOs"],
-        answer: 1,
-        explanation: "HGP (1990-2003) mapped and sequenced the entire human genome (~3 billion base pairs)."
-      },
-      {
-        question: "The theory of natural selection was proposed by:",
-        options: ["Gregor Mendel", "Charles Darwin", "Alfred Wallace", "Lamarck"],
-        answer: 1,
-        explanation: "Darwin’s 'On the Origin of Species' (1859) proposed natural selection as the mechanism of evolution."
-      },
-      {
-        question: "Which of the following is NOT a component of Darwin’s theory?",
-        options: ["Overproduction of offspring", "Inheritance of acquired traits", "Struggle for existence", "Survival of the fittest"],
-        answer: 1,
-        explanation: "Lamarck proposed acquired traits inheritance, while Darwin emphasized variation + natural selection."
-      },
-      {
-        question: "The concept of 'use and disuse of organs' was given by:",
-        options: ["Darwin", "Lamarck", "Hugo de Vries", "Hardy-Weinberg"],
-        answer: 1,
-        explanation: "Lamarck’s theory (e.g., giraffe’s neck elongation) was later disproven."
-      },
-      {
-        question: "The phenomenon where more individuals are produced than can survive is called:",
-        options: ["Speciation", "Overproduction", "Genetic drift", "Adaptive radiation"],
-        answer: 1,
-        explanation: "Darwin observed that populations overproduce, leading to competition."
-      },
-      {
-        question: "The process by which new species arise is called:",
-        options: ["Natural selection", "Speciation", "Genetic drift", "Mutation"],
-        answer: 1,
-        explanation: "Speciation occurs due to reproductive isolation (allopatric/sympatric)."
-      },
-      {
-        question: "Adaptive radiation is best exemplified by:",
-        options: ["Darwin’s finches", "Peppered moths", "Drosophila melanogaster", "Homo sapiens"],
-        answer: 0,
-        explanation: "Finches in the Galápagos evolved different beak shapes for varied diets."
-      },
-      {
-        question: "The change in moth color due to industrial pollution is an example of:",
-        options: ["Genetic drift", "Directional selection", "Stabilizing selection", "Disruptive selection"],
-        answer: 1,
-        explanation: "Dark-colored peppered moths increased post-industrialization (shift in phenotype)."
-      },
-      {
-        question: "The Hardy-Weinberg equilibrium assumes:",
-        options: ["No mutations", "No natural selection", "Random mating", "All of the above"],
-        answer: 3,
-        explanation: "H-W equilibrium requires: No mutations, No gene flow, Large population, Random mating, No selection."
-      },
-      {
-        question: "Genetic drift is most significant in:",
-        options: ["Large populations", "Small populations", "Migratory populations", "Hybrid populations"],
-        answer: 1,
-        explanation: "Random allele fluctuations (founder effect/bottleneck) are stronger in small groups."
-      },
-      {
-        question: "The fossil record provides evidence for:",
-        options: ["Microevolution", "Macroevolution", "Both a and b", "Neither"],
-        answer: 2,
-        explanation: "Fossils show gradual changes (micro) and major transitions (macro)."
-      },
-      {
-        question: "Homologous organs indicate:",
-        options: ["Convergent evolution", "Divergent evolution", "Parallel evolution", "Adaptive radiation"],
-        answer: 1,
-        explanation: "Homologous structures (e.g., human arm, whale flipper) share a common ancestor."
-      },
-      {
-        question: "Analogous organs arise due to:",
-        options: ["Common ancestry", "Similar function", "Genetic drift", "Mutations"],
-        answer: 1,
-        explanation: "Analogous organs (e.g., wings of bats & insects) evolve independently for similar functions."
-      },
-      {
-        question: "The theory of 'continental drift' explains:",
-        options: ["Mass extinctions", "Biogeographical distribution", "Genetic mutations", "Sexual selection"],
-        answer: 1,
-        explanation: "Pangea’s breakup influenced species distribution (e.g., marsupials in Australia)."
-      },
-      {
-        question: "Which of the following is a vestigial organ in humans?",
-        options: ["Appendix", "Heart", "Lung", "Kidney"],
-        answer: 0,
-        explanation: "Vestigial organs (e.g., appendix, tailbone) are non-functional remnants of ancestors."
-      },
-      {
-        question: "The first life forms on Earth were likely:",
-        options: ["Photosynthetic bacteria", "Chemoautotrophs", "Eukaryotes", "Viruses"],
-        answer: 1,
-        explanation: "Early prokaryotes (e.g., archaebacteria) thrived in anaerobic, high-temperature environments."
-      },
-      {
-        question: "The Miller-Urey experiment demonstrated:",
-        options: ["RNA world hypothesis", "Abiogenesis", "Panspermia", "Natural selection"],
-        answer: 1,
-        explanation: "Simulated early Earth conditions produced amino acids, supporting chemical evolution."
-      },
-      {
-        question: "Which era is known as the 'Age of Reptiles'?",
-        options: ["Paleozoic", "Mesozoic", "Cenozoic", "Precambrian"],
-        answer: 1,
-        explanation: "Mesozoic era (252–66 MYA) saw dinosaurs dominate."
-      },
-      {
-        question: "The most recent mass extinction event occurred in the:",
-        options: ["Permian", "Cretaceous", "Devonian", "Quaternary"],
-        answer: 1,
-        explanation: "Cretaceous-Paleogene (K-Pg) extinction wiped out dinosaurs (~65 MYA)."
-      },
-      {
-        question: "Human evolution is studied under:",
-        options: ["Anthropogeny", "Ontogeny", "Phylogeny", "Biogeny"],
-        answer: 0,
-        explanation: "Anthropogeny focuses on human origins (e.g., Homo habilis → H. sapiens)."
-      },
-      {
-        question: "The 'Out of Africa' theory suggests:",
-        options: ["Humans evolved in multiple regions", "Humans migrated from Africa to other continents", "Neanderthals were ancestors of modern humans", "Dinosaurs evolved into birds"],
-        answer: 1,
-        explanation: "Homo sapiens originated in Africa ~200,000 years ago and dispersed globally."
-      },
-      {
-        question: "Which of the following is a bacterial disease?",
-        options: ["Influenza", "Tuberculosis", "Malaria", "Dengue"],
-        answer: 1,
-        explanation: "Tuberculosis is caused by Mycobacterium tuberculosis, a bacterium, while others are viral (influenza, dengue) or parasitic (malaria)."
-      },
-      {
-        question: "The vector for malaria is:",
-        options: ["Anopheles mosquito", "Aedes mosquito", "Culex mosquito", "Housefly"],
-        answer: 0,
-        explanation: "Female Anopheles mosquitoes transmit Plasmodium (malaria parasite)."
-      },
-      {
-        question: "Which disease is caused by Wuchereria bancrofti?",
-        options: ["Typhoid", "Filariasis", "Pneumonia", "Cholera"],
-        answer: 1,
-        explanation: "Wuchereria bancrofti causes lymphatic filariasis (elephantiasis), transmitted by mosquitoes."
-      },
-      {
-        question: "HIV primarily targets which cells?",
-        options: ["B-lymphocytes", "T-helper cells (CD4+)", "Platelets", "Neutrophils"],
-        answer: 1,
-        explanation: "HIV attacks CD4+ T cells, weakening the immune system (leads to AIDS)."
-      },
-      {
-        question: "The confirmatory test for HIV is:",
-        options: ["ELISA", "Western blot", "PCR", "Widal test"],
-        answer: 1,
-        explanation: "ELISA is a screening test; Western blot is confirmatory for HIV."
-      },
-      {
-        question: "Which of the following is an autoimmune disease?",
-        options: ["Asthma", "Rheumatoid arthritis", "Tuberculosis", "Cholera"],
-        answer: 1,
-        explanation: "Autoimmune diseases occur when the immune system attacks self-tissues (e.g., RA, Type 1 diabetes)."
-      },
-      {
-        question: "The causative agent of typhoid is:",
-        options: ["Salmonella typhi", "Vibrio cholerae", "Escherichia coli", "Streptococcus pneumoniae"],
-        answer: 0,
-        explanation: "Typhoid fever is caused by S. typhi, transmitted via contaminated food/water."
-      },
-      {
-        question: "Which of the following is a protozoan disease?",
-        options: ["Ascariasis", "Amoebiasis", "Filariasis", "Ringworm"],
-        answer: 1,
-        explanation: "Amoebiasis is caused by Entamoeba histolytica (protozoan), while others are helminthic (ascariasis, filariasis) or fungal (ringworm)."
-      },
-      {
-        question: "The drug used for treating malaria is:",
-        options: ["Paracetamol", "Chloroquine", "Penicillin", "ORS"],
-        answer: 1,
-        explanation: "Chloroquine is an antimalarial drug (though resistance is now common)."
-      },
-      {
-        question: "Which disease is prevented by the BCG vaccine?",
-        options: ["Tuberculosis", "Polio", "Hepatitis B", "Tetanus"],
-        answer: 0,
-        explanation: "BCG (Bacillus Calmette-Guérin) vaccine protects against TB."
-      },
-      {
-        question: "The main symptom of dengue hemorrhagic fever is:",
-        options: ["High fever", "Low platelet count", "Joint pain", "All of the above"],
-        answer: 3,
-        explanation: "Dengue symptoms include high fever, thrombocytopenia (low platelets), and severe joint/muscle pain."
-      },
-      {
-        question: "Which organ is most affected by hepatitis B?",
-        options: ["Kidney", "Liver", "Lung", "Heart"],
-        answer: 1,
-        explanation: "Hepatitis B virus (HBV) causes liver inflammation, leading to cirrhosis or cancer."
-      },
-      {
-        question: "The term 'oncogene' is related to:",
-        options: ["Bacterial infection", "Viral infection", "Cancer", "Allergy"],
-        answer: 2,
-        explanation: "Oncogenes are mutated genes that promote uncontrolled cell division (e.g., RAS, MYC)."
-      },
-      {
-        question: "Which of the following is a fungal infection?",
-        options: ["Leprosy", "Ringworm", "Diphtheria", "Pertussis"],
-        answer: 1,
-        explanation: "Ringworm (tinea) is caused by fungi (Microsporum, Trichophyton), not worms."
-      },
-      {
-        question: "The disease caused by Streptococcus pneumoniae is:",
-        options: ["Pneumonia", "Typhoid", "Cholera", "Tetanus"],
-        answer: 0,
-        explanation: "S. pneumoniae causes pneumonia (lung infection)."
-      },
-      {
-        question: "Which of the following is a viral disease?",
-        options: ["Tuberculosis", "Cholera", "Common cold", "Anthrax"],
-        answer: 2,
-        explanation: "Common cold is caused by rhinoviruses, while others are bacterial."
-      },
-      {
-        question: "The 'Triple Antigen' vaccine protects against:",
-        options: ["Polio, measles, mumps", "Diphtheria, pertussis, tetanus (DPT)", "Hepatitis A, B, C", "Typhoid, cholera, tuberculosis"],
-        answer: 1,
-        explanation: "DPT vaccine covers diphtheria, whooping cough (pertussis), and tetanus."
-      },
-      {
-        question: "Which of the following is a helminthic disease?",
-        options: ["Malaria", "Ascariasis", "Influenza", "Rabies"],
-        answer: 1,
-        explanation: "Ascariasis is caused by the roundworm Ascaris lumbricoides."
-      },
-      {
-        question: "The diagnostic test for typhoid is:",
-        options: ["ELISA", "Widal test", "PCR", "Blood culture"],
-        answer: 1,
-        explanation: "Widal test detects antibodies against Salmonella typhi."
-      },
-      {
-        question: "Which of the following is NOT a communicable disease?",
-        options: ["Diabetes", "Tuberculosis", "Chickenpox", "Hepatitis B"],
-        answer: 0,
-        explanation: "Diabetes is a metabolic disorder, not transmitted between individuals."
-      },
-      {
-        question: "The process of crossing two genetically dissimilar plants to produce a hybrid is called:",
-        options: ["Inbreeding", "Outbreeding", "Crossbreeding", "Cloning"],
-        answer: 1,
-        explanation: "Outbreeding introduces genetic diversity by crossing unrelated plants (e.g., hybrid maize)."
-      },
-      {
-        question: "Which of the following is a method of plant breeding to develop disease-resistant crops?",
-        options: ["Mutation breeding", "Polyploidy", "Tissue culture", "Biofortification"],
-        answer: 0,
-        explanation: "Mutation breeding uses radiation/chemicals to induce mutations for traits like disease resistance."
-      },
-      {
-        question: "The term 'heterosis' refers to:",
-        options: ["Reduced vigor in hybrids", "Increased yield in hybrids", "Genetic uniformity", "Clonal propagation"],
-        answer: 1,
-        explanation: "Heterosis (hybrid vigor) results in superior traits (e.g., higher yield) in F1 hybrids."
-      },
-      {
-        question: "Sonalika and Kalyan Sona are improved varieties of:",
-        options: ["Rice", "Wheat", "Maize", "Barley"],
-        answer: 1,
-        explanation: "These are high-yielding, semi-dwarf wheat varieties from the Green Revolution."
-      },
-      {
-        question: "The technique used to grow plants from single cells or tissues in a nutrient medium is called:",
-        options: ["Hydroponics", "Tissue culture", "Grafting", "Hybridization"],
-        answer: 1,
-        explanation: "Tissue culture (micropropagation) produces genetically identical plants (clones) under sterile conditions."
-      },
-      {
-        question: "Which hormone is added to tissue culture media to promote shoot formation?",
-        options: ["Auxin", "Gibberellin", "Cytokinin", "Ethylene"],
-        answer: 2,
-        explanation: "Cytokinins (e.g., BAP) stimulate shoot growth, while auxins (e.g., NAA) promote roots."
-      },
-      {
-        question: "The practice of growing two or more crops simultaneously on the same field is called:",
-        options: ["Crop rotation", "Intercropping", "Monoculture", "Mixed farming"],
-        answer: 1,
-        explanation: "Intercropping (e.g., maize + soybean) maximizes land use and reduces pests."
-      },
-      {
-        question: "Which of the following is a biofortified crop?",
-        options: ["Golden Rice", "Bt Cotton", "Flavr Savr Tomato", "Hybrid Maize"],
-        answer: 0,
-        explanation: "Golden Rice is genetically modified to produce beta-carotene (Vitamin A)."
-      },
-      {
-        question: "Bt cotton is resistant to:",
-        options: ["Bacterial blight", "Bollworm", "Fungal rust", "Aphids"],
-        answer: 1,
-        explanation: "Bt cotton expresses the cry gene from Bacillus thuringiensis, toxic to bollworm larvae."
-      },
-      {
-        question: "The Green Revolution in India was led by:",
-        options: ["M.S. Swaminathan", "Norman Borlaug", "Gregor Mendel", "Charles Darwin"],
-        answer: 0,
-        explanation: "Swaminathan introduced high-yielding wheat/rice varieties in the 1960s."
-      },
-      {
-        question: "Which of the following is a marine fish variety?",
-        options: ["Rohu", "Catla", "Sardine", "Mrigal"],
-        answer: 2,
-        explanation: "Sardine is a marine fish, while others (Rohu, Catla, Mrigal) are freshwater."
-      },
-      {
-        question: "The hormonal method to induce breeding in fish is called:",
-        options: ["Hypophysation", "Hybridization", "Polyploidy", "Cryopreservation"],
-        answer: 0,
-        explanation: "Fish pituitary gland extract is injected to induce spawning."
-      },
-      {
-        question: "Poultry farming includes rearing of:",
-        options: ["Chickens and ducks", "Cows and buffaloes", "Fish and prawns", "Sheep and goats"],
-        answer: 0,
-        explanation: "Poultry focuses on domesticated birds (chickens, turkeys, ducks) for eggs/meat."
-      },
-      {
-        question: "Which of the following is an exotic cattle breed?",
-        options: ["Sahiwal", "Jersey", "Gir", "Red Sindhi"],
-        answer: 1,
-        explanation: "Jersey (from the UK) is exotic, while others (Sahiwal, Gir, Red Sindhi) are indigenous."
-      },
-      {
-        question: "The process of preserving animal semen at ultra-low temperatures is called:",
-        options: ["Artificial insemination", "Embryo transfer", "Cryopreservation", "Cloning"],
-        answer: 2,
-        explanation: "Semen is stored in liquid nitrogen (−196°C) for artificial insemination."
-      },
-      {
-        question: "Which of the following is a fungal disease in poultry?",
-        options: ["Ranikhet", "Aspergillosis", "Foot-and-mouth", "Anthrax"],
-        answer: 1,
-        explanation: "Caused by Aspergillus fungi, while Ranikhet is viral, and FMD/anthrax affect cattle."
-      },
-      {
-        question: "The technique of producing genetically identical animals is called:",
-        options: ["Hybridization", "Cloning", "Crossbreeding", "Mutagenesis"],
-        answer: 1,
-        explanation: "Cloning (e.g., Dolly the sheep) creates genetic copies via somatic cell nuclear transfer."
-      },
-      {
-        question: "Which of the following is a viral disease in cattle?",
-        options: ["Anthrax", "Foot-and-mouth disease", "Tuberculosis", "Brucellosis"],
-        answer: 1,
-        explanation: "FMD is caused by a picornavirus, while others are bacterial."
-      },
-      {
-        question: "MOET (Multiple Ovulation Embryo Transfer) is used in:",
-        options: ["Fish breeding", "Poultry farming", "Cattle breeding", "Beekeeping"],
-        answer: 2,
-        explanation: "MOET enhances high-yielding cattle production by transferring embryos to surrogate mothers."
-      },
-      {
-        question: "Apiculture refers to the rearing of:",
-        options: ["Silkworms", "Honeybees", "Fish", "Poultry"],
-        answer: 1,
-        explanation: "Apiculture involves beekeeping for honey, wax, and pollination services."
-      },
-      {
-        question: "Which microorganism is used in the production of curd from milk?",
-        options: ["Lactobacillus", "Saccharomyces", "Rhizobium", "Penicillium"],
-        answer: 0,
-        explanation: "Lactobacillus bacteria ferment lactose into lactic acid, coagulating milk proteins to form curd."
-      },
-      {
-        question: "The gas produced during dough fermentation in bread-making is:",
-        options: ["Oxygen", "Carbon dioxide", "Methane", "Hydrogen"],
-        answer: 1,
-        explanation: "Yeast (Saccharomyces cerevisiae) produces CO₂ during fermentation, causing dough to rise."
-      },
-      {
-        question: "Which of the following is a fungal source of antibiotics?",
-        options: ["Bacillus subtilis", "Streptomyces", "Penicillium notatum", "Escherichia coli"],
-        answer: 2,
-        explanation: "Alexander Fleming discovered penicillin from the fungus Penicillium notatum."
-      },
-      {
-        question: "The primary use of Trichoderma polysporum is in the production of:",
-        options: ["Citric acid", "Cyclosporin A", "Ethanol", "Lactic acid"],
-        answer: 1,
-        explanation: "This fungus produces cyclosporin A, an immunosuppressant used in organ transplants."
-      },
-      {
-        question: "Which bacterium is used as a biofertilizer for legumes?",
-        options: ["Azotobacter", "Rhizobium", "Nostoc", "Bacillus thuringiensis"],
-        answer: 1,
-        explanation: "Rhizobium forms root nodules in legumes and fixes atmospheric nitrogen."
-      },
-      {
-        question: "The microbial source of statins (cholesterol-lowering drugs) is:",
-        options: ["Aspergillus terreus", "Monascus purpureus", "Streptomyces", "Acetobacter"],
-        answer: 1,
-        explanation: "This yeast produces lovastatin, a natural statin."
-      },
-      {
-        question: "Which microbe is used in biogas production?",
-        options: ["Methanobacterium", "Clostridium", "Nitrosomonas", "Thiobacillus"],
-        answer: 0,
-        explanation: "Methanogens like Methanobacterium convert organic waste into methane (biogas)."
-      },
-      {
-        question: "The enzyme used in PCR (Polymerase Chain Reaction) is derived from:",
-        options: ["E. coli", "Thermus aquaticus", "Bacillus subtilis", "Agrobacterium"],
-        answer: 1,
-        explanation: "Taq polymerase (heat-stable DNA polymerase) is isolated from this thermophilic bacterium."
-      },
-      {
-        question: "Which microorganism is responsible for converting alcohol to acetic acid?",
-        options: ["Lactobacillus", "Acetobacter aceti", "Saccharomyces", "Aspergillus"],
-        answer: 1,
-        explanation: "This bacterium oxidizes ethanol to acetic acid (vinegar production)."
-      },
-      {
-        question: "The biocontrol agent used to treat butterfly caterpillars is:",
-        options: ["Bacillus thuringiensis (Bt)", "Trichoderma", "Pseudomonas", "Rhizobium"],
-        answer: 0,
-        explanation: "Bt produces Cry proteins toxic to insect larvae (e.g., caterpillars)."
-      },
-      {
-        question: "Which of the following microbes is used in sewage treatment?",
-        options: ["Mycobacterium", "Flavobacterium", "Vibrio", "Salmonella"],
-        answer: 1,
-        explanation: "Flavobacterium degrades organic sludge in aerobic sewage treatment."
-      },
-      {
-        question: "The industrial production of citric acid involves:",
-        options: ["Aspergillus niger", "Clostridium", "Lactobacillus", "Streptococcus"],
-        answer: 0,
-        explanation: "This fungus is used in citric acid fermentation."
-      },
-      {
-        question: "Which of the following is a free-living nitrogen-fixing bacterium?",
-        options: ["Rhizobium", "Azospirillum", "Nostoc", "Azotobacter"],
-        answer: 3,
-        explanation: "Azotobacter fixes nitrogen without symbiotic association."
-      },
-      {
-        question: "The microbial product used as a 'blood cholesterol-lowering agent' is:",
-        options: ["Insulin", "Streptokinase", "Statins", "Cyclosporin"],
-        answer: 2,
-        explanation: "Statins (e.g., lovastatin) inhibit HMG-CoA reductase, reducing cholesterol synthesis."
-      },
-      {
-        question: "Which microbe is used to produce Swiss cheese with large holes?",
-        options: ["Lactobacillus", "Propionibacterium shermanii", "Saccharomyces", "Penicillium"],
-        answer: 1,
-        explanation: "This bacterium releases CO₂, creating characteristic holes in Swiss cheese."
-      },
-      {
-        question: "The biocontrol agent Trichoderma is a:",
-        options: ["Bacterium", "Fungus", "Virus", "Alga"],
-        answer: 1,
-        explanation: "Trichoderma is a fungal biocontrol agent against soil-borne plant pathogens."
-      },
-      {
-        question: "Which of the following is produced using Saccharomyces cerevisiae?",
-        options: ["Yogurt", "Cheese", "Bread", "Vinegar"],
-        answer: 2,
-        explanation: "S. cerevisiae (yeast) is used in bread, beer, and wine production."
-      },
-      {
-        question: "The primary role of Nitrosomonas in the nitrogen cycle is:",
-        options: ["Nitrogen fixation", "Nitrification", "Denitrification", "Ammonification"],
-        answer: 1,
-        explanation: "Nitrosomonas converts ammonia (NH₃) to nitrite (NO₂⁻) in soil."
-      },
-      {
-        question: "Which microbe is used to produce vitamin B12 commercially?",
-        options: ["Pseudomonas", "Streptomyces", "Propionibacterium", "E. coli"],
-        answer: 2,
-        explanation: "This bacterium is cultured to produce vitamin B12 (cyanocobalamin)."
-      },
-      {
-        question: "The microbial enzyme used to dissolve blood clots is:",
-        options: ["Lipase", "Amylase", "Streptokinase", "Protease"],
-        answer: 2,
-        explanation: "Streptococcus produces streptokinase, a clot-busting enzyme used in heart attack treatment."
-      }
-    ];
-
-    let currentQuestion = 0;
-    let userResponses = Array(quiz.length).fill(null);
-    let testSubmitted = false;
-    let testStarted = false;
-    let timeLeft = 90 * 60; // 90 minutes in seconds
-    let timerInterval;
-    let selectedOptionIndex = null;
-    let quizState = JSON.parse(localStorage.getItem('quizState')) || null;
-
-    // Check for saved state on page load
-    window.onload = function() {
-      if (quizState) {
-        if (confirm("We found an unfinished test. Do you want to continue where you left off?")) {
-          loadSavedState();
-        } else {
-          localStorage.removeItem('quizState');
-        }
-      }
-    };
-
-    // Hide welcome screen after 5 seconds
-    setTimeout(() => {
-      document.getElementById('welcome-screen').style.display = 'none';
-    }, 5000);
-
-    function loadSavedState() {
-      currentQuestion = quizState.currentQuestion;
-      userResponses = quizState.userResponses;
-      timeLeft = quizState.timeLeft;
-      testStarted = true;
+    // 3D Background Initialization
+    const bgCanvas = document.getElementById('bg-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    
+    // Create floating particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 1000;
+    
+    const posArray = new Float32Array(particleCount * 3);
+    for(let i = 0; i < particleCount * 3; i++) {
+      posArray[i] = (Math.random() - 0.5) * 10;
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.02,
+      color: 0x6C63FF,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+    
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+    
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      particlesMesh.rotation.x += 0.0005;
+      particlesMesh.rotation.y += 0.0005;
+      renderer.render(scene, camera);
+    }
+    animate();
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+    
+    // Test Launch Function with Epic Countdown
+    function launchTest(testId) {
+      const overlay = document.getElementById('test-launch-overlay');
+      const countdownEl = document.getElementById('countdown');
+      const testTitle = document.getElementById('test-launch-title');
       
-      document.getElementById("intro-screen").style.display = "none";
-      document.querySelector(".timer").style.display = "flex";
-      document.getElementById("quiz-box").style.display = "block";
-      startTimer();
-      renderQuestion();
-      renderQuestionNav();
-    }
-
-    function saveState() {
-      const state = {
-        currentQuestion,
-        userResponses,
-        timeLeft,
-        testStarted: true
-      };
-      localStorage.setItem('quizState', JSON.stringify(state));
-    }
-
-    function startQuiz() {
-      document.getElementById("intro-screen").style.display = "none";
-      document.querySelector(".timer").style.display = "flex";
-      document.getElementById("quiz-box").style.display = "block";
-      startTimer();
-      renderQuestion();
-      renderQuestionNav();
-      testStarted = true;
-      saveState();
-    }
-
-    function startTimer() {
-      const timerDisplay = document.getElementById("timer");
-      updateTimerDisplay(timerDisplay);
+      // Set test title
+      if(testId === 'neet-free') testTitle.textContent = 'NEET Free Mock Test';
+      else if(testId === 'jee-mains') testTitle.textContent = 'JEE Mains Mock Test';
       
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay(timerDisplay);
-        saveState();
+      // Show overlay
+      overlay.classList.add('active');
+      
+      // Countdown from 3 with GSAP animation
+      let count = 3;
+      countdownEl.textContent = count;
+      
+      const countdownInterval = setInterval(() => {
+        count--;
         
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          submitTest();
+        // Animate with GSAP
+        gsap.fromTo(countdownEl, 
+          { scale: 1.5, opacity: 0.5 },
+          { scale: 1, opacity: 1, duration: 0.5 }
+        );
+        
+        if(count > 0) {
+          countdownEl.textContent = count;
+        } else {
+          countdownEl.textContent = 'GO!';
+          clearInterval(countdownInterval);
+          
+          // Bigger animation for GO!
+          gsap.to(countdownEl, {
+            scale: 2,
+            color: '#28C76F',
+            duration: 0.5,
+            onComplete: () => {
+              // Redirect to actual test page after animation
+              setTimeout(() => {
+                overlay.classList.remove('active');
+                // In real app, this would load the test component
+                alert('Test would start now! In full app this would load the test interface.');
+              }, 500);
+            }
+          });
         }
       }, 1000);
     }
-
-    function updateTimerDisplay(timerDisplay) {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    // Payment Modal Functions
+    function showPaymentModal(testId) {
+      const modal = document.getElementById('payment-modal');
+      const testNameEl = document.getElementById('payment-test-name');
       
-      if (timeLeft <= 300) { // 5 minutes or less
-        timerDisplay.parentElement.style.background = "#ffdddd";
-        timerDisplay.parentElement.style.color = "#dc3545";
+      if(testId === 'neet-grand-master') {
+        testNameEl.textContent = 'NEET Grand Master';
       }
+      
+      modal.style.display = 'flex';
+      
+      // Animate modal appearance
+      gsap.fromTo(modal, 
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      );
     }
-
-    function renderQuestion() {
-      const question = quiz[currentQuestion];
-      document.getElementById("question-text").textContent = `${currentQuestion + 1}. ${question.question}`;
+    
+    function processPayment() {
+      // In real app, this would integrate with Razorpay/Stripe
+      alert('In real app, this would open Razorpay payment gateway. After successful payment, test would be unlocked.');
       
-      const optionsContainer = document.getElementById("options");
-      optionsContainer.innerHTML = "";
-      
-      question.options.forEach((option, index) => {
-        const optionElement = document.createElement("div");
-        optionElement.className = "option";
+      // Simulate payment success
+      setTimeout(() => {
+        document.getElementById('payment-modal').style.display = 'none';
         
-        // Add icon span
-        const iconSpan = document.createElement("span");
-        iconSpan.className = "option-icon";
-        optionElement.appendChild(iconSpan);
+        // Show success animation
+        const successEl = document.createElement('div');
+        successEl.innerHTML = `
+          <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 3000; pointer-events: none;">
+            <div style="background: rgba(40, 199, 111, 0.2); padding: 2rem 3rem; border-radius: 15px; backdrop-filter: blur(5px); border: 2px solid #28C76F; text-align: center;">
+              <i class="fas fa-check-circle" style="font-size: 3rem; color: #28C76F; margin-bottom: 1rem;"></i>
+              <h2 style="color: white; margin-bottom: 0.5rem;">Payment Successful!</h2>
+              <p style="color: rgba(255,255,255,0.8);">Your premium test is now unlocked</p>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(successEl);
         
-        // Add option text
-        optionElement.appendChild(document.createTextNode(option));
-        
-        if (userResponses[currentQuestion] === index) {
-          optionElement.classList.add("selected");
-        }
-        
-        // In review mode, show correct/incorrect answers
-        if (testSubmitted) {
-          if (index === question.answer) {
-            optionElement.classList.add("correct-answer");
-            iconSpan.innerHTML = '<i class="fas fa-check-circle"></i>';
-          } else if (userResponses[currentQuestion] === index && userResponses[currentQuestion] !== question.answer) {
-            optionElement.classList.add("incorrect");
-            iconSpan.innerHTML = '<i class="fas fa-times-circle"></i>';
-          }
-        }
-        
-        optionElement.onclick = () => {
-          if (!testSubmitted) {
-            selectedOptionIndex = index;
-            document.getElementById('confirmation-dialog').style.display = 'flex';
-          }
-        };
-        optionsContainer.appendChild(optionElement);
-      });
-      
-      // Show explanation only in review mode for current question
-      const explanationEl = document.getElementById("explanation");
-      const explanationText = document.getElementById("explanation-text");
-      if (testSubmitted) {
-        explanationEl.style.display = "block";
-        explanationText.textContent = quiz[currentQuestion].explanation;
-      } else {
-        explanationEl.style.display = "none";
-        explanationText.textContent = "";
-      }
+        // Animate and remove
+        gsap.to(successEl, {
+          opacity: 0,
+          y: -50,
+          delay: 2,
+          duration: 0.5,
+          onComplete: () => successEl.remove()
+        });
+      }, 1000);
     }
-
-    function confirmSelection() {
-      userResponses[currentQuestion] = selectedOptionIndex;
-      document.getElementById('confirmation-dialog').style.display = 'none';
-      renderQuestion();
-      renderQuestionNav();
-      saveState();
-    }
-
-    function cancelSelection() {
-      document.getElementById('confirmation-dialog').style.display = 'none';
-      selectedOptionIndex = null;
-    }
-
-    function renderQuestionNav() {
-      const navContainer = document.getElementById("question-nav");
-      navContainer.innerHTML = "";
-      
-      quiz.forEach((question, index) => {
-        const navButton = document.createElement("div");
-        navButton.className = "q-nav-btn";
-        navButton.textContent = index + 1;
-        
-        if (testSubmitted) {
-          if (userResponses[index] === question.answer) {
-            navButton.classList.add("correct");
-          } else if (userResponses[index] !== null) {
-            navButton.classList.add("incorrect");
-          } else {
-            navButton.classList.add("unattempted");
-          }
-        } else {
-          navButton.classList.add(userResponses[index] === null ? "unattempted" : "answered");
-        }
-        
-        navButton.onclick = () => {
-          currentQuestion = index;
-          renderQuestion();
-        };
-        navContainer.appendChild(navButton);
-      });
-    }
-
-    function toggleQuestionNav() {
-      const nav = document.getElementById("question-nav");
-      nav.classList.toggle("active");
-    }
-
-    function prevQuestion() {
-      if (currentQuestion > 0) {
-        currentQuestion--;
-        renderQuestion();
-      }
-    }
-
-    function nextQuestion() {
-      if (currentQuestion < quiz.length - 1) {
-        currentQuestion++;
-        renderQuestion();
-      }
-    }
-
-    function confirmSubmit() {
-      if (confirm("Are you sure you want to end the test?")) {
-        submitTest();
-      }
-    }
-
-    function submitTest() {
-      clearInterval(timerInterval);
-      testSubmitted = true;
-      localStorage.removeItem('quizState');
-      
-      let correct = 0, wrong = 0, unattempted = 0;
-      
-      quiz.forEach((question, index) => {
-        if (userResponses[index] === null) {
-          unattempted++;
-        } else if (userResponses[index] === question.answer) {
-          correct++;
-        } else {
-          wrong++;
-        }
-      });
-      
-      // Calculate marks (+1 for correct, -1/3 for wrong)
-      const obtainedMarks = (correct * 1) - (wrong * (1/3));
-      
-      document.getElementById("quiz-box").style.display = "none";
-      document.querySelector(".timer").style.display = "none";
-      document.getElementById("correct-count").textContent = correct;
-      document.getElementById("wrong-count").textContent = wrong;
-      document.getElementById("unattempted-count").textContent = unattempted;
-      document.getElementById("obtained-marks").textContent = obtainedMarks.toFixed(2);
-      document.getElementById("summary").style.display = "block";
-    }
-
-    function reviewTest() {
-      document.getElementById("summary").style.display = "none";
-      document.getElementById("quiz-box").style.display = "block";
-      
-      // Render current question with correct/incorrect highlights
-      const question = quiz[currentQuestion];
-      const optionsContainer = document.getElementById("options");
-      optionsContainer.innerHTML = "";
-      
-      question.options.forEach((option, index) => {
-        const optionElement = document.createElement("div");
-        optionElement.className = "option";
-        
-        // Add icon span
-        const iconSpan = document.createElement("span");
-        iconSpan.className = "option-icon";
-        optionElement.appendChild(iconSpan);
-        
-        // Add option text
-        optionElement.appendChild(document.createTextNode(option));
-        
-        if (index === question.answer) {
-          optionElement.classList.add("correct-answer");
-          iconSpan.innerHTML = '<i class="fas fa-check-circle"></i>';
-        } else if (userResponses[currentQuestion] === index && userResponses[currentQuestion] !== question.answer) {
-          optionElement.classList.add("incorrect");
-          iconSpan.innerHTML = '<i class="fas fa-times-circle"></i>';
-        }
-        
-        optionsContainer.appendChild(optionElement);
-      });
-      
-      // Show explanation
-      document.getElementById("explanation").style.display = "block";
-      document.getElementById("explanation-text").textContent = question.explanation;
-      
-      // Update navigation buttons
-      renderQuestionNav();
-    }
+    
+    // Floating elements animation
+    gsap.to('.floating-element:nth-child(1)', {
+      x: 100,
+      y: 50,
+      duration: 15,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+    
+    gsap.to('.floating-element:nth-child(2)', {
+      x: -80,
+      y: -30,
+      duration: 20,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+    
+    gsap.to('.floating-element:nth-child(3)', {
+      x: 50,
+      y: -70,
+      duration: 12,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
   </script>
 </body>
 </html>
