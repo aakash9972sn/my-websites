@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEET/JEE MATRIX BLASTER</title>
+  <title>NEET/JEE ULTIMATE BLASTER</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1.70.10/dist/3d-force-graph.min.js"></script>
   <style>
     :root {
       --primary: #00f0ff;
@@ -24,42 +25,12 @@
       --neon-purple: #b400ff;
     }
     
-    /* Matrix Rain Styles */
-    .matrix-rain {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      z-index: 9999;
-      font-family: 'Courier New', monospace;
-      color: #0f0;
-      font-size: 18px;
-      line-height: 1.2;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     
-    .matrix-skip {
-      position: absolute;
-      bottom: 30px;
-      color: #0f0;
-      font-size: 14px;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: all 0.3s;
-    }
-    
-    .matrix-skip:hover {
-      opacity: 1;
-      text-shadow: 0 0 10px #0f0;
-    }
-    
-    /* Cyberpunk UI Styles (from previous version) */
     body {
       font-family: 'Rajdhani', sans-serif;
       background-color: var(--darker);
@@ -70,186 +41,962 @@
         radial-gradient(circle at 80% 70%, rgba(255, 0, 240, 0.05) 0%, transparent 20%);
     }
     
-    /* Rest of your Cyberpunk CSS from previous version */
-    /* [Include all the Cyberpunk styles from the previous code here] */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
     
-    /* Voice Command Button */
-    .voice-command {
+    /* Cyberpunk Glow Effects */
+    .cyber-glow {
+      text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+      animation: cyber-pulse 2s infinite alternate;
+    }
+    
+    .cyber-glow-pink {
+      text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+      animation: cyber-pulse-pink 2s infinite alternate;
+    }
+    
+    @keyframes cyber-pulse {
+      from { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
+      to { text-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary), 0 0 45px var(--primary); }
+    }
+    
+    @keyframes cyber-pulse-pink {
+      from { text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
+      to { text-shadow: 0 0 15px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 45px var(--neon-pink); }
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    /* Cyberpunk Navigation */
+    .cyber-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: rgba(10, 10, 18, 0.8);
+      backdrop-filter: blur(10px);
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      background: rgba(255,0,240,0.7);
-      border-radius: 50%;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--primary);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+    
+    .cyber-logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      letter-spacing: 2px;
+    }
+    
+    .cyber-logo i {
+      margin-right: 0.5rem;
+      font-size: 2rem;
+    }
+    
+    .cyber-nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .cyber-nav-link {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+    
+    .cyber-nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .cyber-nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .cyber-nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .cyber-badge {
+      background: linear-gradient(45deg, var(--premium), #ff8c00);
+      color: var(--darker);
+      padding: 0.3rem 1rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(255, 174, 0, 0.5);
+      text-transform: uppercase;
+    }
+    
+    .cyber-badge i {
+      margin-right: 0.3rem;
+    }
+    
+    /* Cyberpunk Hero Section */
+    .cyber-hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 5rem;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 240, 0.1) 0%, transparent 30%);
+    }
+    
+    .cyber-hero-content {
+      max-width: 600px;
+      z-index: 2;
+      position: relative;
+    }
+    
+    .cyber-hero-title {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+      letter-spacing: 3px;
+    }
+    
+    .cyber-hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      color: var(--light);
+    }
+    
+    .cyber-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 0;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%
+      );
+    }
+    
+    .cyber-btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--neon-purple));
+      color: var(--darker);
+      border: 1px solid var(--primary);
+    }
+    
+    .cyber-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+    }
+    
+    .cyber-btn-secondary {
+      background: rgba(0, 240, 255, 0.1);
+      color: var(--primary);
+      backdrop-filter: blur(5px);
+      margin-left: 1rem;
+      border: 1px solid var(--primary);
+    }
+    
+    .cyber-btn-secondary:hover {
+      background: rgba(0, 240, 255, 0.3);
+      color: var(--light);
+    }
+    
+    /* Cyberpunk Grid Lines */
+    .cyber-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Cyberpunk Test Cards */
+    .cyber-card {
+      background: rgba(20, 20, 30, 0.7);
+      border-radius: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid var(--primary);
+      position: relative;
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        0 100%
+      );
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+    
+    .cyber-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+      border-color: var(--secondary);
+    }
+    
+    .cyber-card-premium {
+      border: 1px solid var(--premium);
+      box-shadow: 0 0 30px rgba(255, 174, 0, 0.3);
+    }
+    
+    .cyber-card-premium:before {
+      content: 'PREMIUM';
+      position: absolute;
+      top: 10px;
+      right: -30px;
+      background: var(--premium);
+      color: var(--darker);
+      padding: 0.2rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+      z-index: 1;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(255, 174, 0, 0.5);
+    }
+    
+    .cyber-card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--primary);
+      position: relative;
+    }
+    
+    .cyber-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .cyber-card-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      display: flex;
+      align-items: center;
+      color: var(--light);
+    }
+    
+    .cyber-card-subtitle i {
+      margin-right: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .cyber-card-body {
+      padding: 1.5rem;
+    }
+    
+    .cyber-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cyber-features li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      color: var(--light);
+    }
+    
+    .cyber-features i {
+      margin-right: 0.7rem;
+      color: var(--primary);
+    }
+    
+    .cyber-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem 1.5rem;
+    }
+    
+    .cyber-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .cyber-price-free {
+      color: var(--success);
+      text-shadow: 0 0 10px rgba(0, 255, 143, 0.5);
+    }
+    
+    .cyber-price-premium {
+      color: var(--premium);
+      text-shadow: 0 0 10px rgba(255, 174, 0, 0.5);
+    }
+    
+    /* Cyberpunk Test Launch */
+    .cyber-launch {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 8, 0.95);
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor: pointer;
-      z-index: 100;
-      box-shadow: 0 0 20px #ff00f0;
-      animation: pulse-mic 2s infinite;
-      border: 2px solid var(--primary);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
     }
     
-    @keyframes pulse-mic {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+    .cyber-launch.active {
+      opacity: 1;
+      pointer-events: all;
     }
     
-    /* Glitch Transition */
-    .glitch-overlay {
+    .cyber-launch-container {
+      text-align: center;
+    }
+    
+    .cyber-launch-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+      letter-spacing: 3px;
+    }
+    
+    .cyber-countdown {
+      font-size: 5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--primary);
+      text-shadow: 0 0 20px var(--primary);
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    /* Cyberpunk Hexagon Background */
+    .cyber-hexagon {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="50,0 95,25 95,75 50,100 5,75 5,25" fill="none" stroke="%2300f0ff" stroke-width="0.3" stroke-opacity="0.1"/></svg>');
+      background-size: 100px 100px;
+      opacity: 0.3;
+      z-index: -1;
+    }
+    
+    /* Cyberpunk Initial Load Animation */
+    .cyber-load {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--darker);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .cyber-load-logo {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      transform: scale(0);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 5px;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    }
+    
+    .cyber-load-bar {
+      width: 300px;
+      height: 5px;
+      background: rgba(0, 240, 255, 0.2);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .cyber-load-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.3s ease;
+    }
+    
+    /* Cyberpunk Scanlines Effect */
+    .cyber-scanlines {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: 
-        linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
-      background-size: 20px 20px;
+        linear-gradient(
+          rgba(0, 240, 255, 0.03) 1px, 
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(0, 240, 255, 0.03) 1px, 
+          transparent 1px
+        );
+      background-size: 5px 5px;
       pointer-events: none;
-      z-index: 9998;
-      opacity: 0;
+      z-index: 999;
+      opacity: 0.3;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .cyber-nav {
+        padding: 1rem;
+      }
+      
+      .cyber-nav-links {
+        display: none;
+      }
+      
+      .cyber-hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .cyber-hero {
+        margin-top: 4rem;
+        padding-top: 2rem;
+      }
+      
+      .cyber-btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      
+      .cyber-btn-secondary {
+        margin-left: 0;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cyber-hero-title {
+        font-size: 2rem;
+      }
+      
+      .cyber-load-logo {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Matrix Rain Intro -->
-  <div class="matrix-rain" id="matrixRain">
-    <canvas id="matrixCanvas"></canvas>
-    <div class="matrix-skip" id="matrixSkip">CLICK TO SKIP</div>
+  <!-- Cyberpunk Initial Load Animation -->
+  <div class="cyber-load" id="cyber-load">
+    <div class="cyber-load-logo" id="cyber-load-logo">ULTIMATE BLASTER</div>
+    <div class="cyber-load-bar">
+      <div class="cyber-load-progress" id="cyber-load-progress"></div>
+    </div>
   </div>
-
-  <!-- Glitch Transition Effect -->
-  <div class="glitch-overlay" id="glitchOverlay"></div>
-
-  <!-- Voice Command Button -->
-  <div class="voice-command" id="voiceCommand">
-    <i class="fas fa-microphone" style="color: white; font-size: 24px;"></i>
+  
+  <!-- Cyberpunk Scanlines Effect -->
+  <div class="cyber-scanlines"></div>
+  
+  <!-- Cyberpunk Grid Background -->
+  <div class="cyber-grid"></div>
+  
+  <!-- Cyberpunk Hexagon Background -->
+  <div class="cyber-hexagon"></div>
+  
+  <!-- Cyberpunk Navigation -->
+  <nav class="cyber-nav">
+    <div class="cyber-logo">
+      <i class="fas fa-atom"></i>
+      <span>ULTIMATE<span class="cyber-glow">BLASTER</span></span>
+    </div>
+    <div class="cyber-nav-links">
+      <a href="#" class="cyber-nav-link">Home</a>
+      <a href="#" class="cyber-nav-link">Tests</a>
+      <a href="#" class="cyber-nav-link">Rankings</a>
+      <a href="#" class="cyber-nav-link">Premium <span class="cyber-badge"><i class="fas fa-crown"></i> PRO</span></a>
+      <a href="#" class="cyber-nav-link">Login</a>
+    </div>
+  </nav>
+  
+  <!-- Cyberpunk Hero Section -->
+  <section class="cyber-hero">
+    <div class="container">
+      <div class="cyber-hero-content">
+        <h1 class="cyber-hero-title">NEET/JEE <span class="cyber-glow-pink">DOMINATION</span></h1>
+        <p class="cyber-hero-subtitle">
+          The most advanced test prep platform in the universe. 
+          Powered by AI, enhanced with 3D tech, and designed to blast you to the top ranks.
+        </p>
+        <div>
+          <a href="#" class="cyber-btn cyber-btn-primary" onclick="cyberLaunchTest('neet-ultra')">
+            <i class="fas fa-rocket"></i> Launch Test
+          </a>
+          <a href="#" class="cyber-btn cyber-btn-secondary">
+            <i class="fas fa-gem"></i> Go Premium
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Cyberpunk Test Cards -->
+  <section class="container">
+    <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">
+      <span class="cyber-glow">SELECT YOUR MISSION</span>
+    </h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin: 4rem 0;">
+      <!-- Free Test Card -->
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <h3 class="cyber-card-title">NEET ULTRA</h3>
+          <p class="cyber-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 180 questions</p>
+        </div>
+        <div class="cyber-card-body">
+          <ul class="cyber-features">
+            <li><i class="fas fa-check"></i> Full syllabus coverage</li>
+            <li><i class="fas fa-check"></i> 3D molecule visualizer</li>
+            <li><i class="fas fa-check"></i> AI-powered analytics</li>
+            <li><i class="fas fa-check"></i> All India ranking</li>
+          </ul>
+        </div>
+        <div class="cyber-card-footer">
+          <div class="cyber-price cyber-price-free">FREE</div>
+          <a href="#" class="cyber-btn cyber-btn-primary" onclick="cyberLaunchTest('neet-ultra')">
+            <i class="fas fa-play"></i> Start
+          </a>
+        </div>
+      </div>
+      
+      <!-- Premium Test Card -->
+      <div class="cyber-card cyber-card-premium">
+        <div class="cyber-card-header">
+          <h3 class="cyber-card-title">NEET GOD MODE</h3>
+          <p class="cyber-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 200 questions</p>
+        </div>
+        <div class="cyber-card-body">
+          <ul class="cyber-features">
+            <li><i class="fas fa-star"></i> AI-generated questions</li>
+            <li><i class="fas fa-star"></i> 3D concept holograms</li>
+            <li><i class="fas fa-star"></i> Video solutions</li>
+            <li><i class="fas fa-star"></i> Weakness destroyer</li>
+          </ul>
+        </div>
+        <div class="cyber-card-footer">
+          <div class="cyber-price cyber-price-premium">₹299</div>
+          <a href="#" class="cyber-btn cyber-btn-primary" style="background: var(--premium); color: var(--darker);" onclick="cyberShowPayment('neet-god-mode')">
+            <i class="fas fa-lock-open"></i> Unlock
+          </a>
+        </div>
+      </div>
+      
+      <!-- JEE Test Card -->
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <h3 class="cyber-card-title">JEE ANNIHILATOR</h3>
+          <p class="cyber-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 90 questions</p>
+        </div>
+        <div class="cyber-card-body">
+          <ul class="cyber-features">
+            <li><i class="fas fa-check"></i> Physics, Chemistry, Maths</li>
+            <li><i class="fas fa-check"></i> NTA pattern questions</li>
+            <li><i class="fas fa-check"></i> Detailed percentile analysis</li>
+            <li><i class="fas fa-check"></i> Previous year trends</li>
+          </ul>
+        </div>
+        <div class="cyber-card-footer">
+          <div class="cyber-price cyber-price-free">FREE</div>
+          <a href="#" class="cyber-btn cyber-btn-primary" onclick="cyberLaunchTest('jee-annihilator')">
+            <i class="fas fa-play"></i> Start
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Cyberpunk Test Launch Sequence -->
+  <div class="cyber-launch" id="cyber-launch">
+    <div class="cyber-launch-container">
+      <h2 class="cyber-launch-title" id="cyber-launch-title">NEET ULTRA</h2>
+      <div class="cyber-countdown" id="cyber-countdown">3</div>
+      <p style="color: var(--primary); font-size: 1.2rem; text-shadow: 0 0 10px var(--primary);">SYSTEM INITIALIZING...</p>
+    </div>
   </div>
-
-  <!-- Cyberpunk UI Content (From previous version) -->
-  <div id="cyberpunkUI" style="display: none;">
-    <!-- [Include all your Cyberpunk HTML content here] -->
-  </div>
-
+  
   <script>
-    // ======================
-    // MATRIX RAIN INTRO
-    // ======================
-    const matrixChars = "01アイウエオカキクケコサシスセソ";
-    const canvas = document.getElementById("matrixCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const fontSize = 18;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-    
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Cyberpunk Initial Load Animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const loadScreen = document.getElementById('cyber-load');
+      const logo = document.getElementById('cyber-load-logo');
+      const progress = document.getElementById('cyber-load-progress');
       
-      ctx.fillStyle = "#0f0";
-      ctx.font = `${fontSize}px monospace`;
+      // Animate logo
+      gsap.to(logo, {
+        scale: 1,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)",
+        delay: 0.5
+      });
       
-      drops.forEach((drop, i) => {
-        const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
-        ctx.fillText(text, i * fontSize, drop * fontSize);
+      // Simulate loading progress
+      let progressValue = 0;
+      const loadInterval = setInterval(() => {
+        progressValue += Math.random() * 10;
+        progress.style.width = `${Math.min(progressValue, 100)}%`;
         
-        if (drop * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      });
-    }
-    
-    // ======================
-    // VOICE COMMAND SYSTEM
-    // ======================
-    const voiceBtn = document.getElementById("voiceCommand");
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    
-    voiceBtn.addEventListener("click", () => {
-      recognition.start();
-      voiceBtn.innerHTML = '<i class="fas fa-microphone-alt" style="color:#00f0ff;"></i>';
-      voiceBtn.style.background = "rgba(0,240,255,0.7)";
-      voiceBtn.style.boxShadow = "0 0 30px #00f0ff";
-    });
-    
-    recognition.onresult = (e) => {
-      const command = e.results[0][0].transcript.toLowerCase();
-      voiceBtn.innerHTML = '<i class="fas fa-check" style="color:#00ff8f;"></i>';
-      voiceBtn.style.background = "rgba(0,255,143,0.7)";
-      
-      if (command.includes("start test")) {
-        launchCyberpunkUI();
-      }
-    };
-    
-    // ======================
-    // GLITCH TRANSITION
-    // ======================
-    function glitchEffect() {
-      const glitch = document.getElementById("glitchOverlay");
-      glitch.style.opacity = "1";
-      
-      gsap.to(glitch, {
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out",
-        onComplete: () => {
-          glitch.style.display = "none";
-        }
-      });
-    }
-    
-    // ======================
-    // LAUNCH MAIN UI
-    // ======================
-    function launchCyberpunkUI() {
-      // Show glitch effect
-      glitchEffect();
-      
-      // Hide matrix intro
-      gsap.to("#matrixRain", {
-        opacity: 0,
-        duration: 1,
-        onComplete: () => {
-          document.getElementById("matrixRain").style.display = "none";
-          document.getElementById("cyberpunkUI").style.display = "block";
+        if(progressValue >= 100) {
+          clearInterval(loadInterval);
           
-          // Initialize Cyberpunk UI
-          initCyberpunkUI();
+          // Hide load screen with style
+          gsap.to(loadScreen, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+              loadScreen.style.display = 'none';
+              
+              // Start background animations
+              startCyberBackground();
+            }
+          });
         }
+      }, 100);
+    });
+    
+    // Cyberpunk Background Effects
+    function startCyberBackground() {
+      // Create floating particles
+      const particleCount = 30;
+      const colors = [0x00f0ff, 0xff00f0, 0xb400ff];
+      
+      for(let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'cyber-particle';
+        particle.style.width = `${Math.random() * 10 + 5}px`;
+        particle.style.height = particle.style.width;
+        particle.style.background = `radial-gradient(circle, hsl(${Math.random() * 60 + 200}, 100%, 50%), transparent)`;
+        particle.style.position = 'fixed';
+        particle.style.borderRadius = '50%';
+        particle.style.zIndex = '-1';
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.top = `${Math.random() * 100}vh`;
+        document.body.appendChild(particle);
+        
+        // Animate particle
+        gsap.to(particle, {
+          x: (Math.random() - 0.5) * 100,
+          y: (Math.random() - 0.5) * 100,
+          opacity: Math.random() * 0.5 + 0.1,
+          duration: Math.random() * 10 + 10,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
+      
+      // Create scanning light effect
+      const scanLight = document.createElement('div');
+      scanLight.style.position = 'fixed';
+      scanLight.style.top = '0';
+      scanLight.style.left = '0';
+      scanLight.style.width = '100%';
+      scanLight.style.height = '2px';
+      scanLight.style.background = 'linear-gradient(to bottom, rgba(0,240,255,0), rgba(0,240,255,0.5), rgba(0,240,255,0)';
+      scanLight.style.zIndex = '998';
+      scanLight.style.boxShadow = '0 0 10px rgba(0,240,255,0.8)';
+      scanLight.style.transform = 'translateY(-100%)';
+      document.body.appendChild(scanLight);
+      
+      // Animate scan light
+      gsap.to(scanLight, {
+        y: '100vh',
+        duration: 2,
+        repeat: -1,
+        ease: "none"
       });
     }
     
-    // ======================
-    // INITIALIZE
-    // ======================
-    let matrixInterval = setInterval(drawMatrix, 50);
-    
-    // Skip intro on click
-    document.getElementById("matrixSkip").addEventListener("click", () => {
-      clearInterval(matrixInterval);
-      launchCyberpunkUI();
-    });
-    
-    // Auto-launch after 8 seconds
-    setTimeout(() => {
-      if (document.getElementById("matrixRain").style.display !== "none") {
-        launchCyberpunkUI();
+    // Cyberpunk Test Launch Sequence
+    function cyberLaunchTest(testId) {
+      const launchScreen = document.getElementById('cyber-launch');
+      const countdown = document.getElementById('cyber-countdown');
+      const title = document.getElementById('cyber-launch-title');
+      
+      // Set test title
+      if(testId === 'neet-ultra') title.textContent = 'NEET ULTRA';
+      else if(testId === 'jee-annihilator') title.textContent = 'JEE ANNIHILATOR';
+      
+      // Show launch screen
+      launchScreen.classList.add('active');
+      
+      // System initialization effect
+      const systemLines = [
+        "SYSTEM CHECK... OK",
+        "QUESTIONS LOADED... OK",
+        "AI PROCTOR ENGAGED",
+        "NEURAL INTERFACE ACTIVE",
+        "LAUNCH SEQUENCE INITIATED"
+      ];
+      
+      let currentLine = 0;
+      const systemInterval = setInterval(() => {
+        if(currentLine < systemLines.length) {
+          const line = document.createElement('div');
+          line.textContent = `> ${systemLines[currentLine]}`;
+          line.style.color = 'var(--primary)';
+          line.style.fontFamily = "'Courier New', monospace";
+          line.style.margin = '0.5rem 0';
+          line.style.textShadow = '0 0 5px var(--primary)';
+          document.querySelector('.cyber-launch-container').appendChild(line);
+          
+          // Scroll to bottom
+          document.querySelector('.cyber-launch-container').scrollTop = 
+            document.querySelector('.cyber-launch-container').scrollHeight;
+            
+          currentLine++;
+        } else {
+          clearInterval(systemInterval);
+          startCountdown();
+        }
+      }, 800);
+      
+      // Countdown sequence
+      function startCountdown() {
+        let count = 3;
+        countdown.textContent = count;
+        countdown.style.opacity = 1;
+        
+        const countdownInterval = setInterval(() => {
+          count--;
+          
+          // Animate with GSAP
+          gsap.fromTo(countdown, 
+            { scale: 1.5, opacity: 0.5 },
+            { scale: 1, opacity: 1, duration: 0.5 }
+          );
+          
+          if(count > 0) {
+            countdown.textContent = count;
+          } else {
+            countdown.textContent = 'GO!';
+            clearInterval(countdownInterval);
+            
+            // Bigger animation for GO!
+            gsap.to(countdown, {
+              scale: 2,
+              color: 'var(--success)',
+              textShadow: '0 0 20px var(--success)',
+              duration: 0.5,
+              onComplete: () => {
+                // Redirect to actual test page after animation
+                setTimeout(() => {
+                  launchScreen.classList.remove('active');
+                  // In real app, this would load the test component
+                  alert('Test would start now! In full app this would load the test interface.');
+                }, 500);
+              }
+            });
+          }
+        }, 1000);
       }
-    }, 8000);
+    }
     
-    // Initialize Cyberpunk UI (from previous version)
-    function initCyberpunkUI() {
-      // [Include all your Cyberpunk JavaScript initialization here]
+    // Cyberpunk Payment Modal
+    function cyberShowPayment(testId) {
+      // In real app, this would show a cyberpunk-style payment modal
+      // For demo, we'll simulate it
+      
+      // Create payment modal elements
+      const paymentModal = document.createElement('div');
+      paymentModal.style.position = 'fixed';
+      paymentModal.style.top = '0';
+      paymentModal.style.left = '0';
+      paymentModal.style.width = '100%';
+      paymentModal.style.height = '100%';
+      paymentModal.style.background = 'rgba(5,5,8,0.95)';
+      paymentModal.style.zIndex = '2000';
+      paymentModal.style.display = 'flex';
+      paymentModal.style.justifyContent = 'center';
+      paymentModal.style.alignItems = 'center';
+      paymentModal.style.backdropFilter = 'blur(5px)';
+      paymentModal.style.border = '1px solid var(--premium)';
+      paymentModal.style.boxShadow = '0 0 30px rgba(255, 174, 0, 0.5)';
+      paymentModal.style.clipPath = 'polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)';
+      
+      // Payment content
+      paymentModal.innerHTML = `
+        <div style="padding: 2rem; width: 90%; max-width: 500px; text-align: center;">
+          <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--premium); font-size: 1.5rem; cursor: pointer;">
+            &times;
+          </button>
+          
+          <h2 style="color: var(--premium); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 10px var(--premium);">
+            <i class="fas fa-lock"></i> UNLOCK PREMIUM
+          </h2>
+          
+          <div style="background: rgba(255,174,0,0.1); padding: 1.5rem; border: 1px dashed var(--premium); margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="color: var(--light);">Test:</span>
+              <span style="color: var(--premium); font-weight: bold;">NEET GOD MODE</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="color: var(--light);">Validity:</span>
+              <span style="color: var(--premium); font-weight: bold;">30 DAYS</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,174,0,0.3);">
+              <span style="color: var(--light);">Total:</span>
+              <span style="color: var(--premium); font-weight: bold; font-size: 1.5rem;">₹299</span>
+            </div>
+          </div>
+          
+          <button onclick="cyberProcessPayment()" style="width: 100%; padding: 1rem; background: linear-gradient(45deg, var(--premium), #ff8c00); border: none; color: var(--darker); font-weight: bold; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; cursor: pointer; margin-bottom: 1rem; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+            <i class="fab fa-google-pay"></i> PAY WITH RAZORPAY
+          </button>
+          
+          <button onclick="this.parentElement.parentElement.remove()" style="width: 100%; padding: 1rem; background: transparent; border: 1px solid var(--premium); color: var(--premium); font-weight: bold; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+            CANCEL
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(paymentModal);
+      
+      // Animate appearance
+      gsap.from(paymentModal, {
+        opacity: 0,
+        y: 50,
+        duration: 0.5,
+        ease: "back.out(1.7)"
+      });
+    }
+    
+    function cyberProcessPayment() {
+      // In real app, this would integrate with Razorpay
+      // For demo, we'll show a success animation
+      
+      // Remove payment modal
+      document.querySelector('div[style*="position: fixed; top: 0; left: 0; width: 100%"]').remove();
+      
+      // Create success animation
+      const success = document.createElement('div');
+      success.style.position = 'fixed';
+      success.style.top = '0';
+      success.style.left = '0';
+      success.style.width = '100%';
+      success.style.height = '100%';
+      success.style.display = 'flex';
+      success.style.justifyContent = 'center';
+      success.style.alignItems = 'center';
+      success.style.zIndex = '2000';
+      success.style.background = 'rgba(5,5,8,0.9)';
+      
+      success.innerHTML = `
+        <div style="text-align: center;">
+          <div style="font-size: 5rem; color: var(--success); margin-bottom: 1rem; text-shadow: 0 0 20px var(--success);">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2 style="color: var(--success); margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--success);">PAYMENT SUCCESSFUL!</h2>
+          <p style="color: var(--light);">Your premium test has been unlocked</p>
+        </div>
+      `;
+      
+      document.body.appendChild(success);
+      
+      // Animate particles
+      for(let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = `${Math.random() * 10 + 5}px`;
+        particle.style.height = particle.style.width;
+        particle.style.background = `radial-gradient(circle, var(--success), transparent)`;
+        particle.style.borderRadius = '50%';
+        particle.style.left = '50%';
+        particle.style.top = '50%';
+        particle.style.transform = 'translate(-50%, -50%)';
+        success.appendChild(particle);
+        
+        gsap.to(particle, {
+          x: (Math.random() - 0.5) * 300,
+          y: (Math.random() - 0.5) * 300,
+          opacity: 0,
+          duration: 1.5,
+          delay: 0.5
+        });
+      }
+      
+      // Remove after animation
+      setTimeout(() => {
+        gsap.to(success, {
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => success.remove()
+        });
+      }, 2000);
     }
   </script>
 </body>
