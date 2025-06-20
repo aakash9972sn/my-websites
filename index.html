@@ -3,269 +3,451 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ULTIMATE NEET/JEE Prep</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <title>NEET/JEE ULTIMATE BLASTER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1.70.10/dist/3d-force-graph.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
-    /* [Previous CSS remains the same] */
-    
-    /* New Mobile Optimizations */
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 2rem;
-        line-height: 1.3;
-      }
-      
-      .test-card {
-        min-width: 100%;
-      }
-      
-      .navbar {
-        padding: 0.8rem;
-      }
-      
-      .logo {
-        font-size: 1.3rem;
-      }
-      
-      .btn {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-      }
+    :root {
+      --primary: #00f0ff;
+      --secondary: #ff00f0;
+      --dark: #0a0a12;
+      --darker: #050508;
+      --light: #e0e0ff;
+      --success: #00ff8f;
+      --danger: #ff3d5e;
+      --warning: #ffcc00;
+      --premium: #ffae00;
+      --neon-pink: #ff00f0;
+      --neon-blue: #00f0ff;
+      --neon-purple: #b400ff;
     }
     
-    /* 3D Molecule Viewer */
-    #molecule-viewer {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background-color: var(--darker);
+      color: var(--light);
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 240, 0.05) 0%, transparent 20%);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Cyberpunk Glow Effects */
+    .cyber-glow {
+      text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+      animation: cyber-pulse 2s infinite alternate;
+    }
+    
+    .cyber-glow-pink {
+      text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+      animation: cyber-pulse-pink 2s infinite alternate;
+    }
+    
+    @keyframes cyber-pulse {
+      from { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
+      to { text-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary), 0 0 45px var(--primary); }
+    }
+    
+    @keyframes cyber-pulse-pink {
+      from { text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
+      to { text-shadow: 0 0 15px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 45px var(--neon-pink); }
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    /* Cyberpunk Navigation */
+    .cyber-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: rgba(10, 10, 18, 0.8);
+      backdrop-filter: blur(10px);
+      position: fixed;
       width: 100%;
-      height: 400px;
-      background: rgba(0,0,0,0.2);
-      border-radius: 15px;
-      margin: 2rem 0;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--primary);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+    
+    .cyber-logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      letter-spacing: 2px;
+    }
+    
+    .cyber-logo i {
+      margin-right: 0.5rem;
+      font-size: 2rem;
+    }
+    
+    .cyber-nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .cyber-nav-link {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+    
+    .cyber-nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .cyber-nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .cyber-nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .cyber-badge {
+      background: linear-gradient(45deg, var(--premium), #ff8c00);
+      color: var(--darker);
+      padding: 0.3rem 1rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(255, 174, 0, 0.5);
+      text-transform: uppercase;
+    }
+    
+    .cyber-badge i {
+      margin-right: 0.3rem;
+    }
+    
+    /* Cyberpunk Hero Section */
+    .cyber-hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
       position: relative;
       overflow: hidden;
+      margin-top: 5rem;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 240, 0.1) 0%, transparent 30%);
     }
     
-    .molecule-controls {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      z-index: 10;
-      display: flex;
-      gap: 10px;
-    }
-    
-    .molecule-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s;
-    }
-    
-    .molecule-btn:hover {
-      background: var(--primary);
-    }
-    
-    /* AI Analysis Dashboard */
-    .ai-dashboard {
-      background: rgba(255,255,255,0.05);
-      border-radius: 15px;
-      padding: 2rem;
-      margin: 3rem 0;
-      backdrop-filter: blur(5px);
-    }
-    
-    .ai-graph {
-      height: 300px;
-      background: rgba(0,0,0,0.2);
-      border-radius: 10px;
-      margin: 1rem 0;
+    .cyber-hero-content {
+      max-width: 600px;
+      z-index: 2;
       position: relative;
     }
     
-    /* Login/Signup Modal */
-    .auth-modal {
+    .cyber-hero-title {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+      letter-spacing: 3px;
+    }
+    
+    .cyber-hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      color: var(--light);
+    }
+    
+    .cyber-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 0;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%
+      );
+    }
+    
+    .cyber-btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--neon-purple));
+      color: var(--darker);
+      border: 1px solid var(--primary);
+    }
+    
+    .cyber-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+    }
+    
+    .cyber-btn-secondary {
+      background: rgba(0, 240, 255, 0.1);
+      color: var(--primary);
+      backdrop-filter: blur(5px);
+      margin-left: 1rem;
+      border: 1px solid var(--primary);
+    }
+    
+    .cyber-btn-secondary:hover {
+      background: rgba(0, 240, 255, 0.3);
+      color: var(--light);
+    }
+    
+    /* Cyberpunk Grid Lines */
+    .cyber-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Cyberpunk Test Cards */
+    .cyber-card {
+      background: rgba(20, 20, 30, 0.7);
+      border-radius: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid var(--primary);
+      position: relative;
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        0 100%
+      );
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+    
+    .cyber-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+      border-color: var(--secondary);
+    }
+    
+    .cyber-card-premium {
+      border: 1px solid var(--premium);
+      box-shadow: 0 0 30px rgba(255, 174, 0, 0.3);
+    }
+    
+    .cyber-card-premium:before {
+      content: 'PREMIUM';
+      position: absolute;
+      top: 10px;
+      right: -30px;
+      background: var(--premium);
+      color: var(--darker);
+      padding: 0.2rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+      z-index: 1;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(255, 174, 0, 0.5);
+    }
+    
+    .cyber-card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--primary);
+      position: relative;
+    }
+    
+    .cyber-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .cyber-card-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      display: flex;
+      align-items: center;
+      color: var(--light);
+    }
+    
+    .cyber-card-subtitle i {
+      margin-right: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .cyber-card-body {
+      padding: 1.5rem;
+    }
+    
+    .cyber-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cyber-features li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      color: var(--light);
+    }
+    
+    .cyber-features i {
+      margin-right: 0.7rem;
+      color: var(--primary);
+    }
+    
+    .cyber-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem 1.5rem;
+    }
+    
+    .cyber-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .cyber-price-free {
+      color: var(--success);
+      text-shadow: 0 0 10px rgba(0, 255, 143, 0.5);
+    }
+    
+    .cyber-price-premium {
+      color: var(--premium);
+      text-shadow: 0 0 10px rgba(255, 174, 0, 0.5);
+    }
+    
+    /* Cyberpunk Test Launch */
+    .cyber-launch {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.9);
+      background: rgba(5, 5, 8, 0.95);
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 3000;
+      z-index: 1000;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.5s;
+      transition: opacity 0.5s ease;
     }
     
-    .auth-modal.active {
+    .cyber-launch.active {
       opacity: 1;
       pointer-events: all;
     }
     
-    .auth-container {
-      background: #1A1A2E;
-      padding: 2rem;
-      border-radius: 15px;
-      width: 100%;
-      max-width: 400px;
-      position: relative;
-      border: 1px solid var(--primary);
+    .cyber-launch-container {
+      text-align: center;
     }
     
-    .close-auth {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
+    .cyber-launch-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+      letter-spacing: 3px;
     }
     
-    .auth-tabs {
-      display: flex;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .auth-tab {
-      padding: 0.8rem 1.5rem;
-      background: transparent;
-      border: none;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      position: relative;
-    }
-    
-    .auth-tab.active {
+    .cyber-countdown {
+      font-size: 5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
       color: var(--primary);
+      text-shadow: 0 0 20px var(--primary);
+      font-family: 'Orbitron', sans-serif;
     }
     
-    .auth-tab.active:after {
-      content: '';
+    /* Cyberpunk Hexagon Background */
+    .cyber-hexagon {
       position: absolute;
-      bottom: -1px;
-      left: 0;
       width: 100%;
-      height: 2px;
-      background: var(--primary);
+      height: 100%;
+      background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="50,0 95,25 95,75 50,100 5,75 5,25" fill="none" stroke="%2300f0ff" stroke-width="0.3" stroke-opacity="0.1"/></svg>');
+      background-size: 100px 100px;
+      opacity: 0.3;
+      z-index: -1;
     }
     
-    .auth-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .auth-input {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 1rem;
-      border-radius: 8px;
-      color: white;
-      font-size: 1rem;
-    }
-    
-    .auth-input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-    
-    /* Test Interface */
-    .test-interface {
-      display: none;
+    /* Cyberpunk Initial Load Animation */
+    .cyber-load {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #1A1A2E;
-      z-index: 2000;
-      flex-direction: column;
-    }
-    
-    .test-header {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem;
-      background: rgba(0,0,0,0.3);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .test-timer {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-    
-    .test-body {
-      flex: 1;
-      padding: 2rem;
-      overflow-y: auto;
-    }
-    
-    .test-question {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-    
-    .test-options {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .test-option {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .test-option:hover {
-      background: rgba(108, 99, 255, 0.2);
-      border-color: var(--primary);
-    }
-    
-    .test-option.selected {
-      background: rgba(108, 99, 255, 0.3);
-      border-color: var(--primary);
-    }
-    
-    .test-footer {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem;
-      background: rgba(0,0,0,0.3);
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    /* Initial Load Explosion Effect */
-    .explosion-effect {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--dark);
+      background: var(--darker);
       z-index: 9999;
       display: flex;
       justify-content: center;
@@ -273,7 +455,7 @@
       flex-direction: column;
     }
     
-    .explosion-logo {
+    .cyber-load-logo {
       font-size: 4rem;
       font-weight: 900;
       background: linear-gradient(45deg, var(--primary), var(--secondary));
@@ -281,699 +463,540 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 2rem;
       transform: scale(0);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 5px;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
     }
     
-    .explosion-particle {
+    .cyber-load-bar {
+      width: 300px;
+      height: 5px;
+      background: rgba(0, 240, 255, 0.2);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .cyber-load-progress {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--primary);
-      opacity: 0;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.3s ease;
+    }
+    
+    /* Cyberpunk Scanlines Effect */
+    .cyber-scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(
+          rgba(0, 240, 255, 0.03) 1px, 
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(0, 240, 255, 0.03) 1px, 
+          transparent 1px
+        );
+      background-size: 5px 5px;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.3;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .cyber-nav {
+        padding: 1rem;
+      }
+      
+      .cyber-nav-links {
+        display: none;
+      }
+      
+      .cyber-hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .cyber-hero {
+        margin-top: 4rem;
+        padding-top: 2rem;
+      }
+      
+      .cyber-btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      
+      .cyber-btn-secondary {
+        margin-left: 0;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cyber-hero-title {
+        font-size: 2rem;
+      }
+      
+      .cyber-load-logo {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Initial Load Explosion Effect -->
-  <div class="explosion-effect" id="explosion-effect">
-    <div class="explosion-logo" id="explosion-logo">ULTIMATE PREP</div>
+  <!-- Cyberpunk Initial Load Animation -->
+  <div class="cyber-load" id="cyber-load">
+    <div class="cyber-load-logo" id="cyber-load-logo">ULTIMATE BLASTER</div>
+    <div class="cyber-load-bar">
+      <div class="cyber-load-progress" id="cyber-load-progress"></div>
+    </div>
   </div>
-
-  <!-- [Previous HTML remains the same until before </body>] -->
   
-  <!-- New AI Analysis Section -->
-  <section class="container">
-    <div class="ai-dashboard">
-      <h2 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-brain"></i> AI Performance Analysis</h2>
-      <p style="margin-bottom: 1.5rem; opacity: 0.8;">Our AI analyzes your test patterns to identify weak areas and suggest improvements</p>
-      
-      <div class="ai-graph" id="ai-graph"></div>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-        <div style="background: rgba(40, 199, 111, 0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--success);">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--success);">Strong Chapters</h3>
-          <ul style="list-style: none;">
-            <li><i class="fas fa-check" style="color: var(--success); margin-right: 0.5rem;"></i> Reproduction</li>
-            <li><i class="fas fa-check" style="color: var(--success); margin-right: 0.5rem;"></i> Genetics</li>
-          </ul>
-        </div>
-        
-        <div style="background: rgba(234, 84, 85, 0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--danger);">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--danger);">Weak Chapters</h3>
-          <ul style="list-style: none;">
-            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger); margin-right: 0.5rem;"></i> Biotechnology</li>
-            <li><i class="fas fa-exclamation-triangle" style="color: var(--danger); margin-right: 0.5rem;"></i> Evolution</li>
-          </ul>
-        </div>
-        
-        <div style="background: rgba(255, 159, 67, 0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--warning);">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--warning);">Time Management</h3>
-          <p style="font-size: 0.9rem;">You spend 30% more time on Physics than Chemistry</p>
+  <!-- Cyberpunk Scanlines Effect -->
+  <div class="cyber-scanlines"></div>
+  
+  <!-- Cyberpunk Grid Background -->
+  <div class="cyber-grid"></div>
+  
+  <!-- Cyberpunk Hexagon Background -->
+  <div class="cyber-hexagon"></div>
+  
+  <!-- Cyberpunk Navigation -->
+  <nav class="cyber-nav">
+    <div class="cyber-logo">
+      <i class="fas fa-atom"></i>
+      <span>ULTIMATE<span class="cyber-glow">BLASTER</span></span>
+    </div>
+    <div class="cyber-nav-links">
+      <a href="#" class="cyber-nav-link">Home</a>
+      <a href="#" class="cyber-nav-link">Tests</a>
+      <a href="#" class="cyber-nav-link">Rankings</a>
+      <a href="#" class="cyber-nav-link">Premium <span class="cyber-badge"><i class="fas fa-crown"></i> PRO</span></a>
+      <a href="#" class="cyber-nav-link">Login</a>
+    </div>
+  </nav>
+  
+  <!-- Cyberpunk Hero Section -->
+  <section class="cyber-hero">
+    <div class="container">
+      <div class="cyber-hero-content">
+        <h1 class="cyber-hero-title">NEET/JEE <span class="cyber-glow-pink">DOMINATION</span></h1>
+        <p class="cyber-hero-subtitle">
+          The most advanced test prep platform in the universe. 
+          Powered by AI, enhanced with 3D tech, and designed to blast you to the top ranks.
+        </p>
+        <div>
+          <a href="#" class="cyber-btn cyber-btn-primary" onclick="cyberLaunchTest('neet-ultra')">
+            <i class="fas fa-rocket"></i> Launch Test
+          </a>
+          <a href="#" class="cyber-btn cyber-btn-secondary">
+            <i class="fas fa-gem"></i> Go Premium
+          </a>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- 3D Molecule Visualizer Section -->
+  <!-- Cyberpunk Test Cards -->
   <section class="container">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-atom"></i> 3D Molecule Visualizer</h2>
-    <p style="margin-bottom: 1.5rem; opacity: 0.8;">Explore complex molecules in 3D for better understanding</p>
+    <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">
+      <span class="cyber-glow">SELECT YOUR MISSION</span>
+    </h2>
     
-    <div class="molecule-selector" style="margin-bottom: 1rem;">
-      <select id="molecule-select" class="auth-input" style="width: 100%;">
-        <option value="H2O">Water (H₂O)</option>
-        <option value="C6H12O6">Glucose (C₆H₁₂O₆)</option>
-        <option value="CH4">Methane (CH₄)</option>
-        <option value="DNA">DNA Segment</option>
-      </select>
-    </div>
-    
-    <div id="molecule-viewer"></div>
-    <div class="molecule-controls">
-      <button class="molecule-btn" id="rotate-molecule"><i class="fas fa-sync-alt"></i></button>
-      <button class="molecule-btn" id="zoom-in-molecule"><i class="fas fa-search-plus"></i></button>
-      <button class="molecule-btn" id="zoom-out-molecule"><i class="fas fa-search-minus"></i></button>
-      <button class="molecule-btn" id="reset-molecule"><i class="fas fa-undo"></i></button>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin: 4rem 0;">
+      <!-- Free Test Card -->
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <h3 class="cyber-card-title">NEET ULTRA</h3>
+          <p class="cyber-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 180 questions</p>
+        </div>
+        <div class="cyber-card-body">
+          <ul class="cyber-features">
+            <li><i class="fas fa-check"></i> Full syllabus coverage</li>
+            <li><i class="fas fa-check"></i> 3D molecule visualizer</li>
+            <li><i class="fas fa-check"></i> AI-powered analytics</li>
+            <li><i class="fas fa-check"></i> All India ranking</li>
+          </ul>
+        </div>
+        <div class="cyber-card-footer">
+          <div class="cyber-price cyber-price-free">FREE</div>
+          <a href="#" class="cyber-btn cyber-btn-primary" onclick="cyberLaunchTest('neet-ultra')">
+            <i class="fas fa-play"></i> Start
+          </a>
+        </div>
+      </div>
+      
+      <!-- Premium Test Card -->
+      <div class="cyber-card cyber-card-premium">
+        <div class="cyber-card-header">
+          <h3 class="cyber-card-title">NEET GOD MODE</h3>
+          <p class="cyber-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 200 questions</p>
+        </div>
+        <div class="cyber-card-body">
+          <ul class="cyber-features">
+            <li><i class="fas fa-star"></i> AI-generated questions</li>
+            <li><i class="fas fa-star"></i> 3D concept holograms</li>
+            <li><i class="fas fa-star"></i> Video solutions</li>
+            <li><i class="fas fa-star"></i> Weakness destroyer</li>
+          </ul>
+        </div>
+        <div class="cyber-card-footer">
+          <div class="cyber-price cyber-price-premium">₹299</div>
+          <a href="#" class="cyber-btn cyber-btn-primary" style="background: var(--premium); color: var(--darker);" onclick="cyberShowPayment('neet-god-mode')">
+            <i class="fas fa-lock-open"></i> Unlock
+          </a>
+        </div>
+      </div>
+      
+      <!-- JEE Test Card -->
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <h3 class="cyber-card-title">JEE ANNIHILATOR</h3>
+          <p class="cyber-card-subtitle"><i class="fas fa-clock"></i> 180 minutes • 90 questions</p>
+        </div>
+        <div class="cyber-card-body">
+          <ul class="cyber-features">
+            <li><i class="fas fa-check"></i> Physics, Chemistry, Maths</li>
+            <li><i class="fas fa-check"></i> NTA pattern questions</li>
+            <li><i class="fas fa-check"></i> Detailed percentile analysis</li>
+            <li><i class="fas fa-check"></i> Previous year trends</li>
+          </ul>
+        </div>
+        <div class="cyber-card-footer">
+          <div class="cyber-price cyber-price-free">FREE</div>
+          <a href="#" class="cyber-btn cyber-btn-primary" onclick="cyberLaunchTest('jee-annihilator')">
+            <i class="fas fa-play"></i> Start
+          </a>
+        </div>
+      </div>
     </div>
   </section>
   
-  <!-- Auth Modals -->
-  <div class="auth-modal" id="login-modal">
-    <div class="auth-container">
-      <button class="close-auth" onclick="closeAuthModal()">&times;</button>
-      <div class="auth-tabs">
-        <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-        <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
-      </div>
-      
-      <form class="auth-form" id="login-form">
-        <input type="email" class="auth-input" placeholder="Email" required>
-        <input type="password" class="auth-input" placeholder="Password" required>
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
-      
-      <form class="auth-form" id="signup-form" style="display: none;">
-        <input type="text" class="auth-input" placeholder="Full Name" required>
-        <input type="email" class="auth-input" placeholder="Email" required>
-        <input type="password" class="auth-input" placeholder="Password" required>
-        <input type="password" class="auth-input" placeholder="Confirm Password" required>
-        <button type="submit" class="btn btn-primary">Create Account</button>
-      </form>
-      
-      <div style="text-align: center; margin-top: 1rem;">
-        <button style="background: transparent; border: none; color: white; cursor: pointer;">
-          <i class="fab fa-google" style="margin-right: 0.5rem;"></i> Continue with Google
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Test Interface -->
-  <div class="test-interface" id="test-interface">
-    <div class="test-header">
-      <div class="test-title">NEET Mock Test - Question 1</div>
-      <div class="test-timer" id="test-timer">59:45</div>
-    </div>
-    
-    <div class="test-body">
-      <div class="test-question" id="test-question">
-        Which of the following is correct about the mitochondria?
-      </div>
-      
-      <div class="test-options" id="test-options">
-        <div class="test-option" onclick="selectOption(this)">
-          <span class="option-letter">A</span>
-          <span class="option-text">It is called the powerhouse of the cell</span>
-        </div>
-        <div class="test-option" onclick="selectOption(this)">
-          <span class="option-letter">B</span>
-          <span class="option-text">It contains chlorophyll</span>
-        </div>
-        <div class="test-option" onclick="selectOption(this)">
-          <span class="option-letter">C</span>
-          <span class="option-text">It is found only in plant cells</span>
-        </div>
-        <div class="test-option" onclick="selectOption(this)">
-          <span class="option-letter">D</span>
-          <span class="option-text">It helps in protein synthesis</span>
-        </div>
-      </div>
-      
-      <!-- 3D Molecule Viewer in Test -->
-      <div id="test-molecule-viewer" style="height: 250px; margin: 2rem 0; display: none;"></div>
-    </div>
-    
-    <div class="test-footer">
-      <button class="btn btn-secondary" onclick="prevQuestion()">
-        <i class="fas fa-arrow-left"></i> Previous
-      </button>
-      <button class="btn btn-primary" onclick="nextQuestion()">
-        Next <i class="fas fa-arrow-right"></i>
-      </button>
+  <!-- Cyberpunk Test Launch Sequence -->
+  <div class="cyber-launch" id="cyber-launch">
+    <div class="cyber-launch-container">
+      <h2 class="cyber-launch-title" id="cyber-launch-title">NEET ULTRA</h2>
+      <div class="cyber-countdown" id="cyber-countdown">3</div>
+      <p style="color: var(--primary); font-size: 1.2rem; text-shadow: 0 0 10px var(--primary);">SYSTEM INITIALIZING...</p>
     </div>
   </div>
   
   <script>
-    // Initial Explosion Effect
+    // Cyberpunk Initial Load Animation
     document.addEventListener('DOMContentLoaded', () => {
-      const explosion = document.getElementById('explosion-effect');
-      const logo = document.getElementById('explosion-logo');
+      const loadScreen = document.getElementById('cyber-load');
+      const logo = document.getElementById('cyber-load-logo');
+      const progress = document.getElementById('cyber-load-progress');
       
       // Animate logo
       gsap.to(logo, {
         scale: 1,
         duration: 0.8,
-        ease: "elastic.out(1, 0.5)"
+        ease: "elastic.out(1, 0.5)",
+        delay: 0.5
       });
       
-      // Create explosion particles
-      for(let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'explosion-particle';
-        explosion.appendChild(particle);
+      // Simulate loading progress
+      let progressValue = 0;
+      const loadInterval = setInterval(() => {
+        progressValue += Math.random() * 10;
+        progress.style.width = `${Math.min(progressValue, 100)}%`;
         
-        // Random properties
-        const size = Math.random() * 15 + 5;
-        const color = `hsl(${Math.random() * 60 + 200}, 100%, 50%)`;
-        
-        // Set initial position (center)
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.background = color;
-        particle.style.left = '50%';
-        particle.style.top = '50%';
-        
-        // Animate outwards
-        gsap.to(particle, {
-          x: (Math.random() - 0.5) * 1000,
-          y: (Math.random() - 0.5) * 1000,
-          opacity: 1,
-          scale: Math.random() * 2 + 0.5,
-          duration: 1.5,
-          delay: 0.8,
-          ease: "power3.out"
-        });
-      }
-      
-      // Hide explosion after animation
-      setTimeout(() => {
-        gsap.to(explosion, {
-          opacity: 0,
-          duration: 0.5,
-          onComplete: () => explosion.remove()
-        });
-        
-        // Start background animations
-        startBackgroundAnimations();
-      }, 2000);
-    });
-    
-    // [Previous JavaScript remains the same until the end]
-    
-    // New Features Implementation
-    
-    // 3D Molecule Visualizer
-    let moleculeScene, moleculeCamera, moleculeRenderer, molecule;
-    
-    function initMoleculeViewer() {
-      const container = document.getElementById('molecule-viewer');
-      
-      // Set up scene
-      moleculeScene = new THREE.Scene();
-      moleculeScene.background = new THREE.Color(0x1A1A2E);
-      
-      // Set up camera
-      moleculeCamera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-      moleculeCamera.position.z = 5;
-      
-      // Set up renderer
-      moleculeRenderer = new THREE.WebGLRenderer({ antialias: true });
-      moleculeRenderer.setSize(container.clientWidth, container.clientHeight);
-      container.appendChild(moleculeRenderer.domElement);
-      
-      // Add lights
-      const ambientLight = new THREE.AmbientLight(0x404040);
-      moleculeScene.add(ambientLight);
-      
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-      directionalLight.position.set(1, 1, 1);
-      moleculeScene.add(directionalLight);
-      
-      // Load initial molecule
-      loadMolecule('H2O');
-      
-      // Add controls
-      document.getElementById('rotate-molecule').addEventListener('click', () => {
-        if(molecule) {
-          gsap.to(molecule.rotation, {
-            y: molecule.rotation.y + Math.PI/2,
-            duration: 1
+        if(progressValue >= 100) {
+          clearInterval(loadInterval);
+          
+          // Hide load screen with style
+          gsap.to(loadScreen, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+              loadScreen.style.display = 'none';
+              
+              // Start background animations
+              startCyberBackground();
+            }
           });
         }
-      });
-      
-      document.getElementById('zoom-in-molecule').addEventListener('click', () => {
-        moleculeCamera.position.z -= 0.5;
-        moleculeCamera.updateProjectionMatrix();
-      });
-      
-      document.getElementById('zoom-out-molecule').addEventListener('click', () => {
-        moleculeCamera.position.z += 0.5;
-        moleculeCamera.updateProjectionMatrix();
-      });
-      
-      document.getElementById('reset-molecule').addEventListener('click', () => {
-        moleculeCamera.position.z = 5;
-        if(molecule) {
-          molecule.rotation.set(0, 0, 0);
-        }
-        moleculeCamera.updateProjectionMatrix();
-      });
-      
-      // Molecule selector
-      document.getElementById('molecule-select').addEventListener('change', (e) => {
-        loadMolecule(e.target.value);
-      });
-      
-      // Animation loop
-      function animate() {
-        requestAnimationFrame(animate);
-        moleculeRenderer.render(moleculeScene, moleculeCamera);
-      }
-      animate();
-      
-      // Handle resize
-      window.addEventListener('resize', () => {
-        moleculeCamera.aspect = container.clientWidth / container.clientHeight;
-        moleculeCamera.updateProjectionMatrix();
-        moleculeRenderer.setSize(container.clientWidth, container.clientHeight);
-      });
-    }
-    
-    function loadMolecule(moleculeType) {
-      // Clear previous molecule
-      if(molecule) {
-        moleculeScene.remove(molecule);
-      }
-      
-      // Create new molecule based on type
-      molecule = new THREE.Group();
-      
-      // Simple representation for demo
-      if(moleculeType === 'H2O') {
-        // Oxygen (center)
-        const oxygen = createAtom(0xDD4B4B, 0.5, 0, 0);
-        molecule.add(oxygen);
-        
-        // Hydrogens
-        const hydrogen1 = createAtom(0x4B8FDD, 0.3, -0.8, -0.5);
-        const hydrogen2 = createAtom(0x4B8FDD, 0.3, 0.8, -0.5);
-        molecule.add(hydrogen1);
-        molecule.add(hydrogen2);
-        
-        // Bonds
-        const bond1 = createBond(oxygen.position, hydrogen1.position);
-        const bond2 = createBond(oxygen.position, hydrogen2.position);
-        molecule.add(bond1);
-        molecule.add(bond2);
-      }
-      else if(moleculeType === 'C6H12O6') {
-        // Simple glucose representation
-        const carbon1 = createAtom(0x333333, 0.4, 0, 0);
-        molecule.add(carbon1);
-        
-        // Add more atoms in a ring formation
-        for(let i = 0; i < 5; i++) {
-          const angle = (i / 5) * Math.PI * 2;
-          const x = Math.cos(angle) * 1.5;
-          const y = Math.sin(angle) * 1.5;
-          
-          const carbon = createAtom(0x333333, 0.4, x, y);
-          molecule.add(carbon);
-          
-          const bond = createBond(carbon1.position, carbon.position);
-          molecule.add(bond);
-        }
-      }
-      else if(moleculeType === 'CH4') {
-        // Methane - tetrahedral
-        const carbon = createAtom(0x333333, 0.5, 0, 0);
-        molecule.add(carbon);
-        
-        // 4 hydrogens
-        const positions = [
-          {x: 1, y: 1, z: 1},
-          {x: -1, y: -1, z: 1},
-          {x: -1, y: 1, z: -1},
-          {x: 1, y: -1, z: -1}
-        ];
-        
-        positions.forEach(pos => {
-          const hydrogen = createAtom(0x4B8FDD, 0.3, pos.x, pos.y, pos.z);
-          molecule.add(hydrogen);
-          
-          const bond = createBond(carbon.position, hydrogen.position);
-          molecule.add(bond);
-        });
-      }
-      else if(moleculeType === 'DNA') {
-        // Simple DNA representation
-        for(let i = 0; i < 10; i++) {
-          const angle = i * 0.3;
-          const x1 = Math.cos(angle) * 1;
-          const y1 = Math.sin(angle) * 1;
-          const x2 = Math.cos(angle + Math.PI) * 1;
-          const y2 = Math.sin(angle + Math.PI) * 1;
-          
-          // Nucleotides
-          const phosphate1 = createAtom(0xFF5555, 0.3, x1, y1, i * 0.2);
-          const sugar1 = createAtom(0x55FF55, 0.25, x1 * 0.7, y1 * 0.7, i * 0.2 + 0.1);
-          const base1 = createAtom(0x5555FF, 0.2, x1 * 0.4, y1 * 0.4, i * 0.2 + 0.15);
-          
-          const phosphate2 = createAtom(0xFF5555, 0.3, x2, y2, i * 0.2);
-          const sugar2 = createAtom(0x55FF55, 0.25, x2 * 0.7, y2 * 0.7, i * 0.2 + 0.1);
-          const base2 = createAtom(0x5555FF, 0.2, x2 * 0.4, y2 * 0.4, i * 0.2 + 0.15);
-          
-          molecule.add(phosphate1);
-          molecule.add(sugar1);
-          molecule.add(base1);
-          molecule.add(phosphate2);
-          molecule.add(sugar2);
-          molecule.add(base2);
-          
-          // Bonds
-          if(i > 0) {
-            const prevPhosphate1 = molecule.children[(i-1)*6];
-            const prevPhosphate2 = molecule.children[(i-1)*6+3];
-            
-            molecule.add(createBond(prevPhosphate1.position, phosphate1.position));
-            molecule.add(createBond(prevPhosphate2.position, phosphate2.position));
-          }
-          
-          // Base pair bonds
-          molecule.add(createBond(base1.position, base2.position, 0xFFFFFF));
-        }
-      }
-      
-      moleculeScene.add(molecule);
-    }
-    
-    function createAtom(color, size, x, y, z = 0) {
-      const geometry = new THREE.SphereGeometry(size, 32, 32);
-      const material = new THREE.MeshPhongMaterial({ color });
-      const sphere = new THREE.Mesh(geometry, material);
-      sphere.position.set(x, y, z);
-      return sphere;
-    }
-    
-    function createBond(pos1, pos2, color = 0xCCCCCC) {
-      const distance = pos1.distanceTo(pos2);
-      const geometry = new THREE.CylinderGeometry(0.1, 0.1, distance, 8);
-      geometry.rotateX(Math.PI/2); // Align with Z axis
-      const material = new THREE.MeshPhongMaterial({ color });
-      const cylinder = new THREE.Mesh(geometry, material);
-      
-      // Position between the two atoms
-      cylinder.position.x = (pos1.x + pos2.x) / 2;
-      cylinder.position.y = (pos1.y + pos2.y) / 2;
-      cylinder.position.z = (pos1.z + pos2.z) / 2;
-      
-      // Rotate to point at second atom
-      cylinder.lookAt(pos2);
-      
-      return cylinder;
-    }
-    
-    // AI Analysis Graph
-    function initAIGraph() {
-      const container = document.getElementById('ai-graph');
-      
-      // Mock data for demo
-      const data = {
-        nodes: [
-          { id: 'Physics', name: 'Physics', val: 30, group: 1 },
-          { id: 'Optics', name: 'Optics', val: 15, group: 1 },
-          { id: 'Mechanics', name: 'Mechanics', val: 25, group: 1 },
-          { id: 'Chemistry', name: 'Chemistry', val: 35, group: 2 },
-          { id: 'Organic', name: 'Organic', val: 20, group: 2 },
-          { id: 'Inorganic', name: 'Inorganic', val: 15, group: 2 },
-          { id: 'Biology', name: 'Biology', val: 40, group: 3 },
-          { id: 'Botany', name: 'Botany', val: 25, group: 3 },
-          { id: 'Zoology', name: 'Zoology', val: 25, group: 3 },
-        ],
-        links: [
-          { source: 'Physics', target: 'Optics', value: 5 },
-          { source: 'Physics', target: 'Mechanics', value: 8 },
-          { source: 'Chemistry', target: 'Organic', value: 7 },
-          { source: 'Chemistry', target: 'Inorganic', value: 6 },
-          { source: 'Biology', target: 'Botany', value: 10 },
-          { source: 'Biology', target: 'Zoology', value: 10 },
-        ]
-      };
-      
-      // Create graph
-      const Graph = ForceGraph3D()
-        (container)
-        .graphData(data)
-        .nodeLabel('name')
-        .nodeAutoColorBy('group')
-        .nodeVal('val')
-        .nodeResolution(16)
-        .linkWidth(0.5)
-        .linkDirectionalArrowLength(3)
-        .linkDirectionalArrowRelPos(1)
-        .linkCurvature(0.25)
-        .backgroundColor('#1A1A2E')
-        .width(container.clientWidth)
-        .height(container.clientHeight);
-      
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        Graph.width(container.clientWidth)
-            .height(container.clientHeight);
-      });
-    }
-    
-    // Auth System
-    function openAuthModal() {
-      document.getElementById('login-modal').classList.add('active');
-    }
-    
-    function closeAuthModal() {
-      document.getElementById('login-modal').classList.remove('active');
-    }
-    
-    function switchAuthTab(tab) {
-      if(tab === 'login') {
-        document.getElementById('login-form').style.display = 'flex';
-        document.getElementById('signup-form').style.display = 'none';
-        document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
-        document.querySelector('.auth-tab:nth-child(2)').classList.remove('active');
-      } else {
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('signup-form').style.display = 'flex';
-        document.querySelector('.auth-tab:nth-child(1)').classList.remove('active');
-        document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
-      }
-    }
-    
-    // Test Interface Functions
-    function startTest(testId) {
-      document.getElementById('test-interface').style.display = 'flex';
-      
-      // In real app, this would load test questions from backend
-      // For demo, we'll use mock questions
-      
-      // Start test timer
-      let timeLeft = 60 * 60; // 60 minutes
-      updateTestTimer();
-      
-      const timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTestTimer();
-        
-        if(timeLeft <= 0) {
-          clearInterval(timerInterval);
-          submitTest();
-        }
-      }, 1000);
-      
-      function updateTestTimer() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        document.getElementById('test-timer').textContent = 
-          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        
-        if(timeLeft <= 300) { // 5 minutes left
-          document.getElementById('test-timer').style.color = 'var(--danger)';
-        }
-      }
-    }
-    
-    function selectOption(element) {
-      // Remove selection from all options
-      document.querySelectorAll('.test-option').forEach(opt => {
-        opt.classList.remove('selected');
-      });
-      
-      // Select clicked option
-      element.classList.add('selected');
-    }
-    
-    function prevQuestion() {
-      // In real app, this would navigate to previous question
-      alert('Previous question would load here');
-    }
-    
-    function nextQuestion() {
-      // In real app, this would navigate to next question
-      alert('Next question would load here');
-    }
-    
-    function submitTest() {
-      // In real app, this would submit test to backend
-      alert('Test submitted! Results would be shown');
-      document.getElementById('test-interface').style.display = 'none';
-    }
-    
-    // Initialize all features when DOM is loaded
-    window.addEventListener('DOMContentLoaded', () => {
-      // Initialize after explosion animation
-      setTimeout(() => {
-        initMoleculeViewer();
-        initAIGraph();
-        
-        // Add click handlers for auth buttons
-        document.querySelectorAll('.nav-link').forEach(link => {
-          if(link.textContent.includes('Login')) {
-            link.addEventListener('click', openAuthModal);
-          }
-        });
-        
-        // Test interface demo button
-        document.querySelector('.btn-primary').addEventListener('click', () => {
-          startTest('neet-free');
-        });
-      }, 2500);
+      }, 100);
     });
     
-    // Backend API Integration Examples
-    async function loginUser(email, password) {
-      try {
-        const response = await axios.post('https://api.ultimateprep.com/auth/login', {
-          email,
-          password
-        });
+    // Cyberpunk Background Effects
+    function startCyberBackground() {
+      // Create floating particles
+      const particleCount = 30;
+      const colors = [0x00f0ff, 0xff00f0, 0xb400ff];
+      
+      for(let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'cyber-particle';
+        particle.style.width = `${Math.random() * 10 + 5}px`;
+        particle.style.height = particle.style.width;
+        particle.style.background = `radial-gradient(circle, hsl(${Math.random() * 60 + 200}, 100%, 50%), transparent)`;
+        particle.style.position = 'fixed';
+        particle.style.borderRadius = '50%';
+        particle.style.zIndex = '-1';
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.top = `${Math.random() * 100}vh`;
+        document.body.appendChild(particle);
         
-        // Save token and redirect
-        localStorage.setItem('authToken', response.data.token);
-        window.location.href = '/dashboard';
-      } catch (error) {
-        alert('Login failed: ' + error.response.data.message);
+        // Animate particle
+        gsap.to(particle, {
+          x: (Math.random() - 0.5) * 100,
+          y: (Math.random() - 0.5) * 100,
+          opacity: Math.random() * 0.5 + 0.1,
+          duration: Math.random() * 10 + 10,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
       }
+      
+      // Create scanning light effect
+      const scanLight = document.createElement('div');
+      scanLight.style.position = 'fixed';
+      scanLight.style.top = '0';
+      scanLight.style.left = '0';
+      scanLight.style.width = '100%';
+      scanLight.style.height = '2px';
+      scanLight.style.background = 'linear-gradient(to bottom, rgba(0,240,255,0), rgba(0,240,255,0.5), rgba(0,240,255,0)';
+      scanLight.style.zIndex = '998';
+      scanLight.style.boxShadow = '0 0 10px rgba(0,240,255,0.8)';
+      scanLight.style.transform = 'translateY(-100%)';
+      document.body.appendChild(scanLight);
+      
+      // Animate scan light
+      gsap.to(scanLight, {
+        y: '100vh',
+        duration: 2,
+        repeat: -1,
+        ease: "none"
+      });
     }
     
-    async function registerUser(name, email, password) {
-      try {
-        const response = await axios.post('https://api.ultimateprep.com/auth/register', {
-          name,
-          email,
-          password
-        });
+    // Cyberpunk Test Launch Sequence
+    function cyberLaunchTest(testId) {
+      const launchScreen = document.getElementById('cyber-launch');
+      const countdown = document.getElementById('cyber-countdown');
+      const title = document.getElementById('cyber-launch-title');
+      
+      // Set test title
+      if(testId === 'neet-ultra') title.textContent = 'NEET ULTRA';
+      else if(testId === 'jee-annihilator') title.textContent = 'JEE ANNIHILATOR';
+      
+      // Show launch screen
+      launchScreen.classList.add('active');
+      
+      // System initialization effect
+      const systemLines = [
+        "SYSTEM CHECK... OK",
+        "QUESTIONS LOADED... OK",
+        "AI PROCTOR ENGAGED",
+        "NEURAL INTERFACE ACTIVE",
+        "LAUNCH SEQUENCE INITIATED"
+      ];
+      
+      let currentLine = 0;
+      const systemInterval = setInterval(() => {
+        if(currentLine < systemLines.length) {
+          const line = document.createElement('div');
+          line.textContent = `> ${systemLines[currentLine]}`;
+          line.style.color = 'var(--primary)';
+          line.style.fontFamily = "'Courier New', monospace";
+          line.style.margin = '0.5rem 0';
+          line.style.textShadow = '0 0 5px var(--primary)';
+          document.querySelector('.cyber-launch-container').appendChild(line);
+          
+          // Scroll to bottom
+          document.querySelector('.cyber-launch-container').scrollTop = 
+            document.querySelector('.cyber-launch-container').scrollHeight;
+            
+          currentLine++;
+        } else {
+          clearInterval(systemInterval);
+          startCountdown();
+        }
+      }, 800);
+      
+      // Countdown sequence
+      function startCountdown() {
+        let count = 3;
+        countdown.textContent = count;
+        countdown.style.opacity = 1;
         
-        alert('Registration successful! Please login.');
-        switchAuthTab('login');
-      } catch (error) {
-        alert('Registration failed: ' + error.response.data.message);
-      }
-    }
-    
-    async function loadTestQuestions(testId) {
-      try {
-        const response = await axios.get(`https://api.ultimateprep.com/tests/${testId}/questions`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
-          }
-        });
-        
-        return response.data.questions;
-      } catch (error) {
-        console.error('Failed to load questions:', error);
-        return [];
-      }
-    }
-    
-    async function submitTestResults(testId, answers) {
-      try {
-        const response = await axios.post(`https://api.ultimateprep.com/tests/${testId}/submit`, {
-          answers
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
-          }
-        });
-        
-        return response.data;
-      } catch (error) {
-        console.error('Failed to submit test:', error);
-        return null;
-      }
-    }
-    
-    // Razorpay Payment Integration
-    async function unlockPremiumTest(testId) {
-      try {
-        // Create order on backend
-        const orderResponse = await axios.post('https://api.ultimateprep.com/payments/create-order', {
-          testId,
-          amount: 29900 // ₹299 in paise
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
-          }
-        });
-        
-        const options = {
-          key: 'rzp_test_YOUR_KEY_HERE', // Your Razorpay key
-          amount: orderResponse.data.amount,
-          currency: 'INR',
-          name: 'ULTIMATE PREP',
-          description: `Premium Test: ${testId}`,
-          image: '/logo.png',
-          order_id: orderResponse.data.id,
-          handler: async function(response) {
-            // Verify payment on backend
-            await axios.post('https://api.ultimateprep.com/payments/verify', {
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_signature: response.razorpay_signature,
-              testId
-            }, {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem('authToken')}`
+        const countdownInterval = setInterval(() => {
+          count--;
+          
+          // Animate with GSAP
+          gsap.fromTo(countdown, 
+            { scale: 1.5, opacity: 0.5 },
+            { scale: 1, opacity: 1, duration: 0.5 }
+          );
+          
+          if(count > 0) {
+            countdown.textContent = count;
+          } else {
+            countdown.textContent = 'GO!';
+            clearInterval(countdownInterval);
+            
+            // Bigger animation for GO!
+            gsap.to(countdown, {
+              scale: 2,
+              color: 'var(--success)',
+              textShadow: '0 0 20px var(--success)',
+              duration: 0.5,
+              onComplete: () => {
+                // Redirect to actual test page after animation
+                setTimeout(() => {
+                  launchScreen.classList.remove('active');
+                  // In real app, this would load the test component
+                  alert('Test would start now! In full app this would load the test interface.');
+                }, 500);
               }
             });
-            
-            // Show success and unlock test
-            alert('Payment successful! Test unlocked.');
-            window.location.reload();
-          },
-          prefill: {
-            name: 'User Name',
-            email: 'user@example.com',
-            contact: '9999999999'
-          },
-          theme: {
-            color: '#6C63FF'
           }
-        };
-        
-        const rzp = new Razorpay(options);
-        rzp.open();
-      } catch (error) {
-        console.error('Payment failed:', error);
-        alert('Payment processing failed. Please try again.');
+        }, 1000);
       }
+    }
+    
+    // Cyberpunk Payment Modal
+    function cyberShowPayment(testId) {
+      // In real app, this would show a cyberpunk-style payment modal
+      // For demo, we'll simulate it
+      
+      // Create payment modal elements
+      const paymentModal = document.createElement('div');
+      paymentModal.style.position = 'fixed';
+      paymentModal.style.top = '0';
+      paymentModal.style.left = '0';
+      paymentModal.style.width = '100%';
+      paymentModal.style.height = '100%';
+      paymentModal.style.background = 'rgba(5,5,8,0.95)';
+      paymentModal.style.zIndex = '2000';
+      paymentModal.style.display = 'flex';
+      paymentModal.style.justifyContent = 'center';
+      paymentModal.style.alignItems = 'center';
+      paymentModal.style.backdropFilter = 'blur(5px)';
+      paymentModal.style.border = '1px solid var(--premium)';
+      paymentModal.style.boxShadow = '0 0 30px rgba(255, 174, 0, 0.5)';
+      paymentModal.style.clipPath = 'polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)';
+      
+      // Payment content
+      paymentModal.innerHTML = `
+        <div style="padding: 2rem; width: 90%; max-width: 500px; text-align: center;">
+          <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--premium); font-size: 1.5rem; cursor: pointer;">
+            &times;
+          </button>
+          
+          <h2 style="color: var(--premium); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 10px var(--premium);">
+            <i class="fas fa-lock"></i> UNLOCK PREMIUM
+          </h2>
+          
+          <div style="background: rgba(255,174,0,0.1); padding: 1.5rem; border: 1px dashed var(--premium); margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="color: var(--light);">Test:</span>
+              <span style="color: var(--premium); font-weight: bold;">NEET GOD MODE</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="color: var(--light);">Validity:</span>
+              <span style="color: var(--premium); font-weight: bold;">30 DAYS</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,174,0,0.3);">
+              <span style="color: var(--light);">Total:</span>
+              <span style="color: var(--premium); font-weight: bold; font-size: 1.5rem;">₹299</span>
+            </div>
+          </div>
+          
+          <button onclick="cyberProcessPayment()" style="width: 100%; padding: 1rem; background: linear-gradient(45deg, var(--premium), #ff8c00); border: none; color: var(--darker); font-weight: bold; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; cursor: pointer; margin-bottom: 1rem; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+            <i class="fab fa-google-pay"></i> PAY WITH RAZORPAY
+          </button>
+          
+          <button onclick="this.parentElement.parentElement.remove()" style="width: 100%; padding: 1rem; background: transparent; border: 1px solid var(--premium); color: var(--premium); font-weight: bold; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+            CANCEL
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(paymentModal);
+      
+      // Animate appearance
+      gsap.from(paymentModal, {
+        opacity: 0,
+        y: 50,
+        duration: 0.5,
+        ease: "back.out(1.7)"
+      });
+    }
+    
+    function cyberProcessPayment() {
+      // In real app, this would integrate with Razorpay
+      // For demo, we'll show a success animation
+      
+      // Remove payment modal
+      document.querySelector('div[style*="position: fixed; top: 0; left: 0; width: 100%"]').remove();
+      
+      // Create success animation
+      const success = document.createElement('div');
+      success.style.position = 'fixed';
+      success.style.top = '0';
+      success.style.left = '0';
+      success.style.width = '100%';
+      success.style.height = '100%';
+      success.style.display = 'flex';
+      success.style.justifyContent = 'center';
+      success.style.alignItems = 'center';
+      success.style.zIndex = '2000';
+      success.style.background = 'rgba(5,5,8,0.9)';
+      
+      success.innerHTML = `
+        <div style="text-align: center;">
+          <div style="font-size: 5rem; color: var(--success); margin-bottom: 1rem; text-shadow: 0 0 20px var(--success);">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2 style="color: var(--success); margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--success);">PAYMENT SUCCESSFUL!</h2>
+          <p style="color: var(--light);">Your premium test has been unlocked</p>
+        </div>
+      `;
+      
+      document.body.appendChild(success);
+      
+      // Animate particles
+      for(let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = `${Math.random() * 10 + 5}px`;
+        particle.style.height = particle.style.width;
+        particle.style.background = `radial-gradient(circle, var(--success), transparent)`;
+        particle.style.borderRadius = '50%';
+        particle.style.left = '50%';
+        particle.style.top = '50%';
+        particle.style.transform = 'translate(-50%, -50%)';
+        success.appendChild(particle);
+        
+        gsap.to(particle, {
+          x: (Math.random() - 0.5) * 300,
+          y: (Math.random() - 0.5) * 300,
+          opacity: 0,
+          duration: 1.5,
+          delay: 0.5
+        });
+      }
+      
+      // Remove after animation
+      setTimeout(() => {
+        gsap.to(success, {
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => success.remove()
+        });
+      }, 2000);
     }
   </script>
 </body>
